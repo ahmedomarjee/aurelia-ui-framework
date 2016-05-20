@@ -71,18 +71,20 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             { id: 'ES', name: 'Español' },
             { id: 'FR', name: 'Français' },
             { id: 'HI', name: 'हिंदी' },
+            { id: 'ID', name: 'Bahasa Indonesia' },
             { id: 'IT', name: 'Italiano' },
             { id: 'JA', name: '日本' },
             { id: 'KO', name: '한국어' },
             { id: 'MS', name: 'Malay' },
             { id: 'NL', name: 'Nederlands' },
             { id: 'PT', name: 'Português' },
+            { id: 'PT-BR', name: 'Português (Brasil)' },
             { id: 'RU', name: 'Русский' },
             { id: 'TH', name: 'ภาษาไทย' },
             { id: 'TL', name: 'Tagalog' },
-            { id: 'TW', name: '漢語' },
+            { id: 'TW', name: '繁體中文' },
             { id: 'VI', name: 'Tiếng Việt' },
-            { id: 'ZH', name: '中文' }
+            { id: 'ZH', name: '简体中文' }
         ];
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 

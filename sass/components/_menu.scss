@@ -5,74 +5,67 @@
  *  @copyright 	2015-2016, Adarsh Pastakia
  **/
 
-.ui-menu
-{
-    .ui-menu-title
-    {
-        font-size: 1.3em;
-        font-weight: $font-weight-strong;
+.ui-menu {
+    .ui-menu-title {
+        font-size    : 1.3em;
+        font-weight  : $font-weight-strong;
 
         margin-bottom: .5em;
+        padding      : 0 .5em;
 
-        color: $primary;
+        color        : $primary;
         border-bottom: 2px solid $primary;
     }
 
-    .ui-menu-section
-    {
+    .ui-menu-section {
         font-size: .8em;
 
-        color: $text-muted;
+        color    : $text-muted;
     }
 
-    .ui-menu-link
-    {
-        font-size: 1em;
+    .ui-menu-link {
+        font-size  : 1em;
         font-weight: $font-weight-normal;
 
-        display: block;
+        display    : block;
 
-        margin: 1px 0;
-        padding: 1em .5em;
+        margin     : 1px 0;
+        padding    : 1em .5em;
 
-        text-align: start;
+        text-align : start;
 
-        color: $menu-link-text;
-        background: $menu-link-bg;
-
+        color      : $menu-link-text;
+        background : $menu-link-bg;
         @include border(start, 4px solid transparent);
 
-        .ui-icon
-        {
+        .ui-icon {
             display: inline-block;
 
-            width: 1.2em;
+            width  : 1.2em;
         }
 
-        &[data-disabled='true']
-        {
-            cursor: not-allowed;
+        &[data-disabled='true'] {
+            cursor        : not-allowed;
             pointer-events: none;
 
-            color: $wg-5;
+            color         : $wg-5;
         }
 
-        &:hover
-        {
-            color: $menu-hover-text;
+        &:hover {
+            color           : $menu-hover-text;
             background-color: $menu-hover-bg;
         }
-        &:active
-        {
-            color: $menu-click-text;
+
+        &:active {
+            color           : $menu-click-text;
             background-color: $menu-click-bg;
         }
-        &.ui-active
-        {
-            font-weight: $font-weight-strong;
 
-            color: $menu-active-text;
-            border-color: $menu-active-border;
+        &.ui-active {
+            font-weight     : $font-weight-strong;
+
+            color           : $menu-active-text;
+            border-color    : $menu-active-border;
             background-color: $menu-active-bg;
         }
     }
