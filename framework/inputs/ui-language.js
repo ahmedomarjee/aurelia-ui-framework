@@ -18,6 +18,17 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
         __extends(UILanguage, _super);
         function UILanguage(element) {
             _super.call(this, element);
+            this.LanguageCodes = {
+                EN: 'English',
+                ES: 'Español',
+                FR: 'Français',
+                ZH: '简体中文',
+                TH: 'ภาษาไทย',
+                'PT-BR': 'Português (Brasil)',
+                LA: 'Español (América Latina)',
+                ID: 'Bahasa Indonesia',
+                MS: 'Malay'
+            };
             this.language = '';
             this.languages = [];
             this.disabled = false;
@@ -71,6 +82,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             { id: 'ES', name: 'Español' },
             { id: 'FR', name: 'Français' },
             { id: 'HI', name: 'हिंदी' },
+            { id: 'ID', name: 'Bahasa Indonesia' },
             { id: 'IT', name: 'Italiano' },
             { id: 'JA', name: '日本' },
             { id: 'KO', name: '한국어' },
@@ -80,9 +92,9 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             { id: 'RU', name: 'Русский' },
             { id: 'TH', name: 'ภาษาไทย' },
             { id: 'TL', name: 'Tagalog' },
-            { id: 'TW', name: '漢語' },
+            { id: 'TW', name: '繁體中文' },
             { id: 'VI', name: 'Tiếng Việt' },
-            { id: 'ZH', name: '中文' }
+            { id: 'ZH', name: '简体中文' }
         ];
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 

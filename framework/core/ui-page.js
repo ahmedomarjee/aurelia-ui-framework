@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_utils_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_utils_1, ui_event_1) {
     "use strict";
     var UIPage = (function () {
         function UIPage(element) {
@@ -80,10 +80,33 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], functio
         }
         UISidebar.prototype.bind = function () {
             this.collapsible = this.element.hasAttribute('collapsible');
-            if (this.element.hasAttribute('scroll'))
+            if (!this.collapsible && this.element.hasAttribute('scroll'))
                 this.element.classList.add('ui-scroll');
+        };
+        UISidebar.prototype.attached = function () {
+            var _this = this;
             if (this.element.hasAttribute('padded'))
                 this.element.classList.add('ui-pad-all');
+            if (this.collapsible)
+                document.addEventListener('mousedown', function (evt) { return _this.closeOverlay(evt); });
+        };
+        UISidebar.prototype.dettached = function () {
+            var _this = this;
+            if (this.collapsible)
+                document.removeEventListener('click', function (evt) { return _this.closeOverlay(evt); });
+        };
+        UISidebar.prototype.closeOverlay = function (evt) {
+            if (getParentByClass(evt.target, 'ui-sidebar-content') === null)
+                this.element.classList.remove('overlay');
+        };
+        UISidebar.prototype.toggleCollapse = function ($event) {
+            this.element.classList.remove('overlay');
+            this.element.classList.toggle('collapse');
+            $event.cancelBubble = true;
+            $event.preventDefault();
+        };
+        UISidebar.prototype.showOverlay = function () {
+            this.element.classList.add('overlay');
         };
         __decorate([
             aurelia_framework_1.bindable(), 
@@ -91,7 +114,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], functio
         ], UISidebar.prototype, "width", void 0);
         UISidebar = __decorate([
             aurelia_framework_1.customElement('ui-sidebar'),
-            aurelia_framework_1.inlineView("<template class=\"ui-sidebar\" role=\"sidebar\" css.bind=\"{'flex-basis':width}\"><content></content></template>"), 
+            aurelia_framework_1.inlineView("<template class=\"ui-sidebar\" role=\"sidebar\" css.bind=\"{'width':width}\" click.trigger=\"showOverlay()\">\n<div class=\"ui-sidebar-collapse\" if.bind=\"collapsible\" click.trigger=\"toggleCollapse($event)\"><span class=\"fi-ui-arrow-left\"></span></div>\n<div class=\"ui-sidebar-content\" ref=\"__content\"><content></content></div></template>"), 
             __metadata('design:paramtypes', [Element])
         ], UISidebar);
         return UISidebar;
@@ -109,12 +132,16 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], functio
     }());
     exports.UIDivider = UIDivider;
     var UIToolbar = (function () {
-        function UIToolbar() {
+        function UIToolbar(element) {
+            this.element = element;
         }
+        UIToolbar.prototype.fireSubmit = function () {
+            ui_event_1.UIEvent.fireEvent('submit', this.element, this);
+        };
         UIToolbar = __decorate([
             aurelia_framework_1.customElement('ui-toolbar'),
-            aurelia_framework_1.inlineView("<template class=\"ui-toolbar ui-button-bar\" role=\"toolbar\"><content></content></template>"), 
-            __metadata('design:paramtypes', [])
+            aurelia_framework_1.inlineView("<template class=\"ui-toolbar ui-button-bar\" role=\"toolbar\" enterpressed.trigger=\"fireSubmit()\"><content></content></template>"), 
+            __metadata('design:paramtypes', [Element])
         ], UIToolbar);
         return UIToolbar;
     }());

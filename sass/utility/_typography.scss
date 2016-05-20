@@ -10,240 +10,199 @@ h2,
 h3,
 h4,
 h5,
-h6
-{
-    > small
-    {
-        font-size: .75em;
+h6 {
+    > small {
+        font-size  : .75em;
         line-height: 1.5;
 
-        display: block;
+        display    : block;
 
-        color: $text-muted;
+        color      : $text-muted;
     }
 }
 
-h6
-{
+h6 {
     font-size: .8em;
 }
 
-h5
-{
+h5 {
     font-size: 1.1em;
 }
 
-h4
-{
+h4 {
     font-size: 1.3em;
 }
 
-h3
-{
+h3 {
     font-size: 1.5em;
 }
 
-h2
-{
+h2 {
     font-size: 1.8em;
 }
 
-h1
-{
+h1 {
     font-size: 2em;
 }
 
-small
-{
+small {
     font-size: .75em;
 }
 
-code
-{
-    font-family: $base-font-family-serif;
-    font-weight: $font-weight-normal;
+code {
+    font-family     : $base-font-family-serif;
+    font-weight     : $font-weight-normal;
 
-    padding: 0 .1em;
+    padding         : 0 .1em;
 
-    cursor: text;
-    word-break: keep-all;
+    cursor          : text;
+    word-break      : keep-all;
 
-    color: $inline-code-text;
-    border-radius: 2px;
+    color           : $inline-code-text;
+    border-radius   : 2px;
     background-color: $inline-code-bg;
-
     @include user-select(text);
 }
 
 // Styles
 .ui-strong,
-strong
-{
+strong {
     font-weight: $font-weight-strong;
 }
 
 .ui-bold,
-b
-{
+b {
     font-weight: $font-weight-bold;
 }
 
 .ui-italic,
-i,
-cite,
-em,
-var,
 address,
-dfn
-{
+cite,
+dfn,
+em,
+i,
+var {
     font-style: italic;
 }
 
-.ui-small-caps
-{
+.ui-small-caps {
     font-variant: small-caps;
 }
 
-.ui-uppercase
-{
+.ui-uppercase {
     text-transform: uppercase;
 }
 
-.ui-lowercase
-{
+.ui-lowercase {
     text-transform: lowercase;
 }
 
-.ui-titlecase
-{
+.ui-titlecase {
     text-transform: capitalize;
 }
 
 // Sizes
 .ui-font-small,
-small
-{
+small {
     font-size: .75em;
 }
 
-.ui-font-big
-{
+.ui-font-big {
     font-size: 1.15em;
 }
 
 .ui-font-large,
-big
-{
+big {
     font-size: 1.5em;
 }
 
-.ui-font-serif
-{
+.ui-font-serif {
     font-family: $base-font-family-serif;
 }
 
 // Colors
-.ui-text-muted
-{
+.ui-text-muted {
     color: $text-muted !important;
 }
 
-.ui-text-primary
-{
+.ui-text-primary {
     color: $primary !important;
 }
 
-.ui-text-info
-{
+.ui-text-info {
     color: $info !important;
 }
 
-.ui-text-danger
-{
+.ui-text-danger {
     color: $danger !important;
 }
 
-.ui-text-success
-{
+.ui-text-success {
     color: $success !important;
 }
 
-.ui-text-warning
-{
+.ui-text-warning {
     color: $warning !important;
 }
 
-.ui-bg-primary
-{
+.ui-bg-primary {
     background-color: $bg-primary;
 }
 
-.ui-bg-info
-{
+.ui-bg-info {
     background-color: $bg-info;
 }
 
-.ui-bg-danger
-{
+.ui-bg-danger {
     background-color: $bg-danger;
 }
 
-.ui-bg-success
-{
+.ui-bg-success {
     background-color: $bg-success;
 }
 
-.ui-bg-warning
-{
+.ui-bg-warning {
     background-color: $bg-warning;
 }
 
-.ui-bg-muted
-{
-    color: $black;
+.ui-bg-muted {
+    color           : $black;
     background-color: $wg-2;
 }
 
 // Alignments
-.ui-text-start
-{
+.ui-text-start {
     text-align: left;
     text-align: start;
 }
 
-.ui-text-center
-{
+.ui-text-center {
     text-align: center;
 }
 
-.ui-text-end
-{
+.ui-text-end {
     text-align: right;
     text-align: end;
 }
 
-[dir='rtl']
-{
-    [class^='fi-'],
-    [class*='fi-']
-    {
+[dir='rtl'] {
+    [class*='fi-'],
+    [class^='fi-'] {
         transform: scale(-1, 1);
     }
-    .ui-flip
-    {
+
+    .ui-flip {
         transform: scale(1, 1);
     }
 }
 
-[dir='ltr']
-{
-    [class^='fi-'],
-    [class*='fi-']
-    {
+[dir='ltr'] {
+    [class*='fi-'],
+    [class^='fi-'] {
         transform: scale(1, 1);
     }
-    .ui-flip
-    {
+
+    .ui-flip {
         transform: scale(-1, 1);
     }
 }
