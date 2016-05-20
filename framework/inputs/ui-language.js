@@ -18,17 +18,6 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
         __extends(UILanguage, _super);
         function UILanguage(element) {
             _super.call(this, element);
-            this.LanguageCodes = {
-                EN: 'English',
-                ES: 'Español',
-                FR: 'Français',
-                ZH: '简体中文',
-                TH: 'ภาษาไทย',
-                'PT-BR': 'Português (Brasil)',
-                LA: 'Español (América Latina)',
-                ID: 'Bahasa Indonesia',
-                MS: 'Malay'
-            };
             this.language = '';
             this.languages = [];
             this.disabled = false;
@@ -89,6 +78,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             { id: 'MS', name: 'Malay' },
             { id: 'NL', name: 'Nederlands' },
             { id: 'PT', name: 'Português' },
+            { id: 'PT-BR', name: 'Português (Brasil)' },
             { id: 'RU', name: 'Русский' },
             { id: 'TH', name: 'ภาษาไทย' },
             { id: 'TL', name: 'Tagalog' },

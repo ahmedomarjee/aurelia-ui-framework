@@ -18,17 +18,6 @@ export class UILanguage extends UIInputGroup {
     __languages;
     __available;
 
-    LanguageCodes = {
-        EN: 'English',
-        ES: 'Español',
-        FR: 'Français',
-        ZH: '简体中文',
-        TH: 'ภาษาไทย',
-        'PT-BR': 'Português (Brasil)',
-        LA: 'Español (América Latina)',
-        ID: 'Bahasa Indonesia',
-        MS: 'Malay'
-    }
 
     static LANGUAGES = [
         { id: 'AR', name: 'العربية', rtl: true },
@@ -44,6 +33,7 @@ export class UILanguage extends UIInputGroup {
         { id: 'MS', name: 'Malay' },
         { id: 'NL', name: 'Nederlands' },
         { id: 'PT', name: 'Português' },
+        { id: 'PT-BR', name: 'Português (Brasil)' },
         { id: 'RU', name: 'Русский' },
         { id: 'TH', name: 'ภาษาไทย' },
         { id: 'TL', name: 'Tagalog' },
