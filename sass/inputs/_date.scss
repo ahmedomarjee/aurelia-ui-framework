@@ -28,9 +28,9 @@
 	span.date {
 		font-size : 8px;
 		position  : absolute;
-		right     : 0.5em;
+		right     : .5em;
 		bottom    : 8px;
-		left      : 0.5em;
+		left      : .5em;
 		text-align: center;
 	}
 }
@@ -80,7 +80,7 @@
 
 		span {
 			position  : relative;
-			padding   : 0.45em 0.4em;
+			padding   : .45em .4em;
 			text-align: center;
 			@include flex(0 0 auto);
 		}
@@ -95,7 +95,7 @@
 				font-weight  : 600;
 				width        : 2.5em;
 				height       : auto;
-				margin       : 0.1em 0.2em;
+				margin       : .1em .2em;
 				cursor       : pointer;
 				color        : $date-control-text;
 				border-radius: $base-border-radius;
@@ -128,7 +128,7 @@
 				@include flex(1 1 0);
 
 				&:not(.nohover):before {
-					content    : '\f150';
+					content    : $font-ui-sort-asc;
 					font-family: Framework;
 				}
 			}
@@ -150,7 +150,7 @@
 
 			span {
 				font-weight  : 600;
-				margin       : 0.25em 0.4em;
+				margin       : .25em .4em;
 				cursor       : pointer;
 				color        : $date-control-text;
 				border-radius: $base-border-radius;
@@ -214,7 +214,7 @@
 			span.today:after {
 				content: ' ';
 				border : {
-					width: 0.3em;
+					width: .3em;
 					color: $date-selected-bg transparent transparent $date-selected-bg;
 					style: solid;
 				}
@@ -226,7 +226,7 @@
 		.months {
 			span {
 				line-height: 300%;
-				margin     : 0.1em 0.2em;
+				margin     : .1em .2em;
 				@include flex(1 1 0);
 			}
 		}
@@ -234,7 +234,7 @@
 		.years {
 			span {
 				line-height: 200%;
-				margin     : 0.1em 0.2em;
+				margin     : .1em .2em;
 				@include flex(1 1 0);
 			}
 		}

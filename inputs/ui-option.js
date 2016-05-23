@@ -151,6 +151,11 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
             }
         };
         UIOptionGroup.prototype.checkChanged = function ($event) {
+            var opt = this.element.querySelector(".ui-option-input[value=\"" + this.value + "\"]");
+            if (opt && this.value != $event.detail) {
+                opt.setAttribute('checked', 'false');
+                opt.checked = false;
+            }
             this.value = $event.detail;
             $event.cancelBubble = true;
             ui_event_1.UIEvent.fireEvent('change', this.element, this.value);
