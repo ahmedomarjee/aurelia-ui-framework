@@ -91,6 +91,19 @@ toast({
     extraClass:string,
     autoHide:boolean
 })
+toastSuccess(message | config)
+toastError(message | config)
+
+alert(message | {
+		message:string,
+		type: 'info' | 'exclaim' | 'error'
+		button: 'OK'
+})
+confirm(message | {
+		message:string,
+		yesLabel: 'Yes',
+		noLabel: 'No'
+})
 
 // Storage
 session(key, value?) // session storage, if value is null it will be deleted
@@ -288,4 +301,7 @@ UIUtils.lazy(T):<T>
 
 // Convert all latin alphabets into ascii equivalent alphabet
 UIUtils.getAscii(string):string
+
+UIUtils.alert(message, type = 'info' | 'error' | 'exclaim')
+UIUtils.confirm(message):Promise
 ```

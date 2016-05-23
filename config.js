@@ -70,6 +70,7 @@ System.config({
       "framework/libs/marked.js",
       "framework/libs/phonelib.js",
       "framework/utils/ui-application.js",
+      "framework/utils/ui-autocomplete.js",
       "framework/utils/ui-converters.js",
       "framework/utils/ui-event.js",
       "framework/utils/ui-formatters.js",
