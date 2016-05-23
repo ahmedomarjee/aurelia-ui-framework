@@ -177,6 +177,11 @@ export class UIOptionGroup {
     }
 
     checkChanged($event) {
+        let opt = <HTMLInputElement>this.element.querySelector(`.ui-option-input[value="${this.value}"]`);
+        if (opt && this.value != $event.detail) {
+            opt.setAttribute('checked', 'false');
+            opt.checked = false;
+        }
         this.value = $event.detail;
         $event.cancelBubble = true;
         UIEvent.fireEvent('change', this.element, this.value);

@@ -163,6 +163,20 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "./ui-util
             config.theme = 'danger';
             ui_utils_1.UIUtils.showToast(this.__overlayContainer, config);
         };
+        UIApplication.prototype.alert = function (config) {
+            if (typeof config === 'string')
+                config = { message: config };
+            config.type = config.type || "info";
+            config.button = config.button || "OK";
+            ui_utils_1.UIUtils.alert(config);
+        };
+        UIApplication.prototype.confirm = function (config) {
+            if (typeof config === 'string')
+                config = { message: config };
+            config.yesLabel = config.button || "Yes";
+            config.noLabel = config.button || "No";
+            return ui_utils_1.UIUtils.confirm(config);
+        };
         UIApplication.defaults = {
             App: {
                 Key: 'App',

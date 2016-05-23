@@ -41,6 +41,14 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
                 showCheckbox: true,
                 selectionLevel: 0
             });
+            this.lang = 'EN';
+            this.langs = ['EN', 'ES', 'FR', 'DE'];
+            this.content = {
+                EN: 'Do you speak english?',
+                ES: 'Hablas español?',
+                FR: 'Parlez-vous français?',
+                DE: 'Sprechen sie deutsch?'
+            };
             this.data = [
                 {
                     id: 1,
@@ -142,6 +150,7 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
                     Count: Math.random() * 10000000,
                     Currency: 'USD'
                 }];
+            this.autoCompWords = 'Alfa Romeo, Audi, Accura, Aston Martin, Bentley, Porsche, BMW, Bugatti, Chevrolet, Cadillac, Citrëon, Daimler, Opel, Ford, Toyota, Honda, Mitsubushi, Kia, Hyundai, Renault, Ferrari, Masseratti, Lamborghini, FIAT, Lancia, SEAT, Daihatsu, MINI, Rolls Royce, Nissan';
             this.validation = _validation
                 .on(this, null)
                 .ensure('model.email')
@@ -235,6 +244,15 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
             else {
                 this.appState.toast({ theme: theme, icon: 'fi-vaadin-bell', message: 'Toasted message' });
             }
+        };
+        Home.prototype.showAlert = function () {
+            this.appState.alert('Hello World');
+        };
+        Home.prototype.showConfirm = function () {
+            var _this = this;
+            this.appState.confirm('Hello World?')
+                .then(function () { return _this.appState.toast({ theme: 'success', icon: 'fi-vaadin-bell', message: 'You clicked OK' }); })
+                .catch(function () { return _this.appState.toast({ theme: 'danger', icon: 'fi-vaadin-bell', message: 'You clicked Cancel' }); });
         };
         Home = __decorate([
             aurelia_framework_1.autoinject(), 

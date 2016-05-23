@@ -131,4 +131,45 @@
             }
         }
     }
+
+    .ui-dialog.ui-alert {
+        min-width : 0;
+        min-height: 0;
+        @include box-shadow(0 0 20px 5px rgba($black, .5), 0 0 2px 0 $primary inset);
+
+        .ui-message-bar {
+            @include flex-row();
+            padding: 1em 1.5em;
+
+            span {
+                font-size: 1.5em;
+                @include flex(0 0 auto);
+            }
+
+            p {
+                padding: .25em .5em;
+                @include flex(1 1 0);
+            }
+        }
+
+        .ui-button-bar {
+            border-top: 1px solid rgba($base-border-color, .5);
+            @include flex-row();
+
+            button {
+                @include flex(1 1 0);
+                padding    : .5em;
+                font-size  : 1.1em;
+                font-weight: $font-weight-normal;
+
+                &.default {
+                    font-weight: $font-weight-strong;
+                }
+
+                &:hover {
+                    background: rgba($secondary, .2);
+                }
+            }
+        }
+    }
 }

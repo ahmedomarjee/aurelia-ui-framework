@@ -7,7 +7,7 @@
 .ui-option {
 	position  : relative;
 	min-height: 1.2em;
-	margin-top: 0.2em;
+	margin-top: .2em;
 	text-align: center;
 	border    : 1px solid transparent;
 	@include flexbox(( display: inline-flex, flex-direction:row, flex-wrap:nowrap, align-items:center ));
@@ -26,7 +26,7 @@
 		z-index         : 1;
 		cursor          : pointer;
 		color           : $input-text;
-		border-radius   : 0.1em;
+		border-radius   : .1em;
 		background-color: $input-bg;
 		@include flex(0 0 auto);
 		@include box-shadow(-1px -1px 1px 0 $base-shadow-color, 1px 1px 1px 0 contrast($input-text));
@@ -60,12 +60,12 @@
 		content: $font-ui-check-on;
 	}
 
-	&.ui-radio .ui-option-input:checked ~ .ui-check-mark:after {
+	&.ui-radio .ui-option-input[checked="true"] ~ .ui-check-mark:after {
 		content: $font-ui-radio-on;
 	}
 
 	.ui-option-label {
-		padding: 0.15em 0;
+		padding: .15em 0;
 		color  : $input-label;
 		@include flex(0 0 auto);
 		@include padding(end, .5em);
@@ -84,18 +84,18 @@
 
 		~ .ui-check-mark {
 			cursor : not-allowed;
-			opacity: 0.5;
+			opacity: .5;
 		}
 
 		~ .ui-option-label {
 			cursor : not-allowed;
-			opacity: 0.5;
+			opacity: .5;
 		}
 	}
 }
 
 .ui-option-group {
-	padding: 0 0.2em;
+	padding: 0 .2em;
 	@include flex-row(flex-start);
 
 	.ui-option {
@@ -117,7 +117,7 @@
 
 	.ui-option,
 	.ui-switch-control {
-		margin: 0.2em 0;
+		margin: .2em 0;
 		@include flex(0 0 auto);
 	}
 }

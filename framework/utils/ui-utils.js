@@ -73,8 +73,73 @@ define(["require", "exports", "lodash", "moment", "numeral", "aurelia-framework"
             var slot = new aurelia_framework_1.ViewSlot(container, true);
             slot.add(view);
             slot.attached();
+            if (isFunction(vm.attached))
+                vm.attached();
+            return view;
         }
         UIUtils.compileView = compileView;
+        function alert(config) {
+            var dialogContainer = document.body.querySelector('.ui-viewport .ui-dialog-container');
+            var type = "fi-ui-info-black";
+            if (config.type == "error")
+                type = "fi-ui-error-black";
+            if (config.type == "exclaim")
+                type = "fi-ui-exclaim-black";
+            var view = UIUtils.compileView("<div class=\"ui-dialog-wrapper ui-modal\" ref=\"__wrapper\">\n        <div class=\"ui-dialog ui-alert\">\n        <input style=\"position:fixed;top:-100%\" ref=\"__focusBlock\" keydown.trigger=\"checkKey($event)\" blur.trigger=\"cancelBlur($event)\"/>\n        <div class=\"ui-message-bar\">\n        <span class=\"" + type + "\"></span><p innerhtml.bind='message'></p></div>\n        <div class=\"ui-button-bar\"><button click.trigger=\"closeAlert()\">" + config.button + "</button></div>\n        </div></div>", dialogContainer, {
+                __wrapper: null,
+                __focusBlock: null,
+                message: config.message,
+                attached: function () {
+                    this.__focusBlock.focus();
+                },
+                closeAlert: function () {
+                    this.__wrapper.remove();
+                },
+                cancelBlur: function ($event) {
+                    $event.preventDefault();
+                    this.__focusBlock.focus();
+                    return false;
+                },
+                checkKey: function ($event) {
+                    var key = ($event.keyCode || $event.which);
+                    if (key == 13)
+                        this.closeAlert();
+                    if (key == 27)
+                        this.closeAlert();
+                }
+            });
+        }
+        UIUtils.alert = alert;
+        function confirm(config) {
+            var dialogContainer = document.body.querySelector('.ui-viewport .ui-dialog-container');
+            return new Promise(function (resolve, reject) {
+                var view = UIUtils.compileView("<div class=\"ui-dialog-wrapper ui-modal\" ref=\"__wrapper\">\n        <div class=\"ui-dialog ui-alert\">\n        <input style=\"position:fixed;top:-100%\" ref=\"__focusBlock\" keydown.trigger=\"checkKey($event)\" blur.trigger=\"cancelBlur($event)\"/>\n        <div class=\"ui-message-bar\">\n        <span class=\"fi-ui-help-black\"></span><p innerhtml.bind='message'></p></div>\n        <div class=\"ui-button-bar\"><button class=\"default\" click.trigger=\"closeAlert(true)\">" + config.yesLabel + "</button>\n        <button click.trigger=\"closeAlert(false)\">" + config.noLabel + "</button></div>\n        </div></div>", dialogContainer, {
+                    __wrapper: null,
+                    __focusBlock: null,
+                    message: config.message,
+                    attached: function () {
+                        this.__focusBlock.focus();
+                    },
+                    closeAlert: function (b) {
+                        b ? resolve() : reject();
+                        this.__wrapper.remove();
+                    },
+                    cancelBlur: function ($event) {
+                        $event.preventDefault();
+                        this.__focusBlock.focus();
+                        return false;
+                    },
+                    checkKey: function ($event) {
+                        var key = ($event.keyCode || $event.which);
+                        if (key == 13)
+                            this.closeAlert(true);
+                        if (key == 27)
+                            this.closeAlert(false);
+                    }
+                });
+            });
+        }
+        UIUtils.confirm = confirm;
         function showToast(container, config) {
             var tmr;
             if (typeof config === 'string')
