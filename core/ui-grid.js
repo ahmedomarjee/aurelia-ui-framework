@@ -39,7 +39,7 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
         };
         UIRow = __decorate([
             aurelia_framework_1.customElement('ui-row'),
-            aurelia_framework_1.inlineView('<template><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UIRow);
         return UIRow;
@@ -86,7 +86,7 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
         ], UIColumn.prototype, "width", void 0);
         UIColumn = __decorate([
             aurelia_framework_1.customElement('ui-column'),
-            aurelia_framework_1.inlineView("<template class=\"ui-column\" css.bind=\"{'flex-basis': width}\"><content></content></template>"), 
+            aurelia_framework_1.inlineView("<template class=\"ui-column\" css.bind=\"{'flex-basis': width}\"><slot></slot></template>"), 
             __metadata('design:paramtypes', [Element])
         ], UIColumn);
         return UIColumn;

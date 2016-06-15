@@ -16,10 +16,10 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], functio
             this.activeTab = 0;
         }
         UITabPanel.prototype.bind = function () {
-            var _this = this;
-            ui_utils_1._.forEach(this.element.querySelectorAll('ui-tab'), function (t) { return _this.tabs.push(t.au.controller.viewModel); });
         };
         UITabPanel.prototype.attached = function () {
+            var _this = this;
+            ui_utils_1._.forEach(this.element.querySelectorAll('ui-tab'), function (t) { return _this.tabs.push(t.au.controller.viewModel); });
             this.activeTabChanged(this.activeTab);
         };
         UITabPanel.prototype.itemsChanged = function (mutations) {
@@ -64,7 +64,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], functio
         ], UITab.prototype, "icon", void 0);
         UITab = __decorate([
             aurelia_framework_1.autoinject(),
-            aurelia_framework_1.inlineView('<template class="ui-tab-content ${isSelected?\'ui-active\':\'\'}"><content></content></template>'),
+            aurelia_framework_1.inlineView('<template class="ui-tab-content ${isSelected?\'ui-active\':\'\'}"><slot></slot></template>'),
             aurelia_framework_1.customElement('ui-tab'), 
             __metadata('design:paramtypes', [Element])
         ], UITab);

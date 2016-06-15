@@ -109,7 +109,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
         UIBody = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement("ui-body"),
-            aurelia_framework_1.inlineView('<template class="ui-panel-body"><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-panel-body"><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UIBody);
         return UIBody;

@@ -14,14 +14,14 @@
 			</a>
 		</h1>
 		<div class="ui-app-header-options">
-			<content></content>
+			<slot></slot>
 			<ui-button primary icon="fi-ui-arrow-signout" if.bind="appState.IsAuthenticated" click.trigger="logout()"></ui-button>
 		</div>
 	</header>
 	<router-view role="region" class="ui-viewport-body"></router-view>
 	<div class="ui-app-taskbar ui-button-bar" if.bind="showTaskbar" role="toolbar">
 		<div class="ui-quick-links">
-			<template replaceable part="quick-links"></template>
+			<slot name="quick-links"></slot>
 		</div>
 	</div>
 	<footer class="ui-app-footer">

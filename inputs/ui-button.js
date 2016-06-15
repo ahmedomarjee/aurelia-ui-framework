@@ -222,7 +222,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
         UIButtonGroup = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-button-group'),
-            aurelia_framework_1.inlineView('<template class="ui-button-group" click.delegate="fireChange($event)"><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-button-group" click.delegate="fireChange($event)"><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UIButtonGroup);
         return UIButtonGroup;

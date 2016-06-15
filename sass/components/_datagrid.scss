@@ -4,319 +4,247 @@
  *	@company	HMC
  *  @copyright 	2015-2016, Adarsh Pastakia
  **/
-
-.ui-datagrid
-{
+.ui-datagrid {
     position: relative;
-
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
+    display : block;
+    width   : 100%;
+    height  : 100%;
     @include flex(1 1 0);
 
-    .ui-ghost
-    {
+    .ui-ghost {
         z-index: 20;
-
         @include position(absolute);
 
-        &.resize
-        {
-            top: 0;
-            bottom: 0;
-
-            width: 2px;
-
+        &.resize {
+            top       : 0;
+            bottom    : 0;
+            width     : 2px;
             background: $base-border-color;
         }
 
-        &.drag
-        {
-            right: 0;
-            left: 0;
-
-            border: 1px dotted $primary;
+        &.drag {
+            right     : 0;
+            left      : 0;
+            border    : 1px dotted $primary;
             background: rgba($base-border-color, .1);
         }
     }
-    .ui-indicator
-    {
-        display: none;
 
-        height: .1em;
-
+    .ui-indicator {
+        display   : none;
+        height    : .1em;
         background: $primary;
-
         @include position(absolute);
     }
 
-    .ui-datagrid-wrapper
-    {
+    .ui-datagrid-wrapper {
         overflow: auto;
-
         @include position(absolute, 0, 0, 0, 0);
 
-        > table > thead,
-        > table > tfoot
-        {
+         > table > thead,
+        > table > tfoot {
             z-index: 20;
-
             @include sticky();
         }
 
-        > table
-        {
-            min-width: 100%;
-            min-height: 100%;
-
+        > table {
+            min-width   : 100%;
+            min-height  : 100%;
             table-layout: fixed;
 
-            > thead
-            {
+            > thead {
                 top: 0;
             }
-            > tfoot
-            {
+
+            > tfoot {
                 bottom: -1px;
             }
-            > tbody
-            {
-                z-index: 10;
 
+            > tbody {
+                z-index : 10;
                 overflow: auto;
 
-                tr:nth-of-type(odd) > td
-                {
+                tr:nth-of-type(odd) > td {
                     background-color: $datagrid-odd-bg;
                 }
-                tr:nth-of-type(even) > td
-                {
+
+                tr:nth-of-type(even) > td {
                     background-color: $datagrid-even-row;
                 }
-                tr:last-child
-                {
-                    line-height: .1;
 
-                    height: 100%;
-                    > td,
-                    > td > div
-                    {
-                        height: 100%;
+                tr:last-child {
+                    line-height: .1;
+                    height     : 100%;
+
+                     > td,
+                    > td > div {
+                        height : 100%;
                         padding: 0;
                     }
                 }
 
-                tr.ui-ghost
-                {
+                tr.ui-ghost {
                     visibility: hidden;
                 }
             }
 
-
-
-            td
-            {
-                > div
-                {
-                    line-height: 1.5;
-
-                    padding: .35em .5em;
-
+            td {
+                > div {
+                    line-height   : 1.5;
+                    padding       : .35em .5em;
                     vertical-align: middle;
-
-                    color: $datagrid-text;
-                    border-right: 1px solid rgba($base-border-color, .2);
-
+                    color         : $datagrid-text;
+                    border-right  : 1px solid rgba($base-border-color, .2);
                     @include text-truncate();
 
-                    &.ui-button-bar
-                    {
+                    &.ui-button-bar {
                         padding: .1em;
 
-                        .fi-ui-view:before
-                        {
+                        .fi-ui-view:before {
                             content: $datagrid-button-view;
                         }
-                        .fi-ui-edit:before
-                        {
+
+                        .fi-ui-edit:before {
                             content: $datagrid-button-edit;
                         }
-                        .fi-ui-delete:before
-                        {
+
+                        .fi-ui-delete:before {
                             content: $datagrid-button-delete;
                         }
                     }
 
-                    a
-                    {
+                    a {
                         font-weight: $font-weight-normal;
                     }
                 }
             }
 
-            td.sticky
-            {
+            td.sticky {
                 z-index: 10;
-                left: 0;
-
+                left   : 0;
                 @include sticky();
 
-                &.last-of-type > div
-                {
+                &.last-of-type > div {
                     border-right: 1px solid $base-border-color !important;
                 }
             }
 
-            thead td
-            {
-                > div
-                {
-                    padding: 0;
-
+            thead td {
+                > div {
+                    padding      : 0;
                     border-bottom: 1px solid $base-border-color;
-                    background: $datagrid-header-bg;
-
+                    background   : $datagrid-header-bg;
                     @include flex-row(stretch);
 
-                    > span:first-child
-                    {
+                    > span:first-child {
                         padding: .3em .5em;
-
                         @include flex(1 1 0);
-                        &.sortable
-                        {
-                            position: relative;
 
+                        &.sortable {
+                            position     : relative;
                             padding-right: 1.2em;
+                            cursor       : pointer;
 
-                            cursor: pointer;
-                            &:hover
-                            {
+                            &:hover {
                                 background-color: $datagrid-header-hover-bg;
                             }
 
-                            &:before
-                            {
+                            &:before {
                                 font-family: Framework;
                                 font-weight: $font-weight-normal;
-
-                                display: block;
-
-                                width: 1em;
-
-                                content: $font-ui-sort-asc;
-
-                                color: rgba($datagrid-indicator-color, .3);
-
+                                display    : block;
+                                width      : 1em;
+                                content    : $font-ui-sort-asc;
+                                color      : rgba($datagrid-indicator-color, .3);
                                 @include position(absolute, $t: 0, $r : 0);
                             }
-                            &:after
-                            {
+
+                            &:after {
                                 font-family: Framework;
                                 font-weight: $font-weight-normal;
-
-                                display: block;
-
-                                width: 1em;
-
-                                content: $font-ui-sort-desc;
-
-                                color: rgba($datagrid-indicator-color, .3);
-
+                                display    : block;
+                                width      : 1em;
+                                content    : $font-ui-sort-desc;
+                                color      : rgba($datagrid-indicator-color, .3);
                                 @include position(absolute, $b: 0, $r : 0);
                             }
 
-                            &.asc:before
-                            {
+                            &.asc:before {
                                 color: $datagrid-indicator-color;
                             }
 
-                            &.desc:after
-                            {
+                            &.desc:after {
                                 color: $datagrid-indicator-color;
                             }
                         }
                     }
-                    > span.resizer
-                    {
-                        margin-left: 4px;
 
+                    > span.resizer {
+                        margin-left: 4px;
                         @include flex(0 0 1px);
 
-                        &.enable
-                        {
-                            cursor: ew-resize;
-
+                        &.enable {
+                            cursor      : ew-resize;
                             border-right: 1px solid lighten($base-border-color, 30%);
-                            border-left: 1px solid $base-border-color;
+                            border-left : 1px solid $base-border-color;
                         }
                     }
                 }
 
-                tr:hover:not(.active) > td > div
-                {
+                tr:hover:not(.active) > td > div {
                     background-color: $datagrid-hover-bg;
-
                     @include transition(background .2s linear .5s);
                 }
 
-                tr.active > td > div
-                {
+                tr.active > td > div {
                     background-color: $datagrid-active-bg;
-
                     @include transition(background .05s linear 0s);
                 }
             }
-            tfoot td
-            {
-                > div
-                {
+
+            tfoot td {
+                > div {
                     border-top: 1px solid $base-border-color;
                     background: $datagrid-footer-bg;
                 }
             }
         }
     }
+
+    &.ui-auto-height > .ui-datagrid-wrapper {
+        position: static;
+    }
 }
 
-.ui-pager
-{
+.ui-pager {
     font-size: .9em;
 
-    .ui-page-input
-    {
-        padding: 0;
-
-        border: none !important;
+    .ui-page-input {
+        padding   : 0;
+        border    : none !important;
         box-shadow: 0 0 1px 0 $base-shadow-color !important;
-
         @include padding(end, .25em);
 
-        .ui-input
-        {
+        .ui-input {
             line-height: 1.5;
-
-            min-height: 1px;
-            padding: .1em .3em;
+            min-height : 1px;
+            padding    : .1em .3em;
         }
     }
 
-    .fi-ui-pager-first:before
-    {
+    .fi-ui-pager-first:before {
         content: $pager-first-glyph;
     }
-    .fi-ui-pager-prev:before
-    {
+
+    .fi-ui-pager-prev:before {
         content: $pager-prev-glyph;
     }
-    .fi-ui-pager-next:before
-    {
+
+    .fi-ui-pager-next:before {
         content: $pager-next-glyph;
     }
-    .fi-ui-pager-last:before
-    {
+
+    .fi-ui-pager-last:before {
         content: $pager-last-glyph;
     }
 }

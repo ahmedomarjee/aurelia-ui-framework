@@ -8,10 +8,8 @@
 
         &.ui-modal {
             z-index       : $z-index-floating;
-
             pointer-events: all;
-
-            background    : rgba($white, .5);
+            background    : rgba($black, .1);
             @include position(absolute, 0, 0, 0, 0);
             @include flex-column(center, center);
 
@@ -24,22 +22,18 @@
 
     .ui-dialog {
         position      : absolute;
-
         min-width     : 300px;
         min-height    : 200px;
-
         pointer-events: all;
-
         border        : 1px solid $primary;
         border-radius : $base-border-radius;
         background    : $base-bg;
         @include flex-column($align: stretch, $justify : flex-start);
-        @include box-shadow(0 0 20px 5px rgba($black, .5), 0 0 5px 0 $primary inset);
+        @include box-shadow(0 0 20px 5px rgba($black, .3));
 
         .ui-header {
             button {
                 font-size: 1.2em;
-
                 padding  : 0;
             }
 
@@ -61,14 +55,11 @@
 
         .ui-resizer {
             font-size: 1.5em;
-
             position : absolute;
             z-index  : 10;
             right    : 0;
             bottom   : 0;
-
             cursor   : nwse-resize;
-
             opacity  : .3 !important;
 
             &:before {
@@ -87,7 +78,6 @@
             right   : 1em !important;
             bottom  : 3em !important;
             left    : 1em !important;
-
             width   : auto !important;
             height  : auto !important;
 
@@ -133,10 +123,9 @@
     }
 
     .ui-dialog.ui-alert {
-        min-width : 0;
+        min-width : 20em;
         min-height: 0;
-        @include box-shadow(0 0 20px 5px rgba($black, .5), 0 0 2px 0 $primary inset);
-
+        // @include box-shadow(0 0 20px 5px rgba($black, .5), 0 0 2px 0 $primary inset);
         .ui-message-bar {
             @include flex-row();
             padding: 1em 1.5em;
@@ -154,13 +143,18 @@
 
         .ui-button-bar {
             border-top: 1px solid rgba($base-border-color, .5);
-            @include flex-row();
+            @include flex-row($justify: center);
+            padding   : .5em 1em;
 
             button {
-                @include flex(1 1 0);
-                padding    : .5em;
-                font-size  : 1.1em;
-                font-weight: $font-weight-normal;
+                @include flex(0 0 auto);
+                min-width    : 5em;
+                padding      : .2em .5em;
+                margin       : .2em .4em;
+                font-size    : 1.1em;
+                font-weight  : $font-weight-normal;
+                border       : 1px solid $primary;
+                border-radius: $base-border-radius;
 
                 &.default {
                     font-weight: $font-weight-strong;
