@@ -362,7 +362,6 @@ export class UIDataColumn {
     if (this.element.hasAttribute('edit')) this.buttonIcon = 'fi-ui-edit';
     if (this.element.hasAttribute('delete')) this.buttonIcon = 'fi-ui-delete';
 
-    this.__title = this.element.textContent;
     if (this.__button = !(isEmpty(this.buttonIcon) && isEmpty(this.buttonTitle) && !this.element.hasAttribute('button'))) this.__align = 'center';
 
     if (!this.width && !isEmpty(this.buttonIcon) && isEmpty(this.buttonTitle)) {
@@ -394,6 +393,10 @@ export class UIDataColumn {
     else {
       this.width = this.width || this.minWidth || 250;
     }
+  }
+
+  attached() {
+    this.__title = this.element.textContent;
   }
 }
 
