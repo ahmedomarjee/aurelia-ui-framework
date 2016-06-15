@@ -3,15 +3,8 @@ define(["require", "exports", "./ui-utils", "aurelia-framework", "aurelia-event-
     var UIEvent;
     (function (UIEvent) {
         function fireEvent(event, element, data) {
-            try {
-                var e = new CustomEvent(event, { bubbles: true, cancelable: true, detail: data });
-                return element.dispatchEvent(e);
-            }
-            catch (e) {
-                var evt = document.createEvent('CustomEvent');
-                evt.initCustomEvent(event, true, true, data);
-                return element.dispatchEvent(evt);
-            }
+            var e = aurelia_framework_1.DOM.createCustomEvent(event, { bubbles: true, cancelable: true, detail: data });
+            return element.dispatchEvent(e);
         }
         UIEvent.fireEvent = fireEvent;
         var __ea;

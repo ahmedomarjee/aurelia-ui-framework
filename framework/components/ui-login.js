@@ -12,12 +12,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../utils/ui-utils", "../utils/ui-model", "../utils/ui-application"], function (require, exports, aurelia_framework_1, ui_event_1, ui_utils_1, ui_model_1, ui_application_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../utils/ui-utils", "../utils/ui-model", "../utils/ui-application", "aurelia-validatejs", "aurelia-validation"], function (require, exports, aurelia_framework_1, ui_event_1, ui_utils_1, ui_model_1, ui_application_1, aurelia_validatejs_1, aurelia_validation_1) {
     "use strict";
     var UILogin = (function () {
-        function UILogin(element, appState) {
+        function UILogin(element, appState, controller) {
             this.element = element;
             this.appState = appState;
+            this.controller = controller;
             this.busy = false;
             this.model = new LoginModel();
         }
@@ -27,14 +28,10 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             this.__content.appendChild(this.__temp);
         };
         UILogin.prototype.doLogin = function () {
-            var _this = this;
-            this.error = '';
-            this.model.validate()
-                .then(function () {
-                ui_event_1.UIEvent.fireEvent('login', _this.element, _this.model);
-            })
-                .catch(function (e) {
-            });
+            if (this.controller.validate().length == 0) {
+                this.error = '';
+                ui_event_1.UIEvent.fireEvent('login', this.element, this.model);
+            }
         };
         UILogin.prototype.toast = function (config) {
             if (typeof config === 'string')
@@ -51,9 +48,9 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             __metadata('design:type', Boolean)
         ], UILogin.prototype, "busy", void 0);
         UILogin = __decorate([
-            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.inject(Element, ui_application_1.UIApplication, aurelia_framework_1.NewInstance.of(aurelia_validation_1.ValidationController)),
             aurelia_framework_1.customElement('ui-login'), 
-            __metadata('design:paramtypes', [Element, ui_application_1.UIApplication])
+            __metadata('design:paramtypes', [Element, ui_application_1.UIApplication, aurelia_validation_1.ValidationController])
         ], UILogin);
         return UILogin;
     }());
@@ -74,12 +71,10 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
                 this.password = _p;
                 this.remember = true;
             }
-            this.validation
-                .ensure('username', null)
-                .isNotEmpty()
-                .isEmail()
-                .ensure('password', null)
-                .isNotEmpty();
+            aurelia_validatejs_1.ValidationRules
+                .ensure('username').required()
+                .ensure('password').required()
+                .on(this);
         }
         LoginModel.prototype.save = function () {
             this.appState.persist('AppUsername', this.username);

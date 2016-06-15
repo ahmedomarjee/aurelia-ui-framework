@@ -11,6 +11,7 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
     "use strict";
     var App = (function () {
         function App(appState) {
+            this.appState = appState;
             appState.IsAuthenticated = true;
         }
         App.prototype.configureRouter = function (config, router) {
@@ -48,7 +49,7 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
                     settings: { icon: 'fi-vaadin-open-book' },
                     title: 'ReadMe',
                     nav: true,
-                    auth: false,
+                    auth: true,
                     name: 'readme'
                 }, {
                     route: 'todo',
@@ -93,6 +94,9 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
                 }, {
                     route: '', redirect: 'home'
                 }]);
+        };
+        App.prototype.logout = function () {
+            this.appState.navigateTo('login');
         };
         App.prototype.toggleDir = function () {
             document.body.dir = document.body.dir == 'rtl' ? 'ltr' : 'rtl';

@@ -66,6 +66,9 @@ define(["require", "exports", "../utils/ui-event"], function (require, exports, 
             this.__input.oninput = function (evt) { return _this.value = _this.formatter(evt); };
             this.__input.onkeypress = function (evt) { return _this.keyPress(evt); };
             this.__input.onchange = function (evt) { return evt.detail = _this; };
+            this.__input.onblur = function (evt) {
+                ui_event_1.UIEvent.fireEvent('blur', _this.element, 'blurring');
+            };
             if (this.__input2) {
                 this.__input2.oninput = function (evt) { return _this.valueSecond = _this.formatter(evt); };
                 this.__input2.onkeypress = function (evt) { return _this.keyPress(evt); };

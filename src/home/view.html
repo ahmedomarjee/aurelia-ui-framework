@@ -185,10 +185,10 @@
 			<div>
 				<ui-switch danger width="5" checked.bind="formBusy" label-on="Busy">Make Busy</ui-switch>
 			</div>
-			<ui-form validate.bind="validation" busy.bind="formBusy" submit.trigger="onSubmit()">
+			<ui-form busy.bind="formBusy" submit.trigger="onSubmit()">
 				<ui-row>
 					<ui-column padded>
-						<ui-input value="Hello" class="ui-invalid" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
+						<ui-input value="Hello" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
 						</ui-input>
 						<ui-input value="Hello" required readonly button-text="Send!">Readonly</ui-input>
 						<ui-input-dual required decimal checkbox prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.lat" value-second.bind="model.long" placeholder="-90 to 90" placeholder-second="-180 to 180">Location
@@ -217,7 +217,7 @@
 			<hr/>
 			<h2>Panel</h2>
 			<ui-row>
-				<ui-column fill>
+				<ui-column size="xl-6">
 					<ui-panel>
 						<ui-body>
 							<h3 class="ui-pad-all">A Simple Panel</h3>
@@ -232,7 +232,7 @@
 						</ui-body>
 					</ui-panel>
 				</ui-column>
-				<ui-column fill>
+				<ui-column size="xl-6">
 					<ui-panel>
 						<ui-header collapse="true" primary>My Panel</ui-header>
 						<ui-body>

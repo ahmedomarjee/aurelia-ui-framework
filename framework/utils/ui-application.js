@@ -211,7 +211,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "./ui-util
                     this.logger.warn('Not authenticated');
                     var url = routingContext.router.generate('login', { status: 401 });
                     this.appState.IsAuthenticated = false;
-                    this.appState.session('AppCurrentRoute', routingContext.fragment);
+                    console.log(routingContext);
+                    this.appState.session('AppCurrentRoute', [routingContext.config.route, routingContext.params]);
                     return next.reject(new aurelia_router_1.Redirect(url));
                 }
             }

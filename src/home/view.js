@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../framework/index", "./my-dialog", "fetch"], function (require, exports, aurelia_validation_1, aurelia_framework_1, index_1, my_dialog_1) {
+define(["require", "exports", "aurelia-framework", "../../framework/index", "./my-dialog", "fetch"], function (require, exports, aurelia_framework_1, index_1, my_dialog_1) {
     "use strict";
     var Home = (function () {
-        function Home(_validation, appState, dialogService, httpClient) {
+        function Home(appState, dialogService, httpClient) {
             this.appState = appState;
             this.dialogService = dialogService;
             this.httpClient = httpClient;
@@ -151,16 +151,6 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
                     Currency: 'USD'
                 }];
             this.autoCompWords = 'Alfa Romeo, Audi, Accura, Aston Martin, Bentley, Porsche, BMW, Bugatti, Chevrolet, Cadillac, Citrëon, Daimler, Opel, Ford, Toyota, Honda, Mitsubushi, Kia, Hyundai, Renault, Ferrari, Masseratti, Lamborghini, FIAT, Lancia, SEAT, Daihatsu, MINI, Rolls Royce, Nissan';
-            this.validation = _validation
-                .on(this, null)
-                .ensure('model.email')
-                .isNotEmpty()
-                .ensure('model.lat')
-                .isNumber()
-                .isBetween(-90, 90)
-                .ensure('model.long')
-                .isNumber()
-                .isBetween(-180, 180);
             var ct = [];
             index_1._.forEach(index_1._.groupBy(window.countries, 'continent'), function (v, k) {
                 var c = {
@@ -205,11 +195,6 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
                 .then(function (resp) { return _this.md = resp; });
         };
         Home.prototype.onSubmit = function () {
-            this.validation.validate()
-                .then(function () {
-            })
-                .catch(function () {
-            });
         };
         Home.prototype.attached = function () {
             var _this = this;
@@ -269,7 +254,7 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
         };
         Home = __decorate([
             aurelia_framework_1.autoinject(), 
-            __metadata('design:paramtypes', [aurelia_validation_1.Validation, index_1.UIApplication, index_1.UIDialogService, index_1.UIHttpService])
+            __metadata('design:paramtypes', [index_1.UIApplication, index_1.UIDialogService, index_1.UIHttpService])
         ], Home);
         return Home;
     }());

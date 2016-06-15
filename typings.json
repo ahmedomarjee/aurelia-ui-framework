@@ -1,14 +1,16 @@
 {
   "name": "aurelia-ui-framework",
   "dependencies": {
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection/dist/aurelia-dependency-injection.d.ts#890723dee1c08ca1764649e34efd14373e5af497",
+    "aurelia-framework": "github:aurelia/framework/dist/aurelia-framework.d.ts#c92263b82366e0c578e284923b60fe079bb96766",
+    "aurelia-validation": "github:aurelia/validation/dist/aurelia-validation.d.ts#3fe0528e79cc1000ff02f777b69a941d0bb98b1f",
+    "aurelia-validatejs": "github:aurelia/validatejs/dist/aurelia-validatejs.d.ts#56ade2c59420cf521006f239d0b18892fe8db6d1"
   },
   "globalDependencies": {
     "aurelia-binding": "github:aurelia/binding/dist/aurelia-binding.d.ts#69d54dbebafe87738f89b8ac4109921544d202cb",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper/dist/aurelia-bootstrapper.d.ts#111ee4eb1e5df7af39305d190d635df7d93cb7e5",
-    "aurelia-dependency-injection": "github:aurelia/dependency-injection/dist/aurelia-dependency-injection.d.ts#dcb53d40d128f5ff89c6bafa587128583529bd68",
     "aurelia-event-aggregator": "github:aurelia/event-aggregator/dist/aurelia-event-aggregator.d.ts#7a38c51dc9082175461e2d0b21a4c0a9242a8925",
     "aurelia-fetch-client": "github:aurelia/fetch-client/dist/aurelia-fetch-client.d.ts#a97fa7b9484cd78d986b11e537394400c99d02fe",
-    "aurelia-framework": "github:aurelia/framework/dist/aurelia-framework.d.ts#e008c4a98147ae39556892a69e5c165947e293a7",
     "aurelia-history": "github:aurelia/history/dist/aurelia-history.d.ts#21e1ecd279b5b6d7525103cf734318103aee5382",
     "aurelia-history-browser": "github:aurelia/history-browser/dist/aurelia-history-browser.d.ts#19e095308a414ab561d3c5b327fcbc756e60f457",
     "aurelia-loader": "github:aurelia/loader/dist/aurelia-loader.d.ts#5bc0bf9424946235bc6d63ce77f4a6b97b0b4742",

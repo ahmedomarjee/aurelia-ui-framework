@@ -5,21 +5,16 @@
  *    @copyright    2015-2016, Adarsh Pastakia
  **/
 import {UIUtils} from "./ui-utils";
-import {BindingEngine, PropertyObserver} from "aurelia-framework";
+import {BindingEngine, PropertyObserver, DOM} from "aurelia-framework";
 import {EventAggregator, Subscription} from "aurelia-event-aggregator";
 
 export module UIEvent {
   export function fireEvent(event: string,
     element: EventTarget,
     data?: any): any {
-    try {
-      let e = new CustomEvent(event, { bubbles: true, cancelable: true, detail: data });
-      return element.dispatchEvent(e);
-    } catch (e) {
-      var evt = document.createEvent('CustomEvent');
-      evt.initCustomEvent(event, true, true, data);
-      return element.dispatchEvent(evt);
-    }
+
+    let e = DOM.createCustomEvent(event, { bubbles: true, cancelable: true, detail: data });
+    return element.dispatchEvent(e);
   }
 
 

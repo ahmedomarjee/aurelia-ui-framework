@@ -4,14 +4,15 @@
  *    @company      HMC
  *    @copyright    2015-2016, Adarsh Pastakia
  **/
-import {autoinject, customElement, containerless, bindable, transient, bindingMode} from "aurelia-framework";
-import {ensure, Validation} from "aurelia-validation";
+import {autoinject, inject, NewInstance, customElement, containerless, bindable, transient, bindingMode} from "aurelia-framework";
 import {UIEvent} from "../utils/ui-event";
 import {UIUtils} from "../utils/ui-utils";
 import {UIModel} from "../utils/ui-model";
 import {UIApplication} from "../utils/ui-application";
+import {required, email, ValidationRules} from "aurelia-validatejs";
+import {ValidationController} from "aurelia-validation";
 
-@autoinject()
+@inject(Element, UIApplication, NewInstance.of(ValidationController))
 @customElement('ui-login')
 export class UILogin {
   model: LoginModel;
@@ -25,7 +26,7 @@ export class UILogin {
   @bindable
   busy: boolean = false;
 
-  constructor(public element: Element, public appState: UIApplication) {
+  constructor(public element: Element, public appState: UIApplication, public controller: ValidationController) {
     this.model = new LoginModel();
   }
 
@@ -36,13 +37,10 @@ export class UILogin {
   }
 
   doLogin() {
-    this.error = '';
-    this.model.validate()
-      .then(() => {
+    if (this.controller.validate().length == 0) {
+      this.error = '';
       UIEvent.fireEvent('login', this.element, this.model);
-    })
-      .catch(e=> {
-    });
+    }
   }
 
   toast(config) {
@@ -75,12 +73,17 @@ export class LoginModel extends UIModel {
       this.remember = true;
     }
 
-    this.validation
-      .ensure('username', null)
-      .isNotEmpty()
-      .isEmail()
-      .ensure('password', null)
-      .isNotEmpty();
+    ValidationRules
+      .ensure('username').required()
+      .ensure('password').required()
+      .on(this);
+
+    // this.validation
+    //   .ensure('username', null)
+    //   .isNotEmpty()
+    //   .isEmail()
+    //   .ensure('password', null)
+    //   .isNotEmpty();
   }
 
   save() {

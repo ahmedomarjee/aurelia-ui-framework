@@ -1,4 +1,3 @@
-import {Validation} from "aurelia-validation";
 import {autoinject} from "aurelia-framework";
 import {_, moment, UIApplication, UITreeOptions, UIDialogService, UIHttpService, UIUtils} from "../../framework/index";
 import {MyDialog} from "./my-dialog";
@@ -43,7 +42,6 @@ export class Home {
 
   md;
 
-  validation;
   __tree;
   checked;
   treeModel;
@@ -177,18 +175,9 @@ export class Home {
     console.log('add', this.data);
   }
 
-  constructor(_validation: Validation, public appState: UIApplication,
+  constructor(public appState: UIApplication,
     public dialogService: UIDialogService, public httpClient: UIHttpService) {
-    this.validation = _validation
-      .on(this, null)
-      .ensure('model.email')
-      .isNotEmpty()
-      .ensure('model.lat')
-      .isNumber()
-      .isBetween(-90, 90)
-      .ensure('model.long')
-      .isNumber()
-      .isBetween(-180, 180);
+
 
     var ct = [];
     _.forEach(_.groupBy(window.countries, 'continent'), (v: any, k: string) => {
@@ -220,13 +209,6 @@ export class Home {
   }
 
   onSubmit() {
-    this.validation.validate()
-      .then(() => {
-
-      })
-      .catch(() => {
-
-      });
   }
 
   autoCompWords = 'Alfa Romeo, Audi, Accura, Aston Martin, Bentley, Porsche, BMW, Bugatti, Chevrolet, Cadillac, Citrëon, Daimler, Opel, Ford, Toyota, Honda, Mitsubushi, Kia, Hyundai, Renault, Ferrari, Masseratti, Lamborghini, FIAT, Lancia, SEAT, Daihatsu, MINI, Rolls Royce, Nissan';

@@ -20,8 +20,9 @@ define(["require", "exports", "../../framework/index", "aurelia-framework"], fun
             }
         };
         Login.prototype.doLogin = function ($event) {
-            var route = this.appState.session('AppCurrentRoute') || '/home';
-            this.appState.navigate(route);
+            this.appState.IsAuthenticated = true;
+            var route = this.appState.session('AppCurrentRoute') || ['home', {}];
+            this.appState.navigateTo.apply(this.appState, route);
         };
         Login = __decorate([
             aurelia_framework_1.autoinject(), 

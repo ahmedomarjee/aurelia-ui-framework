@@ -15,7 +15,8 @@ export class Login {
   }
 
   doLogin($event) {
-    let route = this.appState.session('AppCurrentRoute') || '/home';
-    this.appState.navigate(route);
+    this.appState.IsAuthenticated = true;
+    let route = this.appState.session('AppCurrentRoute') || ['home', {}];
+    this.appState.navigateTo.apply(this.appState, route);
   }
 }

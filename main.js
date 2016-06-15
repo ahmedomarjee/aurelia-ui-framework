@@ -1,4 +1,4 @@
-define(["require", "exports", "./framework/index"], function (require, exports, index_1) {
+define(["require", "exports"], function (require, exports) {
     "use strict";
     function configure(aurelia) {
         aurelia.use
@@ -14,9 +14,8 @@ define(["require", "exports", "./framework/index"], function (require, exports, 
             };
             config.Http.AuthorizationHeader = true;
         })
-            .plugin('aurelia-validation', function (config) {
-            config.useViewStrategy(new index_1.UIValidationStrategy());
-        });
+            .plugin('aurelia-validation')
+            .plugin('aurelia-validatejs');
         aurelia.start()
             .then(function (a) {
             return a.setRoot('./src/app.js');

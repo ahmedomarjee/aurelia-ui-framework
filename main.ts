@@ -1,5 +1,4 @@
 import {Aurelia} from "aurelia-framework";
-import {UIValidationStrategy} from "./framework/index";
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -22,9 +21,8 @@ export function configure(aurelia: Aurelia) {
 			   // HTTPClient Send Basic Authorization Header
 			   config.Http.AuthorizationHeader = true;
     })
-    .plugin('aurelia-validation', function(config) {
-			   config.useViewStrategy(new UIValidationStrategy());
-    });
+    .plugin('aurelia-validation')
+    .plugin('aurelia-validatejs');
 
 
 

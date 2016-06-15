@@ -6,15 +6,12 @@
  **/
 import {autoinject, customElement, bindable} from "aurelia-framework";
 import {UIEvent} from "../utils/ui-event";
-import {Validation} from "aurelia-validation";
 
-@autoinject()
+@autoinject
 @customElement('ui-form')
 export class UIForm {
   @bindable
   busy: boolean;
-  @bindable
-  validation: Validation;
 
   private __form: HTMLElement;
 
@@ -32,7 +29,7 @@ export class UIForm {
 
   busyChanged(newValue: any) {
     let els = this.element.querySelectorAll('ui-button,ui-combo,ui-date,ui-input,ui-input-dual,ui-language,ui-markdown,ui-checkbox,ui-radio,ui-phone,ui-switch,ui-tags,ui-textarea');
-    _.forEach(els, el=> {
+    _.forEach(els, el => {
       try {
         el.au.controller.viewModel.disable(isTrue(newValue));
       } catch (e) {
