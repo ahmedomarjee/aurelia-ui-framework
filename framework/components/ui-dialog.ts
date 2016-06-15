@@ -3,15 +3,15 @@ import {_, UIUtils} from "../utils/ui-utils";
 import {UIEvent} from "../utils/ui-event";
 import {Origin} from "aurelia-metadata";
 import {
-customElement,
-useView,
-singleton,
-Container,
-View,
-ViewCompiler,
-ViewResources,
-CompositionEngine,
-ViewSlot
+  customElement,
+  useView,
+  singleton,
+  Container,
+  View,
+  ViewCompiler,
+  ViewResources,
+  CompositionEngine,
+  ViewSlot
 } from "aurelia-framework";
 import {child} from "aurelia-templating";
 
@@ -52,35 +52,35 @@ export class UIDialogService {
       model: model ? model : {}
     };
     return this.__getViewModel(instruction)
-      .then(newInstruction=> {
-      let viewModel: any = <any>newInstruction.viewModel;
-      return this.__invokeLifecycle(viewModel, 'canActivate', model)
-        .then(canActivate => {
-        if (canActivate) {
-          return this.compositionEngine.createController(instruction)
-            .then(controller => {
-            this.__invokeLifecycle(viewModel, 'activate', model);
-            controller.automate();
+      .then(newInstruction => {
+        let viewModel: any = <any>newInstruction.viewModel;
+        return this.__invokeLifecycle(viewModel, 'canActivate', model)
+          .then(canActivate => {
+            if (canActivate) {
+              return this.compositionEngine.createController(instruction)
+                .then(controller => {
+                  this.__invokeLifecycle(viewModel, 'activate', model);
+                  controller.automate();
 
-            let view = this.__createDialog(controller.viewModel);
-            this.__invokeLifecycle(viewModel, 'bind', model);
+                  let view = this.__createDialog(controller.viewModel);
+                  this.__invokeLifecycle(viewModel, 'bind', model);
 
-            let childSlot: any = new ViewSlot(view['fragment'].querySelector('.ui-dialog'), true);
-            childSlot.add(controller.view);
-            childSlot.viewModel = controller.viewModel;
-            childSlot.attached();
+                  let childSlot: any = new ViewSlot(view['fragment'].querySelector('.ui-dialog'), true);
+                  childSlot.add(controller.view);
+                  childSlot.viewModel = controller.viewModel;
+                  childSlot.attached();
 
-            let slot = new ViewSlot(this.dialogContainer, true);
-            slot.add(view);
-            slot.attached();
+                  let slot = new ViewSlot(this.dialogContainer, true);
+                  slot.add(view);
+                  slot.attached();
 
-            this.__initDialog(controller.viewModel);
+                  this.__initDialog(controller.viewModel);
 
-            this.__invokeLifecycle(viewModel, 'attached', null);
+                  this.__invokeLifecycle(viewModel, 'attached', null);
+                });
+            }
           });
-        }
       });
-    });
   }
 
   private __createDialog(vm) {

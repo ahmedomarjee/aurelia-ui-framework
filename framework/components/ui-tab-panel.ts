@@ -24,11 +24,11 @@ export class UITabPanel {
   }
 
   bind() {
-    _.forEach(this.element.querySelectorAll('ui-tab'),
-				  t=> this.tabs.push(t.au.controller.viewModel));
   }
 
   attached() {
+    _.forEach(this.element.querySelectorAll('ui-tab'),
+				  t => this.tabs.push(t.au.controller.viewModel));
     this.activeTabChanged(this.activeTab);
   }
 
@@ -71,7 +71,7 @@ export class UITabPanel {
 }
 
 @autoinject()
-@inlineView('<template class="ui-tab-content ${isSelected?\'ui-active\':\'\'}"><content></content></template>')
+@inlineView('<template class="ui-tab-content ${isSelected?\'ui-active\':\'\'}"><slot></slot></template>')
 @customElement('ui-tab')
 export class UITab {
   @bindable

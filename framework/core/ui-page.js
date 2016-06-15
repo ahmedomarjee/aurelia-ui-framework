@@ -44,7 +44,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         };
         UISection = __decorate([
             aurelia_framework_1.customElement('ui-section'),
-            aurelia_framework_1.inlineView('<template class="ui-section"><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-section"><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UISection);
         return UISection;
@@ -66,7 +66,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         };
         UIContent = __decorate([
             aurelia_framework_1.customElement('ui-content'),
-            aurelia_framework_1.inlineView('<template class="ui-content"><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-content"><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UIContent);
         return UIContent;
@@ -114,7 +114,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         ], UISidebar.prototype, "width", void 0);
         UISidebar = __decorate([
             aurelia_framework_1.customElement('ui-sidebar'),
-            aurelia_framework_1.inlineView("<template class=\"ui-sidebar\" role=\"sidebar\" css.bind=\"{'width':width}\" click.trigger=\"showOverlay()\">\n<div class=\"ui-sidebar-collapse\" if.bind=\"collapsible\" click.trigger=\"toggleCollapse($event)\"><span class=\"fi-ui-arrow-left\"></span></div>\n<div class=\"ui-sidebar-content\" ref=\"__content\"><content></content></div></template>"), 
+            aurelia_framework_1.inlineView("<template class=\"ui-sidebar\" role=\"sidebar\" css.bind=\"{'width':width}\" click.trigger=\"showOverlay()\">\n<div class=\"ui-sidebar-collapse\" if.bind=\"collapsible\" click.trigger=\"toggleCollapse($event)\"><span class=\"fi-ui-arrow-left\"></span></div>\n<div class=\"ui-sidebar-content\" ref=\"__content\"><slot></slot></div></template>"), 
             __metadata('design:paramtypes', [Element])
         ], UISidebar);
         return UISidebar;
@@ -125,7 +125,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         }
         UIDivider = __decorate([
             aurelia_framework_1.customElement('ui-divider'),
-            aurelia_framework_1.inlineView('<template class="ui-divider" role="separator"></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-divider" role="separator"><slot></slot></template>'), 
             __metadata('design:paramtypes', [])
         ], UIDivider);
         return UIDivider;
@@ -140,7 +140,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         };
         UIToolbar = __decorate([
             aurelia_framework_1.customElement('ui-toolbar'),
-            aurelia_framework_1.inlineView("<template class=\"ui-toolbar ui-button-bar\" role=\"toolbar\" enterpressed.trigger=\"fireSubmit()\"><content></content></template>"), 
+            aurelia_framework_1.inlineView("<template class=\"ui-toolbar ui-button-bar\" role=\"toolbar\" enterpressed.trigger=\"fireSubmit()\"><slot></slot></template>"), 
             __metadata('design:paramtypes', [Element])
         ], UIToolbar);
         return UIToolbar;
@@ -151,7 +151,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         }
         UIStatsbar = __decorate([
             aurelia_framework_1.customElement('ui-statsbar'),
-            aurelia_framework_1.inlineView("<template class=\"ui-statsbar\"><content></content></template>"), 
+            aurelia_framework_1.inlineView("<template class=\"ui-statsbar\"><slot></slot></template>"), 
             __metadata('design:paramtypes', [])
         ], UIStatsbar);
         return UIStatsbar;
@@ -170,7 +170,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         ], UIStat.prototype, "icon", void 0);
         UIStat = __decorate([
             aurelia_framework_1.customElement('ui-stat'),
-            aurelia_framework_1.inlineView('<template class="ui-stat"><span class="${icon}" if.bind="icon"></span><div><h1>${value}</h1><h6><content></content></h6></div></template>'), 
+            aurelia_framework_1.inlineView('<template class="ui-stat"><span class="${icon}" if.bind="icon"></span><div><h1>${value}</h1><h6><slot></slot></h6></div></template>'), 
             __metadata('design:paramtypes', [])
         ], UIStat);
         return UIStat;

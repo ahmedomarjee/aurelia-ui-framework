@@ -1,11 +1,11 @@
 import {Aurelia} from "aurelia-framework";
 import {UIValidationStrategy} from "./framework/index";
 
-export function configure(aurelia:Aurelia) {
-	aurelia.use
-		   .standardConfiguration()
-		   // .developmentLogging()
-		   .feature('./framework', function (config) {
+export function configure(aurelia: Aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .feature('./framework', function(config) {
 			   // AppKey for local/session storage key prefix
 			   config.App.Key = 'App';
 			   // Application Title
@@ -17,29 +17,29 @@ export function configure(aurelia:Aurelia) {
 			   config.Http.BaseUrl = './';
 			   // HTTPClient Extra Headers
 			   config.Http.Headers = {
-				   'X-API-VERSION': '2'
+        'X-API-VERSION': '2'
 			   };
 			   // HTTPClient Send Basic Authorization Header
 			   config.Http.AuthorizationHeader = true;
-		   })
-		   .plugin('aurelia-validation', function (config) {
+    })
+    .plugin('aurelia-validation', function(config) {
 			   config.useViewStrategy(new UIValidationStrategy());
-		   });
+    });
 
 
 
-	aurelia.start()
-		   .then(a=>{
+  aurelia.start()
+    .then(a => {
 			   return a.setRoot('./src/app.js');
-		   })
-		   .then(()=>{
+    })
+    .then(() => {
 			   var splash = window.document.querySelector('.ui-splash');
 			   splash.classList.add('animate');
-			   setTimeout(()=>{
-				   splash.parentElement.removeChild(splash);
+			   setTimeout(() => {
+        splash.parentElement.removeChild(splash);
 			   }, 1000);
-		   })
-		   .catch(e=>{
+    })
+    .catch(e => {
 			   console.log(e);
-		   });
+    });
 }

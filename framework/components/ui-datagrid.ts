@@ -4,7 +4,7 @@
  *    @company      HMC
  *    @copyright    2015-2016, Adarsh Pastakia
  **/
-import {autoinject, customElement, bindable, useView, bindingMode, inlineView} from "aurelia-framework";
+import {autoinject, customElement, bindable, useView, bindingMode, inlineView, BindingEngine} from "aurelia-framework";
 import {BindingSignaler} from "aurelia-templating-resources";
 import {UIFormat} from "../utils/ui-formatters";
 import {UIEvent} from "../utils/ui-event";
@@ -37,25 +37,43 @@ export class UIDataGrid {
   @bindable()
   summaryRow = false;
 
-  constructor(public element: Element, public signaler: BindingSignaler) {
+  private __dataListChangeSubscriber;
+
+  constructor(public element: Element, public signaler: BindingSignaler, public bindingEngine: BindingEngine) {
     this.__id = `UIDataGrid${UIDataGrid.__id++}:Refresh`;
+    if (element.hasAttribute('auto-height')) this.element.classList.add('ui-auto-height');
   }
 
   bind() {
+    // let cols = [];
+    // _.forEach(this.__columns.children, c => {
+    //   cols.push(c['columnDef']);
+    // });
+    //
+    // this.columns = _.orderBy(cols, ['locked'], ['desc']);
+
+    this.__sortColumn = this.defaultSort;
+    this.__sortOrder = this.defaultOrder;
+
+    // this.__doSort(this.dataList);
+
+    this.__dataListChangeSubscriber = this.bindingEngine.collectionObserver(this.dataList).subscribe(e => {
+      this.dataListChanged(this.dataList);
+    });
+  }
+
+  unbind() {
+    this.__dataListChangeSubscriber.dispose();
+  }
+
+  attached() {
     let cols = [];
-    _.forEach(this.__columns.children, c=> {
+    _.forEach(this.__columns.children, c => {
       cols.push(c['columnDef']);
     });
 
     this.columns = _.orderBy(cols, ['locked'], ['desc']);
 
-    this.__sortColumn = this.defaultSort;
-    this.__sortOrder = this.defaultOrder;
-
-    this.__doSort(this.dataList);
-  }
-
-  attached() {
     var w = 0;
     _.forEach(this.columns, (c: any) => {
       c.edge = w;
@@ -63,6 +81,9 @@ export class UIDataGrid {
       return c.__locked;
     });
     this.__table.width = w;
+
+    this.__doSort(this.dataList);
+
   }
 
   dataListChanged(newValue) {
@@ -121,7 +142,7 @@ export class UIDataGrid {
         default:
           return column.summary;
       }
-      return `<small>${prefix}</small>${this.format(v, column, {}) }`;
+      return `<small>${prefix}</small>${this.format(v, column, {})}`;
     }
     else {
       return '&nbsp;';
@@ -188,6 +209,7 @@ export class UIDataGrid {
   }
 
   private __doSort(data) {
+    if (this.columns.length == 0) return;
     let column = _.find(this.columns, ['dataId', this.__sortColumn]);
     let columnId = column.dataId || this.defaultSort;
     let siblingId = column.dataSort || this.defaultSort;
@@ -214,8 +236,8 @@ export class UIDataGrid {
 
     if (column.__resizeable !== true) return;
 
-    document.addEventListener('mousemove', e=> this.resize(e));
-    document.addEventListener('mouseup', e=> this.resizeEnd(e));
+    document.addEventListener('mousemove', e => this.resize(e));
+    document.addEventListener('mouseup', e => this.resizeEnd(e));
 
     this.__column = this.__table.querySelector(`colgroup col[data-index="${this.__index}"]`);
     this.__startX = ($event.x || $event.clientX);
@@ -241,8 +263,8 @@ export class UIDataGrid {
   }
 
   resizeEnd($event) {
-    document.removeEventListener('mousemove', e=> this.resize(e));
-    document.removeEventListener('mouseup', e=> this.resizeEnd(e));
+    document.removeEventListener('mousemove', e => this.resize(e));
+    document.removeEventListener('mouseup', e => this.resizeEnd(e));
 
     if (!this.__isResizing) return;
     this.__ghost.classList.add('ui-hide');
@@ -265,7 +287,7 @@ export class UIDataGrid {
 
 @autoinject()
 @customElement('ui-data-column')
-@inlineView('<template><content></content></template>')
+@inlineView('<template><slot></slot></template>')
 export class UIDataColumn {
   @bindable
   dataId: string;

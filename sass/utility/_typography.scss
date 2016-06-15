@@ -4,7 +4,6 @@
  *	@company	HMC
  *  @copyright 	2015-2016, Adarsh Pastakia
  **/
-
 h1,
 h2,
 h3,
@@ -14,9 +13,7 @@ h6 {
     > small {
         font-size  : .75em;
         line-height: 1.5;
-
         display    : block;
-
         color      : $text-muted;
     }
 }
@@ -52,18 +49,14 @@ small {
 code {
     font-family     : $base-font-family-serif;
     font-weight     : $font-weight-normal;
-
     padding         : 0 .1em;
-
     cursor          : text;
     word-break      : keep-all;
-
     color           : $inline-code-text;
     border-radius   : 2px;
     background-color: $inline-code-bg;
     @include user-select(text);
 }
-
 // Styles
 .ui-strong,
 strong {
@@ -100,7 +93,6 @@ var {
 .ui-titlecase {
     text-transform: capitalize;
 }
-
 // Sizes
 .ui-font-small,
 small {
@@ -119,7 +111,6 @@ big {
 .ui-font-serif {
     font-family: $base-font-family-serif;
 }
-
 // Colors
 .ui-text-muted {
     color: $text-muted !important;
@@ -169,7 +160,6 @@ big {
     color           : $black;
     background-color: $wg-2;
 }
-
 // Alignments
 .ui-text-start {
     text-align: left;
@@ -206,3 +196,96 @@ big {
         transform: scale(-1, 1);
     }
 }
+$font-ui-arrow-down: '\f100';
+$font-ui-arrow-left: '\f101';
+$font-ui-arrow-right: '\f102';
+$font-ui-arrow-signin: '\f103';
+$font-ui-arrow-signout: '\f104';
+$font-ui-arrow-up: '\f105';
+$font-ui-bar-light: '\f106';
+$font-ui-bar-thick: '\f107';
+$font-ui-bar-thin: '\f108';
+$font-ui-bold: '\f109';
+$font-ui-box-signin: '\f10a';
+$font-ui-box-signout: '\f10b';
+$font-ui-calendar: '\f10c';
+$font-ui-calendar-alt: '\f10d';
+$font-ui-calendar-black: '\f10e';
+$font-ui-calendar-white: '\f10f';
+$font-ui-check-off: '\f110';
+$font-ui-check-on: '\f111';
+$font-ui-circle-add: '\f112';
+$font-ui-circle-close: '\f113';
+$font-ui-circle-down: '\f114';
+$font-ui-circle-left: '\f115';
+$font-ui-circle-remove: '\f116';
+$font-ui-circle-right: '\f117';
+$font-ui-circle-up: '\f118';
+$font-ui-close-light: '\f119';
+$font-ui-close-thick: '\f11a';
+$font-ui-close-thin: '\f11b';
+$font-ui-cog-black: '\f11c';
+$font-ui-cog-white: '\f11d';
+$font-ui-delete-black: '\f11e';
+$font-ui-delete-thick: '\f11f';
+$font-ui-delete-white: '\f120';
+$font-ui-dialog-close: '\f121';
+$font-ui-dialog-maximize: '\f122';
+$font-ui-dialog-minimize: '\f123';
+$font-ui-dialog-resize: '\f124';
+$font-ui-dialog-restore: '\f125';
+$font-ui-edit-black: '\f126';
+$font-ui-edit-light: '\f127';
+$font-ui-edit-thick: '\f128';
+$font-ui-edit-thin: '\f129';
+$font-ui-error-black: '\f12a';
+$font-ui-error-exclaim: '\f12b';
+$font-ui-error-white: '\f12c';
+$font-ui-exclaim-alt: '\f12d';
+$font-ui-exclaim-black: '\f12e';
+$font-ui-exclaim-white: '\f12f';
+$font-ui-external: '\f130';
+$font-ui-external-thin: '\f131';
+$font-ui-help-black: '\f132';
+$font-ui-help-white: '\f133';
+$font-ui-image: '\f134';
+$font-ui-info-black: '\f135';
+$font-ui-info-white: '\f136';
+$font-ui-italic: '\f137';
+$font-ui-key-black: '\f138';
+$font-ui-key-white: '\f139';
+$font-ui-language: '\f13a';
+$font-ui-link: '\f13b';
+$font-ui-list-bullet: '\f13c';
+$font-ui-list-numbered: '\f13d';
+$font-ui-page: '\f13e';
+$font-ui-page-first-black: '\f13f';
+$font-ui-page-first-line: '\f140';
+$font-ui-page-first-white: '\f141';
+$font-ui-page-last-black: '\f142';
+$font-ui-page-last-line: '\f143';
+$font-ui-page-last-white: '\f144';
+$font-ui-page-light: '\f145';
+$font-ui-page-next-black: '\f146';
+$font-ui-page-next-line: '\f147';
+$font-ui-page-next-white: '\f148';
+$font-ui-page-prev-black: '\f149';
+$font-ui-page-prev-line: '\f14a';
+$font-ui-page-prev-white: '\f14b';
+$font-ui-preview-light: '\f14c';
+$font-ui-preview-thick: '\f14d';
+$font-ui-preview-thin: '\f14e';
+$font-ui-radio-off: '\f14f';
+$font-ui-radio-on: '\f150';
+$font-ui-search: '\f151';
+$font-ui-search-black: '\f152';
+$font-ui-sort: '\f153';
+$font-ui-sort-asc: '\f154';
+$font-ui-sort-desc: '\f155';
+$font-ui-square-collapse: '\f156';
+$font-ui-square-expand: '\f157';
+$font-ui-strikethrough: '\f158';
+$font-ui-tree-check-off: '\f159';
+$font-ui-tree-check-on: '\f15a';
+$font-ui-tree-check-partial: '\f15b';
+$font-ui-underline: '\f15c';

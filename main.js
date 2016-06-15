@@ -3,6 +3,7 @@ define(["require", "exports", "./framework/index"], function (require, exports, 
     function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
+            .developmentLogging()
             .feature('./framework', function (config) {
             config.App.Key = 'App';
             config.App.Title = 'Aurelia UI Framework';

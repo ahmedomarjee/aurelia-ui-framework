@@ -75,7 +75,7 @@ export class UIHeader {
 
 @autoinject()
 @customElement("ui-body")
-@inlineView('<template class="ui-panel-body"><content></content></template>')
+@inlineView('<template class="ui-panel-body"><slot></slot></template>')
 export class UIBody {
 
     constructor(public element: Element) {

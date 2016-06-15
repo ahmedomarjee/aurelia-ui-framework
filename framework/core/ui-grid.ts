@@ -7,7 +7,7 @@
 import {inlineView, customElement, bindable} from "aurelia-framework";
 
 @customElement('ui-row')
-@inlineView('<template><content></content></template>')
+@inlineView('<template><slot></slot></template>')
 export class UIRow {
 
   constructor(public element: Element) {
@@ -35,7 +35,7 @@ export class UIRow {
 
 
 @customElement('ui-column')
-@inlineView(`<template class="ui-column" css.bind="{'flex-basis': width}"><content></content></template>`)
+@inlineView(`<template class="ui-column" css.bind="{'flex-basis': width}"><slot></slot></template>`)
 export class UIColumn {
 
   @bindable()

@@ -97,7 +97,7 @@ export class UIButton {
 
 @autoinject()
 @customElement('ui-button-group')
-@inlineView('<template class="ui-button-group" click.delegate="fireChange($event)"><content></content></template>')
+@inlineView('<template class="ui-button-group" click.delegate="fireChange($event)"><slot></slot></template>')
 export class UIButtonGroup {
   private __size = 'normal';
   private __theme = 'default';

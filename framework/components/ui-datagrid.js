@@ -10,9 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 define(["require", "exports", "aurelia-framework", "aurelia-templating-resources", "../utils/ui-formatters", "../utils/ui-event", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, aurelia_templating_resources_1, ui_formatters_1, ui_event_1, ui_utils_1) {
     "use strict";
     var UIDataGrid = (function () {
-        function UIDataGrid(element, signaler) {
+        function UIDataGrid(element, signaler, bindingEngine) {
             this.element = element;
             this.signaler = signaler;
+            this.bindingEngine = bindingEngine;
             this.__isProcessing = false;
             this.columns = [];
             this.defaultSort = 'id';
@@ -23,18 +24,26 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             this.__startX = 0;
             this.__diff = 0;
             this.__id = "UIDataGrid" + UIDataGrid.__id++ + ":Refresh";
+            if (element.hasAttribute('auto-height'))
+                this.element.classList.add('ui-auto-height');
         }
         UIDataGrid.prototype.bind = function () {
+            var _this = this;
+            this.__sortColumn = this.defaultSort;
+            this.__sortOrder = this.defaultOrder;
+            this.__dataListChangeSubscriber = this.bindingEngine.collectionObserver(this.dataList).subscribe(function (e) {
+                _this.dataListChanged(_this.dataList);
+            });
+        };
+        UIDataGrid.prototype.unbind = function () {
+            this.__dataListChangeSubscriber.dispose();
+        };
+        UIDataGrid.prototype.attached = function () {
             var cols = [];
             ui_utils_1._.forEach(this.__columns.children, function (c) {
                 cols.push(c['columnDef']);
             });
             this.columns = ui_utils_1._.orderBy(cols, ['locked'], ['desc']);
-            this.__sortColumn = this.defaultSort;
-            this.__sortOrder = this.defaultOrder;
-            this.__doSort(this.dataList);
-        };
-        UIDataGrid.prototype.attached = function () {
             var w = 0;
             ui_utils_1._.forEach(this.columns, function (c) {
                 c.edge = w;
@@ -42,6 +51,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
                 return c.__locked;
             });
             this.__table.width = w;
+            this.__doSort(this.dataList);
         };
         UIDataGrid.prototype.dataListChanged = function (newValue) {
             this.__table.style.tableLayout = 'auto';
@@ -158,6 +168,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             return isEmpty(retVal) ? '&nbsp;' : retVal;
         };
         UIDataGrid.prototype.__doSort = function (data) {
+            if (this.columns.length == 0)
+                return;
             var column = ui_utils_1._.find(this.columns, ['dataId', this.__sortColumn]);
             var columnId = column.dataId || this.defaultSort;
             var siblingId = column.dataSort || this.defaultSort;
@@ -235,7 +247,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
         UIDataGrid = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-datagrid'), 
-            __metadata('design:paramtypes', [Element, aurelia_templating_resources_1.BindingSignaler])
+            __metadata('design:paramtypes', [Element, aurelia_templating_resources_1.BindingSignaler, aurelia_framework_1.BindingEngine])
         ], UIDataGrid);
         return UIDataGrid;
     }());
@@ -383,7 +395,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
         UIDataColumn = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-data-column'),
-            aurelia_framework_1.inlineView('<template><content></content></template>'), 
+            aurelia_framework_1.inlineView('<template><slot></slot></template>'), 
             __metadata('design:paramtypes', [Element])
         ], UIDataColumn);
         return UIDataColumn;

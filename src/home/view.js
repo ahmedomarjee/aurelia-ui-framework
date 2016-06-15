@@ -185,6 +185,19 @@ define(["require", "exports", "aurelia-validation", "aurelia-framework", "../../
         Home.prototype.getDisplay = function () {
             return JSON.stringify(this.model, null, 4);
         };
+        Home.prototype.addRecord = function () {
+            this.data.push({
+                id: 11,
+                FName: 'New',
+                LName: 'Record',
+                Gender: '',
+                SDate: '',
+                Amount: Math.random() * 100000,
+                Count: Math.random() * 10000000,
+                Currency: 'USD'
+            });
+            console.log('add', this.data);
+        };
         Home.prototype.canActivate = function (model) {
             var _this = this;
             return this.httpClient

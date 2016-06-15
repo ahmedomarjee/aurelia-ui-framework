@@ -12,7 +12,7 @@ var release = '../auf-release';
 var skeleton = '../auf-skeleton';
 
 // SASS/Compass compiler
-gulp.task('sass:compile', function (done) {
+gulp.task('sass', function (done) {
 	return gulp.src('./sass/**/*.scss')
 			   .pipe(plumber({
 								 errorHandler: function (error) {
@@ -38,7 +38,7 @@ var tsProject = ts.createProject({
 									 emitDecoratorMetadata: true,
 									 experimentalDecorators: true
 								 });
-gulp.task('scripts:compile', function () {
+gulp.task('scripts', function () {
 	var tsRoot = gulp.src([
 							  './jspm_packages/npm/aurelia-*/*.d.ts',
 							  './framework/**/*.ts',
@@ -120,17 +120,17 @@ gulp.task('aurelia:release', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch('./sass/**/*.scss', ['sass:compile']);
-	gulp.watch('./src/**/*.ts', ['scripts:compile']);
-	gulp.watch('./framework/**/*.ts', ['scripts:compile']);
+	gulp.watch('./sass/**/*.scss', ['sass']);
+	gulp.watch('./src/**/*.ts', ['scripts']);
+	gulp.watch('./framework/**/*.ts', ['scripts']);
 });
 
 gulp.task('build', function () {
-	runSequence('sass:compile', 'scripts:compile');
+	runSequence('sass', 'scripts');
 });
 
 gulp.task('production', function () {
-	runSequence('sass:compile', 'scripts:compile', 'readme:copy', 'aurelia:bundle', 'aurelia:pages', 'aurelia:skeleton', 'aurelia:release', 'aurelia:unbundle');
+	runSequence('sass', 'scripts', 'readme:copy', 'aurelia:bundle', 'aurelia:pages', 'aurelia:skeleton', 'aurelia:release', 'aurelia:unbundle');
 });
 
 gulp.task('serve', ['build'], function (done) {
