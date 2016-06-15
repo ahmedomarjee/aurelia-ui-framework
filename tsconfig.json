@@ -2,6 +2,7 @@
   "filesGlob": [
     "main.ts",
     "src/**/*.ts",
+    "typings/*.d.ts",
     "jspm_packages/**/aurelia*/**/*.ts"
   ],
   "atom": {

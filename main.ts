@@ -1,11 +1,11 @@
 import {Aurelia} from "aurelia-framework";
 import {UIValidationStrategy} from "aurelia-ui-framework";
 
-export function configure(aurelia:Aurelia) {
+export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     // .developmentLogging()
-    .plugin('aurelia-ui-framework', function (config) {
+    .plugin('aurelia-ui-framework', function(config) {
       // AppKey for local/session storage key prefix
       config.App.Key = 'App';
       // Application Title
@@ -22,24 +22,26 @@ export function configure(aurelia:Aurelia) {
       // HTTPClient Send Basic Authorization Header
       config.Http.AuthorizationHeader = true;
     })
-    .plugin('aurelia-validation', function (config) {
+    .plugin('aurelia-validation')
+    .plugin('aurelia-validatejs')
+    .plugin('aurelia-validation', function(config) {
       config.useViewStrategy(new UIValidationStrategy());
     });
 
 
 
   aurelia.start()
-    .then(a=>{
+    .then(a => {
       return a.setRoot('./src/app.js');
     })
-    .then(()=>{
+    .then(() => {
       var splash = window.document.querySelector('.ui-splash');
       splash.classList.add('animate');
-      setTimeout(()=>{
+      setTimeout(() => {
         splash.parentElement.removeChild(splash);
       }, 1000);
     })
-    .catch(e=>{
+    .catch(e => {
       console.log(e);
     });
 }

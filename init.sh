@@ -19,3 +19,6 @@ jspm install aurelia-router
 jspm install aurelia-logging
 jspm install aurelia-event-aggregator
 jspm install aurelia-templating-resources
+
+
+typings install

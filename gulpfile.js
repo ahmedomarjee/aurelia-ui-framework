@@ -7,7 +7,7 @@ var bundler = require('aurelia-bundler');
 var browserSync = require('browser-sync');
 
 // SASS/Compass compiler
-gulp.task('sass:compile', function (done) {
+gulp.task('sass', function (done) {
 	if(compass) {
 		return gulp.src('./sass/**/*.scss')
 			.pipe(plumber({
@@ -36,9 +36,10 @@ var tsProject = ts.createProject({
 	emitDecoratorMetadata: true,
 	experimentalDecorators: true
 });
-gulp.task('scripts:compile', function () {
+gulp.task('scripts', function () {
 	var tsRoot = gulp.src([
-							  './jspm_packages/**/aurelia-*/**/*.d.ts',
+								'./typings/*/**/*.d.ts',
+								'./jspm_packages/**/aurelia-*/**/*.d.ts',
 							  'src/**/*.ts', 'main.ts'], {base: './'})
 		.pipe(ts(tsProject));
 
@@ -90,16 +91,16 @@ gulp.task('aurelia:build', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch('./sass/**/*.scss', ['sass:compile']);
-	gulp.watch('./src/**/*.ts', ['scripts:compile']);
+	gulp.watch('./sass/**/*.scss', ['sass']);
+	gulp.watch('./src/**/*.ts', ['scripts']);
 });
 
 gulp.task('build', function () {
-	runSequence('sass:compile', 'scripts:compile');
+	runSequence('sass', 'scripts');
 });
 
-gulp.task('production', ['build'], function () {
-	runSequence('sass:compile', 'scripts:compile', 'aurelia:bundle', 'aurelia:build', 'aurelia:unbundle');
+gulp.task('production', function () {
+	runSequence('sass', 'scripts', 'aurelia:bundle', 'aurelia:build', 'aurelia:unbundle');
 });
 
 gulp.task('serve', ['build'], function (done) {
