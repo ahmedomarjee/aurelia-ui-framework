@@ -4,172 +4,130 @@
  *	@company	HMC
  *  @copyright 	2015-2016, Adarsh Pastakia
  **/
-
-.ui-hide
-{
+.ui-hide {
     display: none !important;
 }
 
-.ui-hidden
-{
+.ui-hidden {
     visibility: hidden !important;
 }
 
-.ui-scroll
-{
-    position: relative;
-
-    overflow: auto !important;
+.ui-scroll {
+    position                  : relative;
+    overflow                  : auto !important;
+    -webkit-overflow-scrolling: touch;
 }
 
-.ui-block
-{
+.ui-block {
     display: block;
 }
 
-.ui-inline
-{
+.ui-inline {
     display: inline-block;
 }
-
 // PADDING
-.ui-pad-0
-{
+.ui-pad-0 {
     padding: 0 !important;
 }
 
-.ui-pad-all
-{
+.ui-pad-all {
     padding: .5em;
 }
 
-.ui-pad-h
-{
-    padding: 
-    {
+.ui-pad-h {
+    padding: {
         right: .5em;
-        left: .5em;
+        left : .5em;
     }
 }
 
-.ui-pad-v
-{
-    padding: 
-    {
-        top: .5em;
+.ui-pad-v {
+    padding: {
+        top   : .5em;
         bottom: .5em;
     }
 }
-
 // MARGIN
-.ui-margin-0
-{
+.ui-margin-0 {
     margin: 0 !important;
 }
 
-.ui-margin-all
-{
+.ui-margin-all {
     margin: .5em;
 }
 
-.ui-margin-h
-{
-    margin: 
-    {
+.ui-margin-h {
+    margin: {
         right: .5em;
-        left: .5em;
+        left : .5em;
     }
 }
 
-.ui-margin-v
-{
-    margin: 
-    {
-        top: .5em;
+.ui-margin-v {
+    margin: {
+        top   : .5em;
         bottom: .5em;
     }
 }
-
 // BORDERS
-.ui-border-all
-{
+.ui-border-all {
     border: 1px solid $base-border-color;
 }
 
-.ui-border-h
-{
-    border: 
-    {
+.ui-border-h {
+    border: {
         width: 1px 0;
-
         color: $base-border-color;
-
         style: solid;
     }
 }
 
-.ui-border-v
-{
-    border: 
-    {
+.ui-border-v {
+    border: {
         width: 0 1px;
-
         color: $base-border-color;
-
         style: solid;
     }
 }
 
-.ui-border-t
-{
+.ui-border-t {
     border-top: 1px solid $base-border-color;
 }
 
-.ui-border-b
-{
+.ui-border-b {
     border-bottom: 1px solid $base-border-color;
 }
 
-.ui-border-l
-{
+.ui-border-l {
     @include border(start, 1px solid $base-border-color);
 }
 
-.ui-border-r
-{
+.ui-border-r {
     @include border(end, 1px solid $base-border-color);
 }
 
-.ui-push-right
-{
+.ui-push-right {
     float: right;
 }
 
-.ui-table
-{
-    width: 100%;
-
+.ui-table {
+    width : 100%;
     border: 1px solid $base-border-color;
 
-    td
-    {
+    td {
         padding: .3em .7em;
-
-        border: 
-        {
+        border : {
             width: 1px 0;
-
             color: $base-border-color;
-
             style: solid;
         }
     }
-    thead > td
-    {
+
+    thead > td {
         font-weight: $font-weight-strong;
     }
-    tbody > tr:nth-child(even) > td
-    {
+
+    tbody > tr:nth-child(even) > td {
         background: shade($base-bg, 3%);
     }
 }
