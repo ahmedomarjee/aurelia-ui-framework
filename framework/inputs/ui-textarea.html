@@ -13,7 +13,7 @@
 				<span class="ui-check-mark"></span>
 			</div>
 			<div class="ui-input-wrapper">
-				<textarea class="ui-input" id="${__id}" autocomplete="off" rows.bind="rows" dir="${dir}" value.bind="__value" placeholder.bind="placeholder" ref="__input" keydown.trigger="keyDown($event)" blur.bind="__focus=false"></textarea>
+				<textarea class="ui-input" id="${__id}" autocomplete="off" rows.bind="rows" dir="${dir}" value.bind="__value" name="${name}" placeholder.bind="placeholder" ref="__input" keydown.trigger="keyDown($event)" blur.bind="__focus=false"></textarea>
 				<span class="ui-clear fi-ui-close-light ${__value?'show-clear':''}" click.trigger="clearInput()" if.bind="__clear"></span>
 
 				<div class="ui-list floating" css.bind="{width:'200px', 'max-height':'300px', right:'auto', left:__listCss.left, top:__listCss.top}" show.bind="__focus && !readonly" mousewheel.trigger="$event.cancelBubble = true" mousedown.trigger="__clicked($event)"

@@ -9,18 +9,15 @@
 @import 'compass/utilities';
 @import 'utility/mixins';
 @import 'utility/animations';
-
 @import 'utility/reset';
 @import 'utility/helpers';
 @import 'utility/typography';
 @import 'utility/rtl';
 @import 'utility/markdown';
-
 @import 'core/base';
 @import 'core/viewport';
 @import 'core/page';
 @import 'core/grid';
-
 @import 'components/form';
 @import 'components/menu';
 @import 'components/tree';
@@ -30,10 +27,10 @@
 @import 'components/dialog';
 @import 'components/ribbon';
 @import 'components/datagrid';
-
 @import 'inputs/input';
 @import 'inputs/date';
 @import 'inputs/list';
+@import 'inputs/file';
 @import 'inputs/button';
 @import 'inputs/switch';
 @import 'inputs/option';

@@ -48,7 +48,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             __metadata('design:type', Boolean)
         ], UILogin.prototype, "busy", void 0);
         UILogin = __decorate([
-            aurelia_framework_1.inject(Element, ui_application_1.UIApplication, aurelia_framework_1.NewInstance.of(aurelia_validation_1.ValidationController)),
+            aurelia_framework_1.autoinject,
             aurelia_framework_1.customElement('ui-login'), 
             __metadata('design:paramtypes', [Element, ui_application_1.UIApplication, aurelia_validation_1.ValidationController])
         ], UILogin);
@@ -61,6 +61,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             _super.call(this);
             this.username = '';
             this.password = '';
+            this.tempInput = '';
             this.remember = false;
             var _u, _p;
             this.appState = ui_utils_1.UIUtils.lazy(ui_application_1.UIApplication);
@@ -71,15 +72,24 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
                 this.password = _p;
                 this.remember = true;
             }
-            aurelia_validatejs_1.ValidationRules
-                .ensure('username').required()
-                .ensure('password').required()
-                .on(this);
         }
         LoginModel.prototype.save = function () {
             this.appState.persist('AppUsername', this.username);
             this.appState.persist('AppPassword', this.remember ? this.password : null);
         };
+        __decorate([
+            aurelia_validatejs_1.required,
+            aurelia_validatejs_1.email, 
+            __metadata('design:type', String)
+        ], LoginModel.prototype, "username", void 0);
+        __decorate([
+            aurelia_validatejs_1.required, 
+            __metadata('design:type', String)
+        ], LoginModel.prototype, "password", void 0);
+        __decorate([
+            aurelia_validatejs_1.required, 
+            __metadata('design:type', String)
+        ], LoginModel.prototype, "tempInput", void 0);
         LoginModel = __decorate([
             aurelia_framework_1.transient(),
             aurelia_framework_1.autoinject(), 

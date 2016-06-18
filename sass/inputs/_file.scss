@@ -1,0 +1,41 @@
+/**
+ *	UI File DragDrop
+ *	@author 	Adarsh Pastakia
+ *	@company	HMC
+ *  @copyright 	2015-2016, Adarsh Pastakia
+ **/
+.ui-file-input {
+    .ui-file-drop-zone {
+        border    : 3px dashed $base-border-color;
+        text-align: center;
+        font-size : 1.4em;
+        color     : $base-border-color;
+        padding   : 2.5em 0;
+    }
+
+    .ui-file-drop-zone.dragging {
+        border-color: $primary;
+    }
+
+    input {
+        display: none;
+    }
+
+    .ui-file-list {
+        p {
+            font-size  : 1em;
+            color      : $input-text;
+            margin     : .2em 0;
+            font-family: $base-font-family-input;
+
+            i {
+                font-size: 1.5em;
+            }
+
+            span {
+                font-size  : .9em;
+                font-weight: 500;
+            }
+        }
+    }
+}

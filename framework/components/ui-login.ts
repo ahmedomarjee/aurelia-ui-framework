@@ -12,7 +12,8 @@ import {UIApplication} from "../utils/ui-application";
 import {required, email, ValidationRules} from "aurelia-validatejs";
 import {ValidationController} from "aurelia-validation";
 
-@inject(Element, UIApplication, NewInstance.of(ValidationController))
+//@inject(Element, UIApplication, NewInstance.of(ValidationController))
+@autoinject
 @customElement('ui-login')
 export class UILogin {
   model: LoginModel;
@@ -53,8 +54,14 @@ export class UILogin {
 @transient()
 @autoinject()
 export class LoginModel extends UIModel {
+  @required
+  @email
   username: string = '';
+  @required
   password: string = '';
+
+  @required
+  tempInput: string = '';
 
   remember: boolean = false;
 
@@ -72,18 +79,6 @@ export class LoginModel extends UIModel {
       this.password = _p;
       this.remember = true;
     }
-
-    ValidationRules
-      .ensure('username').required()
-      .ensure('password').required()
-      .on(this);
-
-    // this.validation
-    //   .ensure('username', null)
-    //   .isNotEmpty()
-    //   .isEmail()
-    //   .ensure('password', null)
-    //   .isNotEmpty();
   }
 
   save() {

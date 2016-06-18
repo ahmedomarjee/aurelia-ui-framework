@@ -243,6 +243,7 @@ interface Window {
 
   countries: Array<ICountry>;
   currencies: Map<string, string>;
+  filetypes: Map<string, string>;
 
   escape;
   unescape;

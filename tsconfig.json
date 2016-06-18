@@ -65,6 +65,7 @@
     "framework/inputs/ui-combo.ts",
     "framework/inputs/ui-date-view.ts",
     "framework/inputs/ui-date.ts",
+    "framework/inputs/ui-file.ts",
     "framework/inputs/ui-input-dual.ts",
     "framework/inputs/ui-input-group.ts",
     "framework/inputs/ui-input.ts",

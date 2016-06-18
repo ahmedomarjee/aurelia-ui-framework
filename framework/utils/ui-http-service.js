@@ -137,8 +137,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-fetch-client", "aure
             var data = new FormData();
             for (var i = 0, q = form.querySelectorAll('input'); i < q.length; i++) {
                 if (q[i].type == 'file') {
-                    for (var x = 0; x < q[i].files.length; x++) {
-                        data.append((q[i].name || 'file') + (i + 1), q[i].files[x], q[i].files[x].name);
+                    var files = q[i]['draggedFiles'] || q[i].files;
+                    for (var x = 0; x < files; x++) {
+                        data.append((q[i].name || 'file') + (i + 1), files[x], files[x].name);
                     }
                 }
                 else {

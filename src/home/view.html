@@ -204,13 +204,14 @@
 						<ui-tags options.bind="months" disabled.bind="!enabled" value.bind="model.tags">Tag Input</ui-tags>
 						<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
 						<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
-						<ui-input file button-icon="fi-ui-circle-remove" name="file">File</ui-input>
+						<ui-input file name="file">File</ui-input>
 						<div><pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
 					</ui-column>
 					<ui-column padded>
 						<ui-language language.bind="lang" languages.bind="langs">Language</ui-language>
 						<ui-markdown value.bind="content[lang]" disabled.bind="lang==null">Markdown Editor</ui-markdown>
 						<ui-date-view date.bind="dt"></ui-date-view>
+						<ui-file>Files</ui-file>
 					</ui-column>
 				</ui-row>
 			</ui-form>
@@ -235,23 +236,21 @@
 				<ui-column size="xl-6">
 					<ui-panel>
 						<ui-header collapse="true" primary>My Panel</ui-header>
-						<ui-body>
-							<ui-content scroll>
-								<ui-datagrid auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
-									<ui-data-column locked center width="50" data-id="id">ID</ui-data-column>
-									<ui-data-column locked resizeable sortable link summary="Total" data-id="FName" display.call="formatName($event)">Name
-									</ui-data-column>
-									<ui-data-column locked data-id="view" view button-title="Preview" width="90" button.call="checkAge($event)"></ui-data-column>
-									<ui-data-column locked data-id="edit" edit></ui-data-column>
-									<ui-data-column locked data-id="delete" delete></ui-data-column>
-									<ui-data-column date sortable data-id="SDate" format="DD MMM YYYY">Birthday</ui-data-column>
-									<ui-data-column data-id="SDate" from-now center></ui-data-column>
-									<ui-data-column data-id="Amount" currency symbol="$" summary="sum">Amount
-									</ui-data-column>
-									<ui-data-column data-id="Count" number format="0.000a" summary="sum">Count
-									</ui-data-column>
-								</ui-datagrid>
-							</ui-content>
+						<ui-body scroll>
+							<ui-datagrid auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
+								<ui-data-column locked center width="50" data-id="id">ID</ui-data-column>
+								<ui-data-column locked resizeable sortable link summary="Total" data-id="FName" display.call="formatName($event)">Name
+								</ui-data-column>
+								<ui-data-column locked data-id="view" view button-title="Preview" width="90" button.call="checkAge($event)"></ui-data-column>
+								<ui-data-column locked data-id="edit" edit></ui-data-column>
+								<ui-data-column locked data-id="delete" delete></ui-data-column>
+								<ui-data-column date sortable data-id="SDate" format="DD MMM YYYY">Birthday</ui-data-column>
+								<ui-data-column data-id="SDate" from-now center></ui-data-column>
+								<ui-data-column data-id="Amount" currency symbol="$" summary="sum">Amount
+								</ui-data-column>
+								<ui-data-column data-id="Count" number format="0.000a" summary="sum">Count
+								</ui-data-column>
+							</ui-datagrid>
 						</ui-body>
 					</ui-panel>
 				</ui-column>
@@ -304,7 +303,7 @@
 							<ui-sidebar>
 								<ui-tree checked.trigger="checked = $event.detail" model.bind="treeModel" options.bind="treeOpts" view-model.ref="__tree"></ui-tree>
 							</ui-sidebar>
-							<ui-content scroll>
+							<ui-content scroll padded>
 								<h3>Tree View</h3>
 								<div>
 									<h3>Checked</h3>

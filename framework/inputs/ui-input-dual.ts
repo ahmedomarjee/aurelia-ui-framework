@@ -109,6 +109,20 @@ export class UIInputDual extends UIInputGroup {
 	 */
   @bindable() dir: string = '';
 
+  /**
+   * @property    name
+   * @type        string
+   */
+  @bindable()
+  name: string = '';
+
+  /**
+   * @property    name
+   * @type        string
+   */
+  @bindable()
+  nameSecond: string = '';
+
   constructor(element: Element) {
     super(element);
   }

@@ -10,6 +10,7 @@ import 'moment';
 import 'numeral';
 import './libs/marked';
 import './libs/phonelib';
+import './data/fileTypes';
 import './data/countries';
 import './data/currencies';
 import {FrameworkConfiguration} from "aurelia-framework";
@@ -39,6 +40,7 @@ export function configure(aurelia: FrameworkConfiguration, configCallback) {
   aurelia.globalResources('./inputs/ui-switch');
   aurelia.globalResources('./inputs/ui-option');
   aurelia.globalResources('./inputs/ui-input');
+  aurelia.globalResources('./inputs/ui-file');
   aurelia.globalResources('./inputs/ui-phone');
   aurelia.globalResources('./inputs/ui-markdown');
   aurelia.globalResources('./inputs/ui-textarea');

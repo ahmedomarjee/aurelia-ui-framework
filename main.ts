@@ -3,7 +3,7 @@ import {Aurelia} from "aurelia-framework";
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .developmentLogging()
+    // .developmentLogging()
     .feature('./framework', function(config) {
 			   // AppKey for local/session storage key prefix
 			   config.App.Key = 'App';

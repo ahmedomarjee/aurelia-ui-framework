@@ -12,3 +12,5 @@ jspm install numeral
 jspm install aurelia-bootstrapper
 jspm install aurelia-validation
 jspm install aurelia-fetch-client
+
+typings install

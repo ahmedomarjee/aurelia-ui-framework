@@ -24,52 +24,52 @@ export class UIHttpService {
       config => {
         config
           .withBaseUrl(appState.HttpConfig.BaseUrl)
-        //.withDefaults({})
+          //.withDefaults({})
           .withInterceptor({
-          request(request) {
-            appState.info(self.constructor.name, `Requesting ${request.method} ${request.url}`);
-            appState.IsHttpInUse = true;
-            //request.url = encodeURI(request.url);
-            return request;
-          },
-          response(response) {
-            appState.info(self.constructor.name, `Response ${response.status} ${response.url}`);
-            appState.IsHttpInUse = false;
+            request(request) {
+              appState.info(self.constructor.name, `Requesting ${request.method} ${request.url}`);
+              appState.IsHttpInUse = true;
+              //request.url = encodeURI(request.url);
+              return request;
+            },
+            response(response) {
+              appState.info(self.constructor.name, `Response ${response.status} ${response.url}`);
+              appState.IsHttpInUse = false;
 
-            if (response instanceof TypeError) {
-              throw Error(response['message']);
-            }
+              if (response instanceof TypeError) {
+                throw Error(response['message']);
+              }
 
-            if (response.status == 401) {
-              eventAggregator.publish('Unauthorized', null);
+              if (response.status == 401) {
+                eventAggregator.publish('Unauthorized', null);
+              }
+              else if (response.status != 200) {
+                return response.text()
+                  .then(resp => {
+                    let json: any = {};
+                    try {
+                      json = JSON.parse(resp);
+                    } catch (e) { }
+                    if (json.message) throw Error(json.message);
+                    if (json.error) throw Error(json.error);
+                    if (response.statusText) throw Error(response.statusText);
+                    if (!response.statusText) throw Error('Network Error!!');
+                    return null;
+                  });
+              }
+              return response;
+            },
+            requestError(error) {
+              appState.IsHttpInUse = false;
+              if (error !== null) throw Error(error.message);
+              return error;
+            },
+            responseError(error) {
+              appState.IsHttpInUse = false;
+              if (error !== null) throw Error(error.message);
+              return error;
             }
-            else if (response.status != 200) {
-              return response.text()
-                .then(resp => {
-                let json: any = {};
-                try {
-                  json = JSON.parse(resp);
-                } catch (e) { }
-                if (json.message) throw Error(json.message);
-                if (json.error) throw Error(json.error);
-                if (response.statusText) throw Error(response.statusText);
-                if (!response.statusText) throw Error('Network Error!!');
-                return null;
-              });
-            }
-            return response;
-          },
-          requestError(error) {
-            appState.IsHttpInUse = false;
-            if (error !== null) throw Error(error.message);
-            return error;
-          },
-          responseError(error) {
-            appState.IsHttpInUse = false;
-            if (error !== null) throw Error(error.message);
-            return error;
-          }
-        });
+          });
       });
   }
 
@@ -154,8 +154,9 @@ export class UIHttpService {
     var data = new FormData();
     for (var i = 0, q = (form.querySelectorAll('input') as NodeListOf<HTMLInputElement>); i < q.length; i++) {
       if (q[i].type == 'file') {
-        for (var x = 0; x < q[i].files.length; x++) {
-          data.append((q[i].name || 'file') + (i + 1), q[i].files[x], q[i].files[x].name);
+        let files = q[i]['draggedFiles'] || q[i].files;
+        for (var x = 0; x < files; x++) {
+          data.append((q[i].name || 'file') + (i + 1), files[x], files[x].name);
         }
       }
       else {
