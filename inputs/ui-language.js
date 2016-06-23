@@ -35,11 +35,16 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
         };
         UILanguage.prototype.languagesChanged = function (newValue) {
             var s = [], a = [];
+            var isMap = newValue instanceof Map;
             ui_utils_1._.forEach(UILanguage.LANGUAGES, function (l) {
-                if (newValue.indexOf(l.id) == -1)
+                if (!isMap && newValue.indexOf(l.id) == -1)
                     a.push(l);
-                if (newValue.indexOf(l.id) > -1)
+                if (!isMap && newValue.indexOf(l.id) > -1)
                     s.push(l);
+                if (isMap && newValue.has(l.id))
+                    s.push(l);
+                if (isMap && !newValue.has(l.id))
+                    a.push(l);
             });
             this.__languages = s;
             this.__available = a;
@@ -48,19 +53,21 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             return this.value;
         };
         UILanguage.prototype.__add = function (lang) {
-            this.languages.push(lang);
             this.__languages.push(ui_utils_1._.remove(this.__available, ['id', lang.id])[0]);
+            ui_event_1.UIEvent.fireEvent('add', this.element, lang.id);
             this.__select(lang);
             this.__focus = false;
         };
         UILanguage.prototype.__select = function (lang) {
             this.language = lang.id;
-            ui_event_1.UIEvent.fireEvent('select', this.element, lang);
+            ui_event_1.UIEvent.fireEvent('select', this.element, lang.id);
             this.__focus = false;
         };
         UILanguage.prototype.__remove = function (lang) {
-            ui_utils_1._.remove(this.languages, ['id', lang.id]);
             this.__available.push(ui_utils_1._.remove(this.__languages, ['id', lang.id])[0]);
+            if (this.__languages == null)
+                this.__languages = [];
+            ui_event_1.UIEvent.fireEvent('delete', this.element, lang.id);
             this.__select(this.__languages[0] || { id: '' });
             this.__focus = false;
         };

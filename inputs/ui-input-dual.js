@@ -27,6 +27,8 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
             this.placeholder = '';
             this.placeholderSecond = '';
             this.dir = '';
+            this.name = '';
+            this.nameSecond = '';
         }
         UIInputDual.prototype.bind = function () {
             _super.prototype.bind.call(this);
@@ -147,6 +149,14 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
             aurelia_framework_1.bindable(), 
             __metadata('design:type', String)
         ], UIInputDual.prototype, "dir", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', String)
+        ], UIInputDual.prototype, "name", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', String)
+        ], UIInputDual.prototype, "nameSecond", void 0);
         UIInputDual = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.useView("./ui-input.html"),

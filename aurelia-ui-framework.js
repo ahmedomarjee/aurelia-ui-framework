@@ -1,6 +1,7 @@
-define(["require", "exports", "./utils/ui-application", "./utils/ui-event", "./utils/ui-formatters", "./utils/ui-application", "./utils/ui-model", "./inputs/ui-language", "./components/ui-dialog", "./utils/ui-tree-models", "./utils/ui-http-service", "./utils/ui-validation", "./utils/ui-utils", 'fetch', 'lodash', 'moment', 'numeral', './libs/marked', './libs/phonelib', './data/countries', './data/currencies'], function (require, exports, ui_application_1, ui_event_1, ui_formatters_1, ui_application_2, ui_model_1, ui_language_1, ui_dialog_1, ui_tree_models_1, ui_http_service_1, ui_validation_1, ui_utils_1) {
+define(["require", "exports", "./utils/ui-application", "./utils/ui-validation", "./utils/ui-event", "./utils/ui-formatters", "./utils/ui-application", "./utils/ui-model", "./inputs/ui-language", "./components/ui-dialog", "./utils/ui-tree-models", "./utils/ui-http-service", "./utils/ui-validation", "./utils/ui-utils", 'fetch', 'lodash', 'moment', 'numeral', './libs/marked', './libs/phonelib', './data/fileTypes', './data/countries', './data/currencies'], function (require, exports, ui_application_1, ui_validation_1, ui_event_1, ui_formatters_1, ui_application_2, ui_model_1, ui_language_1, ui_dialog_1, ui_tree_models_1, ui_http_service_1, ui_validation_2, ui_utils_1) {
     "use strict";
     function configure(aurelia, configCallback) {
+        aurelia.container.registerHandler('ui-validator', function (container) { return container.get(ui_validation_1.UIValidationRenderer); });
         aurelia.globalResources('./core/ui-viewport');
         aurelia.globalResources('./core/ui-page');
         aurelia.globalResources('./core/ui-grid');
@@ -16,6 +17,7 @@ define(["require", "exports", "./utils/ui-application", "./utils/ui-event", "./u
         aurelia.globalResources('./inputs/ui-switch');
         aurelia.globalResources('./inputs/ui-option');
         aurelia.globalResources('./inputs/ui-input');
+        aurelia.globalResources('./inputs/ui-file');
         aurelia.globalResources('./inputs/ui-phone');
         aurelia.globalResources('./inputs/ui-markdown');
         aurelia.globalResources('./inputs/ui-textarea');
@@ -42,7 +44,7 @@ define(["require", "exports", "./utils/ui-application", "./utils/ui-event", "./u
     exports.UITreeModel = ui_tree_models_1.UITreeModel;
     exports.UITreeOptions = ui_tree_models_1.UITreeOptions;
     exports.UIHttpService = ui_http_service_1.UIHttpService;
-    exports.UIValidationStrategy = ui_validation_1.UIValidationStrategy;
+    exports.validatemap = ui_validation_2.validatemap;
     exports.UIUtils = ui_utils_1.UIUtils;
     exports._ = ui_utils_1._;
     exports.moment = ui_utils_1.moment;

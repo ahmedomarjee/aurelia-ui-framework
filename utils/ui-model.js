@@ -7,21 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "aurelia-logging", "aurelia-validation", "./ui-http-service", "./ui-utils"], function (require, exports, aurelia_framework_1, aurelia_logging_1, aurelia_validation_1, ui_http_service_1, ui_utils_1) {
+define(["require", "exports", "aurelia-framework", "aurelia-logging", "./ui-http-service", "./ui-utils"], function (require, exports, aurelia_framework_1, aurelia_logging_1, ui_http_service_1, ui_utils_1) {
     "use strict";
     var UIModel = (function () {
         function UIModel() {
-            var _v = ui_utils_1.UIUtils.lazy(aurelia_validation_1.Validation);
             this.logger = aurelia_logging_1.getLogger(this.constructor.name);
             Object.defineProperties(this, {
                 'httpClient': {
                     value: ui_utils_1.UIUtils.lazy(ui_http_service_1.UIHttpService),
                     writable: false,
-                    enumerable: false
-                },
-                'validation': {
-                    value: _v.on(this, null),
-                    writable: true,
                     enumerable: false
                 },
                 'logger': {
@@ -70,10 +64,6 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "aurelia-v
             }
             throw new Error('Not implemented [delete]');
         };
-        UIModel.prototype.validate = function () {
-            this.logger.info('Validating...');
-            return this.validation.validate();
-        };
         UIModel.prototype.dispose = function () {
             this.logger.debug("Model Disposing");
             while (this.__observers && this.__observers.length) {
@@ -101,24 +91,61 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "aurelia-v
         UIModel.prototype.__serializeObject = function (o) {
             var _this = this;
             var _pojo = {};
-            Object.keys(o)
-                .forEach(function (key) {
-                if (key !== 'undefined' && !/^__/.test(key)) {
-                    if (o[key] instanceof UIModel) {
-                        _pojo[key] = o[key].serialize();
+            if (o instanceof Map) {
+                o.forEach(function (obj, key) {
+                    if (obj instanceof UIModel) {
+                        _pojo[key] = obj.serialize();
                     }
-                    if (ui_utils_1._.isObject(o[key])) {
-                        _pojo[key] = _this.__serializeObject(o[key]);
+                    if (ui_utils_1._.isObject(obj)) {
+                        _pojo[key] = _this.__serializeObject(obj);
                     }
-                    else if (ui_utils_1._.isArray(o[key])) {
-                        _pojo[key] = o[key].join(',');
+                    else if (ui_utils_1._.isArray(obj)) {
+                        _pojo[key] = obj.join(',');
                     }
                     else {
-                        _pojo[key] = isEmpty(o[key]) ? null : o[key];
+                        _pojo[key] = isEmpty(obj) ? null : obj;
+                    }
+                });
+            }
+            else {
+                Object.keys(o)
+                    .forEach(function (key) {
+                    if (key !== 'undefined' && !/^__/.test(key)) {
+                        if (o[key] instanceof UIModel) {
+                            _pojo[key] = o[key].serialize();
+                        }
+                        if (ui_utils_1._.isObject(o[key])) {
+                            _pojo[key] = _this.__serializeObject(o[key]);
+                        }
+                        else if (ui_utils_1._.isArray(o[key])) {
+                            _pojo[key] = o[key].join(',');
+                        }
+                        else {
+                            _pojo[key] = isEmpty(o[key]) ? null : o[key];
+                        }
+                    }
+                });
+            }
+            return _pojo;
+        };
+        UIModel.prototype.___serializeKey = function (key, o) {
+            var _this = this;
+            (function (key) {
+                if (key !== 'undefined' && !/^__/.test(key)) {
+                    if (o[key] instanceof UIModel) {
+                        return o[key].serialize();
+                    }
+                    if (ui_utils_1._.isObject(o[key])) {
+                        return _this.__serializeObject(o[key]);
+                    }
+                    else if (ui_utils_1._.isArray(o[key])) {
+                        return o[key].join(',');
+                    }
+                    else {
+                        return isEmpty(o[key]) ? null : o[key];
                     }
                 }
             });
-            return _pojo;
         };
         UIModel.prototype.isDirty = function () {
             var _this = this;

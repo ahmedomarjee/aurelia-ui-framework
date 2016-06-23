@@ -60,6 +60,14 @@ define(["require", "exports", "lodash", "moment", "numeral", "aurelia-framework"
                 .get(__container)();
         }
         UIUtils.lazy = lazy;
+        function newInstance(T, container) {
+            if (!container) {
+                throw new Error('UIUtils.newInstance::Container not provided');
+            }
+            return aurelia_framework_1.NewInstance.of(T)
+                .get(container);
+        }
+        UIUtils.newInstance = newInstance;
         var __compiler;
         var __resources;
         function compileView(markup, container, vm) {

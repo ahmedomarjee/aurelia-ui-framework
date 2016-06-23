@@ -16,12 +16,9 @@ Creation date: 13/03/2016 12:28
 	font-style             : normal;
 	font-variant           : normal;
 	line-height            : 1;
-
 	display                : inline-block;
-
 	text-decoration        : inherit;
 	text-transform         : none;
-
 	text-rendering         : optimizeLegibility;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing : antialiased;
@@ -400,6 +397,13 @@ Creation date: 13/03/2016 12:28
 	content: '\f15c';
 }
 
+.fi-ui-upload-black:before {
+	content: '\f15d';
+}
+
+.fi-ui-upload-white:before {
+	content: '\f15e';
+}
 $font-ui-arrow-down: '\f100';
 $font-ui-arrow-left: '\f101';
 $font-ui-arrow-right: '\f102';
@@ -493,3 +497,5 @@ $font-ui-tree-check-off: '\f159';
 $font-ui-tree-check-on: '\f15a';
 $font-ui-tree-check-partial: '\f15b';
 $font-ui-underline: '\f15c';
+$font-ui-upload-black: '\f15d';
+$font-ui-upload-white: '\f15e';

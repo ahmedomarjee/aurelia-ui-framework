@@ -1,25 +1,27 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-validation', "aurelia-validation"], function (require, exports, aurelia_validation_1, aurelia_validation_2) {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define(["require", "exports", "aurelia-framework", 'aurelia-validation', "aurelia-validatejs", 'validate.js'], function (require, exports, aurelia_framework_1, aurelia_validation_1, aurelia_validatejs_1, validate_js_1) {
     "use strict";
-    var UIValidationStrategy = (function (_super) {
-        __extends(UIValidationStrategy, _super);
-        function UIValidationStrategy() {
-            _super.call(this);
-            aurelia_validation_2.ValidationGroup.prototype['isPhone'] = function () {
-                this.passes(function (newValue) {
-                    return PhoneLib.isValid(newValue, '');
-                }, null)
-                    .withMessage(function () {
-                    return 'invalid phone number';
-                });
-                return this;
-            };
+    var UIValidationRenderer = (function () {
+        function UIValidationRenderer(boundaryElement) {
+            this.boundaryElement = boundaryElement;
         }
-        UIValidationStrategy.prototype.appendMessageToElement = function (validationProperty, formGroup) {
+        UIValidationRenderer.prototype.render = function (error, target) {
+            if (!target || !(this.boundaryElement === target || this.boundaryElement.contains(target))) {
+                return;
+            }
+            var formGroup = getParentByClass(target, 'ui-input-group');
+            formGroup.classList.add('ui-invalid');
+            formGroup.classList.remove('ui-valid');
+            if (formGroup.lastElementChild !== null)
+                formGroup = formGroup.lastElementChild;
             var helpBlock = formGroup.lastElementChild;
             if (helpBlock) {
                 if (!helpBlock.classList) {
@@ -30,40 +32,55 @@ define(["require", "exports", 'aurelia-validation', "aurelia-validation"], funct
                 }
             }
             if (!helpBlock) {
-                helpBlock = document.createElement('div');
+                helpBlock = aurelia_framework_1.DOM.createElement('div');
                 helpBlock.classList.add('ui-input-help');
                 helpBlock.classList.add('ui-input-error');
                 formGroup.appendChild(helpBlock);
             }
-            helpBlock.textContent = validationProperty ? validationProperty.message : '';
+            helpBlock.error = error;
+            helpBlock.textContent = error ? error.message : 'Invalid';
         };
-        UIValidationStrategy.prototype.appendUIVisuals = function (validationProperty, formGroup) {
-            if (isEmpty(formGroup))
+        UIValidationRenderer.prototype.unrender = function (error, target) {
+            if (!target || !(this.boundaryElement === target || this.boundaryElement.contains(target))) {
                 return;
-            if (validationProperty && validationProperty.isDirty) {
-                if (validationProperty.isValid) {
-                    formGroup.classList.remove('ui-invalid');
-                    formGroup.classList.add('ui-valid');
-                }
-                else {
-                    formGroup.classList.remove('ui-valid');
-                    formGroup.classList.add('ui-invalid');
-                }
             }
-            else {
-                formGroup.classList.remove('ui-invalid');
-                formGroup.classList.remove('ui-valid');
+            var formGroup = getParentByClass(target, 'ui-input-group');
+            formGroup.classList.remove('ui-invalid');
+            formGroup.classList.add('ui-valid');
+            var messages = formGroup.querySelectorAll('.ui-input-error');
+            var i = messages.length;
+            while (i--) {
+                var message = messages[i];
+                if (message.error !== error) {
+                    continue;
+                }
+                message.error = null;
+                message.remove();
             }
-            if (formGroup.lastElementChild !== null)
-                this.appendMessageToElement(validationProperty, formGroup.lastElementChild);
         };
-        UIValidationStrategy.prototype.prepareElement = function (validationProperty, element) {
-            this.appendUIVisuals(null, element);
-        };
-        UIValidationStrategy.prototype.updateElement = function (validationProperty, element) {
-            this.appendUIVisuals(validationProperty, element);
-        };
-        return UIValidationStrategy;
-    }(aurelia_validation_1.ValidationViewStrategy));
-    exports.UIValidationStrategy = UIValidationStrategy;
+        UIValidationRenderer = __decorate([
+            aurelia_framework_1.autoinject,
+            aurelia_validation_1.validationRenderer, 
+            __metadata('design:paramtypes', [Element])
+        ], UIValidationRenderer);
+        return UIValidationRenderer;
+    }());
+    exports.UIValidationRenderer = UIValidationRenderer;
+    var validator = new aurelia_validatejs_1.Validator();
+    validate_js_1.validate.validators.map = function (map) {
+        var errors = [];
+        map.forEach(function (v, k) {
+            console.log(v, validator.validateObject(v));
+            if (validator.validateObject(v).length > 0)
+                errors.push(k);
+        });
+        return errors.length > 0 ? errors.join(',') + " has invalid values" : null;
+    };
+    function mapRule(config) {
+        return new aurelia_validatejs_1.ValidationRule('map', config);
+    }
+    function validatemap(targetOrConfig, key, descriptor) {
+        return aurelia_validatejs_1.base(targetOrConfig, key, descriptor, mapRule);
+    }
+    exports.validatemap = validatemap;
 });

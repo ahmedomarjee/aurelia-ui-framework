@@ -299,7 +299,6 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
                 this.buttonIcon = 'fi-ui-edit';
             if (this.element.hasAttribute('delete'))
                 this.buttonIcon = 'fi-ui-delete';
-            this.__title = this.element.textContent;
             if (this.__button = !(isEmpty(this.buttonIcon) && isEmpty(this.buttonTitle) && !this.element.hasAttribute('button')))
                 this.__align = 'center';
             if (!this.width && !isEmpty(this.buttonIcon) && isEmpty(this.buttonTitle)) {
@@ -331,6 +330,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             else {
                 this.width = this.width || this.minWidth || 250;
             }
+        };
+        UIDataColumn.prototype.attached = function () {
+            this.__title = this.element.textContent;
         };
         __decorate([
             aurelia_framework_1.bindable, 

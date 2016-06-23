@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-event", "aurelia-validation"], function (require, exports, aurelia_framework_1, ui_event_1, aurelia_validation_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_event_1) {
     "use strict";
     var UIForm = (function () {
         function UIForm(element) {
@@ -43,12 +43,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "aurelia
             aurelia_framework_1.bindable, 
             __metadata('design:type', Boolean)
         ], UIForm.prototype, "busy", void 0);
-        __decorate([
-            aurelia_framework_1.bindable, 
-            __metadata('design:type', aurelia_validation_1.Validation)
-        ], UIForm.prototype, "validation", void 0);
         UIForm = __decorate([
-            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.autoinject,
             aurelia_framework_1.customElement('ui-form'), 
             __metadata('design:paramtypes', [Element])
         ], UIForm);
