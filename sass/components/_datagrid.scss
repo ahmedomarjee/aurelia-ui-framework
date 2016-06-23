@@ -39,9 +39,10 @@
 
     .ui-datagrid-wrapper {
         @include position(absolute, 0, 0, 0, 0);
+        @include scroll();
 
-         > table > thead,
-        > table > tfoot {
+         > table > tfoot,
+        > table > thead {
             z-index: 20;
             @include sticky();
         }
@@ -61,7 +62,6 @@
 
             > tbody {
                 z-index: 10;
-                @include scroll();
 
                 tr:nth-of-type(odd) > td {
                     background-color: $datagrid-odd-bg;
@@ -74,8 +74,8 @@
                 tr:last-child {
                     height: 100%;
 
-                     > td,
-                    > td > div {
+                     > td > div,
+                    > td {
                         height     : 100%;
                         padding    : 0;
                         line-height: 0;

@@ -83,7 +83,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             __metadata('design:type', String)
         ], LoginModel.prototype, "username", void 0);
         __decorate([
-            aurelia_validatejs_1.required, 
+            aurelia_validatejs_1.required,
+            aurelia_validatejs_1.length({ minimum: 4 }), 
             __metadata('design:type', String)
         ], LoginModel.prototype, "password", void 0);
         __decorate([

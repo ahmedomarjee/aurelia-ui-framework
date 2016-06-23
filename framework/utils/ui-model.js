@@ -91,24 +91,61 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "./ui-http
         UIModel.prototype.__serializeObject = function (o) {
             var _this = this;
             var _pojo = {};
-            Object.keys(o)
-                .forEach(function (key) {
-                if (key !== 'undefined' && !/^__/.test(key)) {
-                    if (o[key] instanceof UIModel) {
-                        _pojo[key] = o[key].serialize();
+            if (o instanceof Map) {
+                o.forEach(function (obj, key) {
+                    if (obj instanceof UIModel) {
+                        _pojo[key] = obj.serialize();
                     }
-                    if (ui_utils_1._.isObject(o[key])) {
-                        _pojo[key] = _this.__serializeObject(o[key]);
+                    if (ui_utils_1._.isObject(obj)) {
+                        _pojo[key] = _this.__serializeObject(obj);
                     }
-                    else if (ui_utils_1._.isArray(o[key])) {
-                        _pojo[key] = o[key].join(',');
+                    else if (ui_utils_1._.isArray(obj)) {
+                        _pojo[key] = obj.join(',');
                     }
                     else {
-                        _pojo[key] = isEmpty(o[key]) ? null : o[key];
+                        _pojo[key] = isEmpty(obj) ? null : obj;
+                    }
+                });
+            }
+            else {
+                Object.keys(o)
+                    .forEach(function (key) {
+                    if (key !== 'undefined' && !/^__/.test(key)) {
+                        if (o[key] instanceof UIModel) {
+                            _pojo[key] = o[key].serialize();
+                        }
+                        if (ui_utils_1._.isObject(o[key])) {
+                            _pojo[key] = _this.__serializeObject(o[key]);
+                        }
+                        else if (ui_utils_1._.isArray(o[key])) {
+                            _pojo[key] = o[key].join(',');
+                        }
+                        else {
+                            _pojo[key] = isEmpty(o[key]) ? null : o[key];
+                        }
+                    }
+                });
+            }
+            return _pojo;
+        };
+        UIModel.prototype.___serializeKey = function (key, o) {
+            var _this = this;
+            (function (key) {
+                if (key !== 'undefined' && !/^__/.test(key)) {
+                    if (o[key] instanceof UIModel) {
+                        return o[key].serialize();
+                    }
+                    if (ui_utils_1._.isObject(o[key])) {
+                        return _this.__serializeObject(o[key]);
+                    }
+                    else if (ui_utils_1._.isArray(o[key])) {
+                        return o[key].join(',');
+                    }
+                    else {
+                        return isEmpty(o[key]) ? null : o[key];
                     }
                 }
             });
-            return _pojo;
         };
         UIModel.prototype.isDirty = function () {
             var _this = this;

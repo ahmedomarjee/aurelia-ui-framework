@@ -55,6 +55,7 @@ export class PercentValueConverter {
 export class KeysValueConverter {
   toView(object: any) {
     if (isEmpty(object)) return [];
+    // if (object instanceof Map) return object.keys();
     return Object.keys(object);
   }
 }

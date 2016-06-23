@@ -67,4 +67,5 @@ export {UILanguage} from "./inputs/ui-language";
 export {UIDialogService, UIDialog} from "./components/ui-dialog";
 export {UITreeModel, UITreeOptions, UITreePanel} from "./utils/ui-tree-models";
 export {UIHttpService} from "./utils/ui-http-service";
+export {validatemap} from "./utils/ui-validation";
 export {UIUtils, _, moment, numeral} from "./utils/ui-utils";

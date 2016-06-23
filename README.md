@@ -9,6 +9,8 @@ Aurelia UI Framework for Business Apps
 
 #### [Help Wiki](https://github.com/adarshpastakia/aurelia-ui-framework/wiki/Home)
 
+#### [Changes](#changes)
+
 ---
 
 AureliaUIFramework
@@ -28,12 +30,12 @@ AureliaUIFramework
 #### Usage `main.js`
 
 ```typescript
-import {UIValidationStrategy} from "aurelia-ui-framework";
-
 function configure(aurelia) {
     aurelia.use
        .standardConfiguration()
        .developmentLogging()
+       .plugin('aurelia-validation')
+       .plugin('aurelia-validatejs')
        .plugin('aurelia-ui-framework', function (config) {
            // AppKey for local/session storage key prefix
            config.App.Key = 'App';
@@ -50,10 +52,62 @@ function configure(aurelia) {
            };
            // HTTPClient Send Basic Authorization Header
            config.Http.AuthorizationHeader = false;
-       })
-       .plugin('aurelia-validation', function (config) {
-           config.useViewStrategy(new UIValidationStrategy());
        });
+```
+
+---
+
+### Changes
+
+> For using aurelia-validation and aurelia-validatejs
+>
+> Read about the new [Aurelia Validation Alpha](http://blog.durandal.io/2016/06/14/new-validation-alpha-is-here/)
+
+* Data model
+
+```typescript
+export class MyModel extends UIModel {
+  @required
+  name: string = '';
+  @required
+  @numericality({ onlyInteger: false, lessThanOrEqualTo: 90, greaterThanOrEqualTo: -90 })
+  latitude: number = 0;
+  @required
+  @numericality({ onlyInteger: false, lessThanOrEqualTo: 180, greaterThanOrEqualTo: -180 })
+  longitude: number = 0;
+}
+```
+
+* Form Page
+
+```html
+<ui-form submit.trigger="onSubmit()">
+    <ui-row>
+        <ui-column padded>
+            <ui-input value.bind="model.name & validate" required clear>Name</ui-input>
+        </ui-column>
+        <ui-column padded>
+            <ui-input-dual required decimal prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.latitude & validate" value-second.bind="model.longitude & validate" placeholder="-90 to 90" placeholder-second="-180 to 180">Location</ui-input-dual>
+        </ui-column>
+    </ui-row>
+</ui-form>
+```
+
+All properties must use the `validate` binding behavior
+
+* Form ViewModel
+
+```typescript
+export class MyFormView {
+  constructor(public controller: ValidationController) {
+    this.model = new MyModel();
+  }
+  onSubmit() {
+    let errors = this.controller.validate();
+    if(errors.length>0) // form has errors
+    else // form is valid
+  }
+}
 ```
 
 ---

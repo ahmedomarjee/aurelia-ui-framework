@@ -88,24 +88,61 @@ export class UIModel {
 
   __serializeObject(o) {
     let _pojo = {};
-    Object.keys(o)
-      .forEach((key) => {
-        if (key !== 'undefined' && !/^__/.test(key)) {
-          if (o[key] instanceof UIModel) {
-            _pojo[key] = o[key].serialize();
-          }
-          if (_.isObject(o[key])) {
-            _pojo[key] = this.__serializeObject(o[key])
-          }
-          else if (_.isArray(o[key])) {
-            _pojo[key] = o[key].join(',');
-          }
-          else {
-            _pojo[key] = isEmpty(o[key]) ? null : o[key];
-          }
+    if (o instanceof Map) {
+      o.forEach((obj, key) => {
+        if (obj instanceof UIModel) {
+          _pojo[key] = obj.serialize();
         }
-      });
+        if (_.isObject(obj)) {
+          _pojo[key] = this.__serializeObject(obj)
+        }
+        else if (_.isArray(obj)) {
+          _pojo[key] = obj.join(',');
+        }
+        else {
+          _pojo[key] = isEmpty(obj) ? null : obj;
+        }
+      })
+    }
+    else {
+      Object.keys(o)
+        .forEach((key) => {
+          if (key !== 'undefined' && !/^__/.test(key)) {
+            if (o[key] instanceof UIModel) {
+              _pojo[key] = o[key].serialize();
+            }
+            if (_.isObject(o[key])) {
+              _pojo[key] = this.__serializeObject(o[key])
+            }
+            else if (_.isArray(o[key])) {
+              _pojo[key] = o[key].join(',');
+            }
+            else {
+              _pojo[key] = isEmpty(o[key]) ? null : o[key];
+            }
+          }
+        });
+    }
     return _pojo;
+  }
+
+  ___serializeKey(key, o) {
+    (key) => {
+      if (key !== 'undefined' && !/^__/.test(key)) {
+        if (o[key] instanceof UIModel) {
+          return o[key].serialize();
+        }
+        if (_.isObject(o[key])) {
+          return this.__serializeObject(o[key])
+        }
+        else if (_.isArray(o[key])) {
+          return o[key].join(',');
+        }
+        else {
+          return isEmpty(o[key]) ? null : o[key];
+        }
+      }
+    }
   }
 
   isDirty() {

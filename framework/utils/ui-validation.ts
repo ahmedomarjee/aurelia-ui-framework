@@ -6,7 +6,8 @@
  **/
 import {autoinject, DOM} from "aurelia-framework";
 import {validationRenderer} from 'aurelia-validation';
-import {ValidationRule} from "aurelia-validatejs";
+import {base, Validator, ValidationRule} from "aurelia-validatejs";
+import {validate} from 'validate.js';
 
 @autoinject
 @validationRenderer
@@ -77,5 +78,26 @@ export class UIValidationRenderer {
       message.remove();
     }
   }
+}
 
+//--------------------------
+// Custom ValidationRules
+
+const validator = new Validator();
+validate.validators.map = function(map: Map<string, any>) {
+  const errors = []
+  map.forEach((v, k) => {
+    console.log(v, validator.validateObject(v));
+    if (validator.validateObject(v).length > 0) errors.push(k);
+  });
+  // Unfortunately details are lost, but Aurelia's controller will evaluate and display them on the binding as well.
+  // This is only really useful for your `validate()` call when saving.
+  return errors.length > 0 ? `${errors.join(',')} has invalid values` : null;
+}
+
+function mapRule(config) {
+  return new ValidationRule('map', config);
+}
+export function validatemap(targetOrConfig?, key?, descriptor?) {
+  return base(targetOrConfig, key, descriptor, mapRule);
 }

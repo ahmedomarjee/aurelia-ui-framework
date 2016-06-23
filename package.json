@@ -1,6 +1,6 @@
 {
   "name": "aurelia-ui-framework",
-  "version": "2.0.6",
+  "version": "2.1.0",
   "description": "Aurelia UX Framework for Business Applications",
   "main": "aurelia-ui-framework.js",
   "scripts": {
@@ -41,7 +41,8 @@
       "lodash": "npm:lodash@^4.5.1",
       "moment": "npm:moment@^2.11.2",
       "numeral": "npm:numeral@^1.5.3",
-      "text": "github:systemjs/plugin-text@^0.0.4"
+      "text": "github:systemjs/plugin-text@^0.0.4",
+      "validate.js": "npm:validate.js@^0.10.0"
     },
     "devDependencies": {
       "typescript": "npm:typescript@^1.6.2"

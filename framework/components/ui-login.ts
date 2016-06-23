@@ -9,7 +9,7 @@ import {UIEvent} from "../utils/ui-event";
 import {UIUtils} from "../utils/ui-utils";
 import {UIModel} from "../utils/ui-model";
 import {UIApplication} from "../utils/ui-application";
-import {required, email, ValidationRules} from "aurelia-validatejs";
+import {required, email, length, ValidationRules} from "aurelia-validatejs";
 import {ValidationController} from "aurelia-validation";
 
 //@inject(Element, UIApplication, NewInstance.of(ValidationController))
@@ -58,6 +58,7 @@ export class LoginModel extends UIModel {
   @email
   username: string = '';
   @required
+  @length({ minimum: 4 })
   password: string = '';
 
   @required

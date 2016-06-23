@@ -15,6 +15,7 @@
 
     .ui-file-drop-zone.dragging {
         border-color: $primary;
+        background  : rgba($primary, .075);
     }
 
     input {

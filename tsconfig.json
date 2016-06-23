@@ -29,6 +29,7 @@
     "src/home/my-dialog.ts",
     "src/home/readme.ts",
     "src/home/todo.ts",
+    "src/home/validate.ts",
     "src/home/view.ts",
     "src/inputs/readme.ts",
     "src/inputs/view.ts",

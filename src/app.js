@@ -36,6 +36,14 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
                     auth: false,
                     name: 'home'
                 }, {
+                    route: 'validate',
+                    moduleId: './home/validate',
+                    settings: { icon: 'fi-vaadin-automation' },
+                    title: 'Validation Tester',
+                    nav: true,
+                    auth: false,
+                    name: 'validate'
+                }, {
                     route: 'colors',
                     moduleId: './home/colors',
                     settings: { icon: 'fi-material-painter-palette' },

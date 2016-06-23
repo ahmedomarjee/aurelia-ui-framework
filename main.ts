@@ -3,7 +3,9 @@ import {Aurelia} from "aurelia-framework";
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    // .developmentLogging()
+    .developmentLogging()
+    .plugin('aurelia-validation')
+    .plugin('aurelia-validatejs')
     .feature('./framework', function(config) {
 			   // AppKey for local/session storage key prefix
 			   config.App.Key = 'App';
@@ -20,9 +22,7 @@ export function configure(aurelia: Aurelia) {
 			   };
 			   // HTTPClient Send Basic Authorization Header
 			   config.Http.AuthorizationHeader = true;
-    })
-    .plugin('aurelia-validation')
-    .plugin('aurelia-validatejs');
+    });
 
 
 

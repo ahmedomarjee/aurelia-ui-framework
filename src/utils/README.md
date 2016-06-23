@@ -5,7 +5,6 @@ UTILS
 -	[UIApplication](#uiapplication)
 -	[UIHttpService](#uihttpservice)
 -	[UIModel](#uimodel)
--	[UIValidationStrategy](#uivalidationstrategy)
 -	[UIConverters](#uiconverters)
 	-	[Value Converters](#__value-converters__)
 	-	[Repeat Converters](#__repeat-converters__)

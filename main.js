@@ -3,6 +3,9 @@ define(["require", "exports"], function (require, exports) {
     function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
+            .developmentLogging()
+            .plugin('aurelia-validation')
+            .plugin('aurelia-validatejs')
             .feature('./framework', function (config) {
             config.App.Key = 'App';
             config.App.Title = 'Aurelia UI Framework';
@@ -12,9 +15,7 @@ define(["require", "exports"], function (require, exports) {
                 'X-API-VERSION': '2'
             };
             config.Http.AuthorizationHeader = true;
-        })
-            .plugin('aurelia-validation')
-            .plugin('aurelia-validatejs');
+        });
         aurelia.start()
             .then(function (a) {
             return a.setRoot('./src/app.js');

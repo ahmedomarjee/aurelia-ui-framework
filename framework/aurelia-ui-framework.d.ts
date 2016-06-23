@@ -205,6 +205,8 @@ declare module "aurelia-ui-framework" {
   }
 }
 
+declare function validatemap(targetOrConfig?: any, key?: any, descriptor?: any): any;
+
 // Global methods
 declare var __seed;
 declare var Constants;
@@ -250,9 +252,4 @@ interface Window {
 }
 interface Element {
   au: any;
-}
-declare module 'aurelia-validation' {
-  export interface ValidationGroup {
-    isPhone(): any;
-  }
 }
