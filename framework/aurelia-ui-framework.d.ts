@@ -253,3 +253,7 @@ interface Window {
 interface Element {
   au: any;
 }
+
+declare module 'validate.js' {
+  export var validate: any;
+}

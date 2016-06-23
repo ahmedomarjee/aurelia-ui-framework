@@ -146,7 +146,12 @@ put(api-route, json-body):Promise
 
 delete(api-route):Promise
 
+// HTML5 File Upload
+upload(api-route, form:HTMLFormElement):Promise
+reupload(api-route, form:HTMLFormElement):Promise
 ```
+
+> File upload uses HTML5 FormData API, the upload method is a post while the reupload method is a put.
 
 ---
 
