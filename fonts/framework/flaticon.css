@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 21/05/2016 12:57
+  	Creation date: 17/06/2016 19:46
   	*/
 
 @font-face {
@@ -122,3 +122,5 @@ margin-left: 20px;
 .flaticon-tree-check-on:before { content: "\f15a"; }
 .flaticon-tree-check-partial:before { content: "\f15b"; }
 .flaticon-underline:before { content: "\f15c"; }
+.flaticon-upload-black:before { content: "\f15d"; }
+.flaticon-upload-white:before { content: "\f15e"; }
