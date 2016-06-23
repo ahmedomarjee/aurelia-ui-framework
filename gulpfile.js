@@ -39,7 +39,6 @@ var tsProject = ts.createProject({
 gulp.task('scripts', function () {
 	var tsRoot = gulp.src([
 								'./typings/*/**/*.d.ts',
-								'./jspm_packages/**/aurelia-*/**/*.d.ts',
 							  'src/**/*.ts', 'main.ts'], {base: './'})
 		.pipe(ts(tsProject));
 

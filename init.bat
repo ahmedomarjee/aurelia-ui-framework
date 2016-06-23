@@ -12,6 +12,7 @@ call jspm install numeral
 call jspm install aurelia-ui-framework
 call jspm install aurelia-bootstrapper
 call jspm install aurelia-validation
+call jspm install aurelia-validatejs
 call jspm install aurelia-fetch-client
 call jspm install aurelia-framework
 call jspm install aurelia-metadata

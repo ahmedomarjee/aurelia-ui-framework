@@ -1,10 +1,11 @@
 import {Aurelia} from "aurelia-framework";
-import {UIValidationStrategy} from "aurelia-ui-framework";
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     // .developmentLogging()
+    .plugin('aurelia-validation')
+    .plugin('aurelia-validatejs')
     .plugin('aurelia-ui-framework', function(config) {
       // AppKey for local/session storage key prefix
       config.App.Key = 'App';
@@ -21,11 +22,6 @@ export function configure(aurelia: Aurelia) {
       };
       // HTTPClient Send Basic Authorization Header
       config.Http.AuthorizationHeader = true;
-    })
-    .plugin('aurelia-validation')
-    .plugin('aurelia-validatejs')
-    .plugin('aurelia-validation', function(config) {
-      config.useViewStrategy(new UIValidationStrategy());
     });
 
 
