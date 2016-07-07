@@ -18,6 +18,27 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             this.icon = '';
             this.theme = 'default';
             this.disabled = false;
+            this.__hasMenu = false;
+            this.__menu = [];
+            this.__hasMenu = this.element.childNodes.length > 0;
+            var content = this.element.querySelector('au-content');
+            if (this.__hasMenu) {
+                this.element.classList.add('ui-dropdown');
+                for (var i = 0, c = content.children; i < c.length; i++) {
+                    if (c[i].tagName.toLowerCase() === 'menu') {
+                        this.__menu.push({
+                            id: c[i].getAttribute('id'),
+                            text: c[i].textContent,
+                            icon: c[i].getAttribute('icon'),
+                            href: c[i].getAttribute('href') || 'javascript:;',
+                        });
+                    }
+                    if (c[i].tagName.toLowerCase() === 'section')
+                        this.__menu.push(c[i].textContent);
+                    if (c[i].tagName.toLowerCase() === 'divider')
+                        this.__menu.push('-');
+                }
+            }
         }
         UIButton.prototype.bind = function () {
             if (this.element.hasAttribute('primary'))
@@ -65,7 +86,12 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../util
             $event.cancelBubble = true;
             if (this.disabled === true)
                 return false;
-            ui_event_1.UIEvent.fireEvent('click', this.element, this);
+            if (this.__hasMenu) {
+                this.__menuEl.classList.add('show');
+            }
+            else {
+                ui_event_1.UIEvent.fireEvent('click', this.element, this);
+            }
         };
         __decorate([
             aurelia_framework_1.bindable(), 

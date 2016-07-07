@@ -34,6 +34,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
                 this.appState.info(this.constructor.name, "hideMenu");
                 this.element.classList.remove('show-menu');
             }
+            var menu = document.querySelector('.ui-floating.show');
+            if (menu)
+                menu.classList.remove('show');
             return true;
         };
         UIViewport.prototype.logout = function () {

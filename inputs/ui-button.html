@@ -3,4 +3,6 @@
 		<span class.bind="icon" if.bind="icon"></span>
 		<span innerhtml.bind="label" if.bind="label"></span>
 	</button>
+	<ui-menu dropdown if.bind="__hasMenu" menu.bind="__menu" ref="__menuEl">
+	</ui-menu>
 </template>

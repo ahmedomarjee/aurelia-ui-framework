@@ -14,6 +14,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
             this.element = element;
             this.appState = appState;
             this.menu = [];
+            element.classList.add('ui-floating');
         }
         UIMenu.prototype.bind = function () {
             for (var i = 0, c = this.element.children; i < c.length; i++) {
@@ -39,7 +40,6 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
             if (this.router)
                 return true;
             $event.preventDefault();
-            $event.cancelBubble = true;
             var link = getParentByClass($event.target, 'ui-menu-link', 'ui-menu');
             if (link !== null)
                 ui_event_1.UIEvent.fireEvent('menuclick', this.element, link.dataset['id']);

@@ -117,7 +117,7 @@
 
 	&.ui-expanded {
 		.ui-header .ui-expand span:before {
-			content: '\e060';
+			content: $font-ui-arrow-up;
 		}
 		@include position(fixed, 0, 0, 0, 0);
 		margin : 1em;
