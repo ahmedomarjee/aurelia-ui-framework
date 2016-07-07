@@ -26,6 +26,7 @@ export class UIMenu {
   menu: Array<any> = [];
 
   constructor(public element: Element, public appState: UIApplication) {
+    element.classList.add('ui-floating');
   }
 
   bind() {
@@ -51,7 +52,7 @@ export class UIMenu {
   onClick($event) {
     if (this.router) return true;
     $event.preventDefault();
-    $event.cancelBubble = true;
+    // $event.cancelBubble = true;
     let link = getParentByClass($event.target, 'ui-menu-link', 'ui-menu');
     if (link !== null) UIEvent.fireEvent('menuclick', this.element, link.dataset['id']);
     return false;

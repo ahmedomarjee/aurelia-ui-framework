@@ -252,6 +252,9 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
                 .then(function () { return _this.appState.toast({ theme: 'success', icon: 'fi-vaadin-bell', message: 'You clicked OK' }); })
                 .catch(function () { return _this.appState.toast({ theme: 'danger', icon: 'fi-vaadin-bell', message: 'You clicked Cancel' }); });
         };
+        Home.prototype.__menuclicked = function ($event) {
+            this.appState.toast({ icon: 'fi-vaadin-bell', message: 'Menu clicked::' + $event.detail });
+        };
         Home = __decorate([
             aurelia_framework_1.autoinject(), 
             __metadata('design:paramtypes', [index_1.UIApplication, index_1.UIDialogService, index_1.UIHttpService])

@@ -45,8 +45,28 @@ export class UIButton {
   @bindable()
   disabled: boolean = false;
 
-  constructor(public element: Element) {
+  private __hasMenu = false;
+  private __menu = [];
+  private __menuEl;
 
+  constructor(public element: Element) {
+    this.__hasMenu = this.element.childNodes.length > 0;
+    let content = <HTMLElement>this.element.querySelector('au-content');
+    if (this.__hasMenu) {
+      this.element.classList.add('ui-dropdown');
+      for (var i = 0, c = content.children; i < c.length; i++) {
+        if (c[i].tagName.toLowerCase() === 'menu') {
+          this.__menu.push({
+            id: c[i].getAttribute('id'),
+            text: c[i].textContent,
+            icon: c[i].getAttribute('icon'),
+            href: c[i].getAttribute('href') || 'javascript:;',
+          });
+        }
+        if (c[i].tagName.toLowerCase() === 'section') this.__menu.push(c[i].textContent);
+        if (c[i].tagName.toLowerCase() === 'divider') this.__menu.push('-');
+      }
+    }
   }
 
   bind() {
@@ -91,7 +111,11 @@ export class UIButton {
     $event.preventDefault();
     $event.cancelBubble = true;
     if (this.disabled === true) return false;
-    UIEvent.fireEvent('click', this.element, this);
+    if (this.__hasMenu) {
+      this.__menuEl.classList.add('show');
+    } else {
+      UIEvent.fireEvent('click', this.element, this);
+    }
   }
 }
 
@@ -154,14 +178,14 @@ export class UIButtonGroup {
     }
 
     let buttons = this.element.getElementsByClassName('ui-button');
-    _.forEach(buttons, b=> {
+    _.forEach(buttons, b => {
       b.className = `ui-button ui-button-${this.__theme} ui-button-${this.__size} ${this.__extraClass}`;
     });
 
     if (this.toggle !== false) {
       if (!isEmpty(this.value)) {
         setTimeout(() => {
-          _.forEach((this.value + '').split(','), v=> {
+          _.forEach((this.value + '').split(','), v => {
             let opt = this.element.querySelector(`.ui-button[data-value="${v}"]`);
             if (opt) opt.classList.add('ui-checked');
           });
@@ -172,7 +196,7 @@ export class UIButtonGroup {
 
   disable(disabled?) {
     let buttons = this.element.getElementsByClassName('ui-button');
-    _.forEach(buttons, b=> {
+    _.forEach(buttons, b => {
       if (b.attributes.getNamedItem('disabled') !== null) {
         b.attributes.removeNamedItem('disabled');
       }
@@ -194,8 +218,8 @@ export class UIButtonGroup {
   valueChanged(newValue) {
     if (this.toggle !== false) {
       _.forEach(this.element.querySelectorAll(`.ui-button.ui-checked`),
-        b=> b.classList.remove('ui-checked'));
-      _.forEach((newValue + '').split(','), v=> {
+        b => b.classList.remove('ui-checked'));
+      _.forEach((newValue + '').split(','), v => {
         let opt = this.element.querySelector(`.ui-button[data-value="${v}"]`);
         if (opt) opt.classList.add('ui-checked');
       });

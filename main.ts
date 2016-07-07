@@ -3,7 +3,7 @@ import {Aurelia} from "aurelia-framework";
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .developmentLogging()
+    // .developmentLogging()
     .plugin('aurelia-validation')
     .plugin('aurelia-validatejs')
     .feature('./framework', function(config) {

@@ -3,7 +3,6 @@ define(["require", "exports"], function (require, exports) {
     function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
-            .developmentLogging()
             .plugin('aurelia-validation')
             .plugin('aurelia-validatejs')
             .feature('./framework', function (config) {

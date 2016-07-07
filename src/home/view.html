@@ -116,6 +116,11 @@
 					<ui-button disabled.bind="!enabled" icon="fi-vaadin-circle-1" label="Danger" danger click.trigger="toastMe('global', 'danger')"></ui-button>
 					<ui-button disabled.bind="!enabled" icon="fi-vaadin-circle-1" label="Success" success click.trigger="toastMe('global', 'success')"></ui-button>
 					<ui-button disabled.bind="!enabled" icon="fi-vaadin-circle-1" label="Warning" warning click.trigger="toastMe('global', 'warning')"></ui-button>
+
+					<ui-button disabled.bind="!enabled" label="DropDown" menuclick.trigger="__menuclicked($event)">
+						<menu id="one">Link 1</menu>
+						<menu id="two">Link 2</menu>
+					</ui-button>
 				</div>
 				<h4>Styles</h4>
 				<div>
