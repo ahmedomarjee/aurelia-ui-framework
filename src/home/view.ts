@@ -276,4 +276,8 @@ export class Home {
       .then(() => this.appState.toast({ theme: 'success', icon: 'fi-vaadin-bell', message: 'You clicked OK' }))
       .catch(() => this.appState.toast({ theme: 'danger', icon: 'fi-vaadin-bell', message: 'You clicked Cancel' }));
   }
+
+  __menuclicked($event) {
+    this.appState.toast({ icon: 'fi-vaadin-bell', message: 'Menu clicked::' + $event.detail });
+  }
 }
