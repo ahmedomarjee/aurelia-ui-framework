@@ -168,10 +168,10 @@ treeModel:Array<UITreeModel> = [{
 ```html
 <ui-datagrid data-list.bind=? summary-row="true | false"
   default-sort=? default-order="asc | desc" linkclick.trigger=?>
-    <ui-column data-id=? locked sortable resizeable
+    <ui-data-column data-id=? locked sortable resizeable
       (align) [start | center | end]
       (display) [link | edit | delete]
-      (data-type) [text | date | datetime| from-now | number | currency]>Label</ui-column>
+      (data-type) [text | date | datetime| from-now | number | currency]>Label</ui-data-column>
     ...
 </ui-datagrid>
 ```

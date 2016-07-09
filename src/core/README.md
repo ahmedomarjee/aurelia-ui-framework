@@ -27,9 +27,9 @@ Main app template must contain UIViewport, can only have a single UIViewport. Th
     show-menu.bind=true|false show-taskbar.bind=true|false logout.trigger=?>
     <!-- Header extras -->
 
-    <template replace-part="quick-links">
+    <div slot="quick-links">
         <!-- to add buttons to the taskbar -->
-    </template>
+    </div>
 </ui-viewport>
 ```
 
