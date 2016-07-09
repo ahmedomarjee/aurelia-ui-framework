@@ -96,7 +96,7 @@
             top             : 0;
             left            : -20em;
             width           : 20em;
-            z-index         : 5;
+            z-index         : $z-index-floating;
             background-color: rgba($sidebar-bg, 1);
             @include transition(left 0.5s, right 0.5s);
         }

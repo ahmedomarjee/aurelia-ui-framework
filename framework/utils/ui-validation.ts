@@ -33,11 +33,13 @@ export class UIValidationRenderer {
       return;
     }
     let formGroup: any = getParentByClass(target, 'ui-input-group');
+    let isDual = formGroup.isDual;
     formGroup.classList.add('ui-invalid');
     formGroup.classList.remove('ui-valid');
     if (formGroup.lastElementChild !== null) formGroup = formGroup.lastElementChild;
 
     let helpBlock: any = formGroup.lastElementChild;
+    if (isDual && helpBlock.prop != error.propertyName) helpBlock = helpBlock.previousSibling;
     if (helpBlock) {
       if (!helpBlock.classList) {
         helpBlock = null;
@@ -51,6 +53,7 @@ export class UIValidationRenderer {
       helpBlock = DOM.createElement('div');
       helpBlock.classList.add('ui-input-help');
       helpBlock.classList.add('ui-input-error');
+      helpBlock.prop = error.propertyName;
       formGroup.appendChild(helpBlock);
     }
 
@@ -62,21 +65,25 @@ export class UIValidationRenderer {
     if (!target || !(this.boundaryElement === target || this.boundaryElement.contains(target))) {
       return;
     }
-    const formGroup = getParentByClass(target, 'ui-input-group');
-    formGroup.classList.remove('ui-invalid');
-    formGroup.classList.add('ui-valid');
+    let formGroup: any = getParentByClass(target, 'ui-input-group');
 
     // remove all messages related to the error.
     let messages = formGroup.querySelectorAll('.ui-input-error');
     let i = messages.length;
     while (i--) {
       let message: any = messages[i];
-      if (message.error !== error) {
+      if (message.prop !== error.propertyName) {
         continue;
       }
       message.error = null;
       message.remove();
     }
+
+    if (formGroup.querySelectorAll('.ui-input-error').length == 0) {
+      formGroup.classList.remove('ui-invalid');
+      formGroup.classList.add('ui-valid');
+    }
+
   }
 }
 
@@ -100,4 +107,17 @@ function mapRule(config) {
 }
 export function validatemap(targetOrConfig?, key?, descriptor?) {
   return base(targetOrConfig, key, descriptor, mapRule);
+}
+
+validate.validators.phone = function(val: string) {
+  // Unfortunately details are lost, but Aurelia's controller will evaluate and display them on the binding as well.
+  // This is only really useful for your `validate()` call when saving.
+  return !PhoneLib.isValid(val) ? `Invalid phone number` : null;
+}
+
+function phoneRule(config) {
+  return new ValidationRule('phone', config);
+}
+export function validatephone(targetOrConfig?, key?, descriptor?) {
+  return base(targetOrConfig, key, descriptor, phoneRule);
 }

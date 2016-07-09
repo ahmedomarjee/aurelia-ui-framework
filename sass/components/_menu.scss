@@ -10,7 +10,7 @@
         position  : absolute;
         overflow  : auto;
         border    : 1px solid $base-border-color;
-        z-index   : 50;
+        z-index   : $z-index-floating;
         min-width : 100%;
         margin    : -4px .2em 0;
         left      : 0;

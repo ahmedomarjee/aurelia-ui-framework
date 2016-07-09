@@ -213,8 +213,8 @@ export class AuthInterceptor {
         this.logger.warn('Not authenticated');
         let url = routingContext.router.generate('login', { status: 401 });
         this.appState.IsAuthenticated = false;
-        console.log(routingContext);
         this.appState.session('AppCurrentRoute', [routingContext.config.route, routingContext.params]);
+        this.appState.session('AppCurrentFragment', routingContext.fragment);
         return next.reject(new Redirect(url));
       }
     }

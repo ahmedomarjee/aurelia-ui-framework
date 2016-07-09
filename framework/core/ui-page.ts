@@ -96,7 +96,7 @@ export class UISidebar {
   }
 
   dettached() {
-    if (this.collapsible) document.removeEventListener('click', (evt) => this.closeOverlay(evt));
+    if (this.collapsible) document.removeEventListener('mousedown', (evt) => this.closeOverlay(evt));
   }
 
   closeOverlay(evt) {
@@ -112,7 +112,7 @@ export class UISidebar {
   }
 
   showOverlay() {
-    this.element.classList.add('overlay');
+    if (this.element.classList.contains('collapse')) this.element.classList.add('overlay');
   }
 }
 

@@ -22,7 +22,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "aur
             this.model = new Hotel();
         }
         ValidationTester.prototype.onSubmit = function () {
-            console.log(this.errors = this.controller.validate());
+            this.errors = this.controller.validate();
         };
         ValidationTester.prototype.changeLanguage = function ($event) {
             if ($event.detail)
@@ -61,7 +61,8 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "aur
             __metadata('design:type', String)
         ], Hotel.prototype, "name", void 0);
         __decorate([
-            aurelia_validatejs_1.required, 
+            aurelia_validatejs_1.required,
+            index_1.validatephone, 
             __metadata('design:type', String)
         ], Hotel.prototype, "phone", void 0);
         __decorate([

@@ -93,7 +93,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         UISidebar.prototype.dettached = function () {
             var _this = this;
             if (this.collapsible)
-                document.removeEventListener('click', function (evt) { return _this.closeOverlay(evt); });
+                document.removeEventListener('mousedown', function (evt) { return _this.closeOverlay(evt); });
         };
         UISidebar.prototype.closeOverlay = function (evt) {
             if (getParentByClass(evt.target, 'ui-sidebar-content') === null)
@@ -106,7 +106,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
             $event.preventDefault();
         };
         UISidebar.prototype.showOverlay = function () {
-            this.element.classList.add('overlay');
+            if (this.element.classList.contains('collapse'))
+                this.element.classList.add('overlay');
         };
         __decorate([
             aurelia_framework_1.bindable(), 

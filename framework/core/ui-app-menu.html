@@ -12,11 +12,10 @@
 	</div>
 
 	<div repeat.for="route of router.navigation">
-		<hr if.bind="route.settings.sectionStart"/>
+		<hr if.bind="route.settings.sectionStart" />
 		<p class="ui-menu-section" if.bind="route.settings.sectionTitle">${route.settings.sectionTitle}</p>
 
-		<a class="ui-menu-link ${route.isActive?'ui-active':''}"
-		   data-disabled="${route.settings.disabled}" href.bind="route.href">
+		<a class="ui-menu-link ${isActive(route, router.currentInstruction)?'ui-active':''}" data-disabled="${route.settings.disabled}" href.bind="route.href">
 			<span class="ui-icon ${route.settings.icon}"></span>&nbsp;${route.settings.menuTitle || route.title}</a>
 	</div>
 

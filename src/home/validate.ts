@@ -1,5 +1,5 @@
 import {autoinject} from "aurelia-framework";
-import {UIModel, validatemap} from "../../framework/index";
+import {UIModel, validatemap, validatephone} from "../../framework/index";
 import {required, email, length, ValidationRules, numericality} from "aurelia-validatejs";
 import {ValidationController} from "aurelia-validation";
 
@@ -15,7 +15,7 @@ export class ValidationTester {
   }
 
   onSubmit() {
-    console.log(this.errors = this.controller.validate());
+    this.errors = this.controller.validate();
   }
 
   languageModel = null;
@@ -37,6 +37,7 @@ export class Hotel extends UIModel {
   @required
   name: string = '';
   @required
+  @validatephone
   phone: string = '';
   @required
   @numericality({ onlyInteger: false, lessThanOrEqualTo: 90, greaterThanOrEqualTo: -90 })

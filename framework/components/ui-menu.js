@@ -14,7 +14,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
             this.element = element;
             this.appState = appState;
             this.menu = [];
-            element.classList.add('ui-floating');
+            if (element.hasAttribute('floating'))
+                element.classList.add('ui-floating');
         }
         UIMenu.prototype.bind = function () {
             for (var i = 0, c = this.element.children; i < c.length; i++) {
@@ -37,13 +38,16 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
                 location.hash.indexOf(route.config.redirect || 'QWER') > -1;
         };
         UIMenu.prototype.onClick = function ($event) {
-            if (this.router)
+            $event.stopPropagation();
+            if (this.router) {
                 return true;
-            $event.preventDefault();
+            }
+            $event.cancelBubble = true;
+            this.element.classList.remove('show');
             var link = getParentByClass($event.target, 'ui-menu-link', 'ui-menu');
             if (link !== null)
                 ui_event_1.UIEvent.fireEvent('menuclick', this.element, link.dataset['id']);
-            return false;
+            return true;
         };
         __decorate([
             aurelia_framework_1.bindable(), 

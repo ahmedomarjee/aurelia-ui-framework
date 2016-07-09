@@ -41,6 +41,11 @@ export class UIViewport {
     this.showTaskbar = isTrue(this.showTaskbar);
   }
 
+  isActive(route) {
+    return route.isActive || route.href == location.hash ||
+      location.hash.indexOf(route.config.redirect || 'QWER') > -1;
+  }
+
   __showMenu($event) {
     $event.stopPropagation();
     this.element.classList.add('show-menu');

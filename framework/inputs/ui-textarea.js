@@ -152,7 +152,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
         UITextArea.prototype.__replace = function (selected) {
             var pre = this.__input.value.substring(0, this.__input.selectionEnd);
             var post = this.__input.value.substring(this.__input.selectionEnd);
-            pre = pre.replace(this.__acRegExp, selected + ' ');
+            pre = pre.replace(this.__acRegExp, ' ' + selected);
             this.__value = (pre + post).replace(/\s{2,}/g, ' ');
             this.__input.selectionStart = this.__input.selectionEnd = pre.length;
         };

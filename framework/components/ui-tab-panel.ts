@@ -83,6 +83,7 @@ export class UITab {
 
   constructor(public element: Element) {
     if (this.element.hasAttribute('scroll')) this.element.classList.add('ui-scroll');
+    if (this.element.hasAttribute('padded')) this.element.classList.add('ui-pad-all');
     if (this.element.hasAttribute('flex')) this.element.classList.add('ui-column-row');
   }
 }

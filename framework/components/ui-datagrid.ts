@@ -36,6 +36,8 @@ export class UIDataGrid {
   dataList = [];
   @bindable()
   summaryRow = false;
+  @bindable()
+  emptyText = '';
 
   private __dataListChangeSubscriber;
 

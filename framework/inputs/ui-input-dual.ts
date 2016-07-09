@@ -125,6 +125,7 @@ export class UIInputDual extends UIInputGroup {
 
   constructor(element: Element) {
     super(element);
+    this.element['isDual'] = true;
   }
 
   bind() {

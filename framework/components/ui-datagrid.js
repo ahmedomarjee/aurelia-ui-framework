@@ -20,6 +20,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             this.defaultOrder = 'asc';
             this.dataList = [];
             this.summaryRow = false;
+            this.emptyText = '';
             this.__isResizing = false;
             this.__startX = 0;
             this.__diff = 0;
@@ -244,6 +245,10 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             aurelia_framework_1.bindable(), 
             __metadata('design:type', Object)
         ], UIDataGrid.prototype, "summaryRow", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', Object)
+        ], UIDataGrid.prototype, "emptyText", void 0);
         UIDataGrid = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-datagrid'), 

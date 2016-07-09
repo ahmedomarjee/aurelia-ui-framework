@@ -29,6 +29,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
             this.dir = '';
             this.name = '';
             this.nameSecond = '';
+            this.element['isDual'] = true;
         }
         UIInputDual.prototype.bind = function () {
             _super.prototype.bind.call(this);
