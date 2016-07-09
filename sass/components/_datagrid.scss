@@ -11,6 +11,11 @@
     height  : 100%;
     @include flex(1 1 0);
 
+    .ui-empty-text {
+        text-align: center;
+        padding   : $base-padding;
+    }
+
     .ui-ghost {
         z-index: 20;
         @include position(absolute);
@@ -41,8 +46,8 @@
         @include position(absolute, 0, 0, 0, 0);
         @include scroll();
 
-         > table > tfoot,
-        > table > thead {
+         > table > thead,
+        > table > tfoot {
             z-index: 20;
             @include sticky();
         }
@@ -74,8 +79,8 @@
                 tr:last-child {
                     height: 100%;
 
-                     > td > div,
-                    > td {
+                     > td,
+                    > td > div {
                         height     : 100%;
                         padding    : 0;
                         line-height: 0;

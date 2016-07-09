@@ -24,6 +24,10 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
             this.showMenu = isTrue(this.showMenu);
             this.showTaskbar = isTrue(this.showTaskbar);
         };
+        UIViewport.prototype.isActive = function (route) {
+            return route.isActive || route.href == location.hash ||
+                location.hash.indexOf(route.config.redirect || 'QWER') > -1;
+        };
         UIViewport.prototype.__showMenu = function ($event) {
             $event.stopPropagation();
             this.element.classList.add('show-menu');

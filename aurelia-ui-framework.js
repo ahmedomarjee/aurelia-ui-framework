@@ -45,6 +45,7 @@ define(["require", "exports", "./utils/ui-application", "./utils/ui-validation",
     exports.UITreeOptions = ui_tree_models_1.UITreeOptions;
     exports.UIHttpService = ui_http_service_1.UIHttpService;
     exports.validatemap = ui_validation_2.validatemap;
+    exports.validatephone = ui_validation_2.validatephone;
     exports.UIUtils = ui_utils_1.UIUtils;
     exports._ = ui_utils_1._;
     exports.moment = ui_utils_1.moment;
