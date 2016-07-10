@@ -224,7 +224,7 @@
 			<hr/>
 			<h2>Panel</h2>
 			<ui-row>
-				<ui-column size="xl-6">
+				<ui-column size="md-6">
 					<ui-panel>
 						<ui-body>
 							<h3 class="ui-pad-all">A Simple Panel</h3>
@@ -239,7 +239,18 @@
 						</ui-body>
 					</ui-panel>
 				</ui-column>
-				<ui-column size="xl-6">
+				<ui-column size="md-6">
+					<ui-panel>
+						<ui-header secondary>Reorder List</ui-header>
+						<ui-body>
+							<ui-reorder list.bind="reorderList"></ui-reorder>
+						</ui-body>
+						<ui-toolbar>
+							${reorderList | json}
+						</ui-toolbar>
+					</ui-panel>
+				</ui-column>
+				<ui-column full>
 					<ui-panel>
 						<ui-header collapse="true" primary>My Panel</ui-header>
 						<ui-body scroll>

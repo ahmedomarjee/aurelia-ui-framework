@@ -34,7 +34,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
             this.model = {
                 email: '', lat: null, long: null, ctry: 'AE'
             };
-            this.autoCompleteList = [
+            this.reorderList = [
                 'Alfa Romeo', 'Ferrari', 'Maseratti', 'Lamborghini', 'Lancia', 'Fiat', 'Aprilia', 'Vespa', 'Piaggio'
             ];
             this.treeOpts = new index_1.UITreeOptions({

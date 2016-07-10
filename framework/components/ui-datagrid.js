@@ -186,8 +186,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             var column = this.columns[this.__index];
             if (column.__resizeable !== true)
                 return;
-            document.addEventListener('mousemove', function (e) { return _this.resize(e); });
-            document.addEventListener('mouseup', function (e) { return _this.resizeEnd(e); });
+            document.addEventListener('mousemove', this.__move = function (e) { return _this.resize(e); });
+            document.addEventListener('mouseup', this.__stop = function (e) { return _this.resizeEnd(e); });
             this.__column = this.__table.querySelector("colgroup col[data-index=\"" + this.__index + "\"]");
             this.__startX = ($event.x || $event.clientX);
             this.__isResizing = true;
@@ -210,9 +210,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             this.__ghost.style.left = (parseInt(this.__ghost.style.left) + x) + 'px';
         };
         UIDataGrid.prototype.resizeEnd = function ($event) {
-            var _this = this;
-            document.removeEventListener('mousemove', function (e) { return _this.resize(e); });
-            document.removeEventListener('mouseup', function (e) { return _this.resizeEnd(e); });
+            document.removeEventListener('mousemove', this.__move);
+            document.removeEventListener('mouseup', this.__stop);
             if (!this.__isResizing)
                 return;
             this.__ghost.classList.add('ui-hide');

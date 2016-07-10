@@ -88,12 +88,11 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
             if (this.element.hasAttribute('padded'))
                 this.element.classList.add('ui-pad-all');
             if (this.collapsible)
-                document.addEventListener('mousedown', function (evt) { return _this.closeOverlay(evt); });
+                document.addEventListener('mousedown', this.__close = function (evt) { return _this.closeOverlay(evt); });
         };
         UISidebar.prototype.dettached = function () {
-            var _this = this;
             if (this.collapsible)
-                document.removeEventListener('mousedown', function (evt) { return _this.closeOverlay(evt); });
+                document.removeEventListener('mousedown', this.__close);
         };
         UISidebar.prototype.closeOverlay = function (evt) {
             if (getParentByClass(evt.target, 'ui-sidebar-content') === null)

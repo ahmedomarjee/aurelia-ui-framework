@@ -90,13 +90,14 @@ export class UISidebar {
     if (!this.collapsible && this.element.hasAttribute('scroll')) this.element.classList.add('ui-scroll');
   }
 
+  private __close;
   attached() {
     if (this.element.hasAttribute('padded')) this.element.classList.add('ui-pad-all');
-    if (this.collapsible) document.addEventListener('mousedown', (evt) => this.closeOverlay(evt));
+    if (this.collapsible) document.addEventListener('mousedown', this.__close = (evt) => this.closeOverlay(evt));
   }
 
   dettached() {
-    if (this.collapsible) document.removeEventListener('mousedown', (evt) => this.closeOverlay(evt));
+    if (this.collapsible) document.removeEventListener('mousedown', this.__close);
   }
 
   closeOverlay(evt) {

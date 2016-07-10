@@ -50,6 +50,7 @@ export function configure(aurelia: FrameworkConfiguration, configCallback) {
   aurelia.globalResources('./inputs/ui-language');
   aurelia.globalResources('./inputs/ui-date');
   aurelia.globalResources('./inputs/ui-date-view');
+  aurelia.globalResources('./inputs/ui-reorder');
 
   /** Utils **/
   aurelia.globalResources('./utils/ui-converters');

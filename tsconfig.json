@@ -74,6 +74,7 @@
     "framework/inputs/ui-markdown.ts",
     "framework/inputs/ui-option.ts",
     "framework/inputs/ui-phone.ts",
+    "framework/inputs/ui-reorder.ts",
     "framework/inputs/ui-switch.ts",
     "framework/inputs/ui-tags.ts",
     "framework/inputs/ui-textarea.ts",

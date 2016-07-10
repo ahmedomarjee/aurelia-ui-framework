@@ -32,7 +32,7 @@ export class Home {
     return JSON.stringify(this.model, null, 4);
   }
 
-  autoCompleteList = [
+  reorderList = [
     'Alfa Romeo', 'Ferrari', 'Maseratti', 'Lamborghini', 'Lancia', 'Fiat', 'Aprilia', 'Vespa', 'Piaggio'
   ]
 

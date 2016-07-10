@@ -228,6 +228,9 @@ export class UIDataGrid {
   private __index;
   private __column: HTMLTableColElement;
 
+  private __move;
+  private __stop;
+
   resizeStart($event) {
     if ($event.button != 0) return;
     if (!$event.target.classList.contains('resizer')) return;
@@ -238,8 +241,8 @@ export class UIDataGrid {
 
     if (column.__resizeable !== true) return;
 
-    document.addEventListener('mousemove', e => this.resize(e));
-    document.addEventListener('mouseup', e => this.resizeEnd(e));
+    document.addEventListener('mousemove', this.__move = e => this.resize(e));
+    document.addEventListener('mouseup', this.__stop = e => this.resizeEnd(e));
 
     this.__column = this.__table.querySelector(`colgroup col[data-index="${this.__index}"]`);
     this.__startX = ($event.x || $event.clientX);
@@ -265,8 +268,8 @@ export class UIDataGrid {
   }
 
   resizeEnd($event) {
-    document.removeEventListener('mousemove', e => this.resize(e));
-    document.removeEventListener('mouseup', e => this.resizeEnd(e));
+    document.removeEventListener('mousemove', this.__move);
+    document.removeEventListener('mouseup', this.__stop);
 
     if (!this.__isResizing) return;
     this.__ghost.classList.add('ui-hide');

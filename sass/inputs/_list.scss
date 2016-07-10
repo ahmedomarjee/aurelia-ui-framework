@@ -75,6 +75,39 @@
             color    : $text-muted;
         }
     }
+
+    &.ui-reorder {
+        display : block;
+        border  : none;
+        position: relative;
+
+        .ui-list-item {
+            cursor: default;
+
+            &:hover {
+                background: none;
+            }
+
+            &.dragging {
+                visibility: hidden;
+            }
+
+            > .ui-icon {
+                cursor: pointer;
+            }
+        }
+
+        .ui-ghost {
+            color     : $secondary-text;
+            background: rgba($secondary, .5);
+            border    : 1px solid $secondary;
+
+            position  : absolute;
+            left      : 0;
+            right     : 0;
+        }
+    }
+
 }
 
 .ui-tags {
