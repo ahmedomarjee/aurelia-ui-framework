@@ -63,6 +63,8 @@ System.config({
       "framework/inputs/ui-option.html!github:systemjs/plugin-text@0.0.4.js",
       "framework/inputs/ui-option.js",
       "framework/inputs/ui-phone.js",
+      "framework/inputs/ui-reorder.html!github:systemjs/plugin-text@0.0.4.js",
+      "framework/inputs/ui-reorder.js",
       "framework/inputs/ui-switch.html!github:systemjs/plugin-text@0.0.4.js",
       "framework/inputs/ui-switch.js",
       "framework/inputs/ui-tags.html!github:systemjs/plugin-text@0.0.4.js",
