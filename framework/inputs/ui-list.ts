@@ -1,0 +1,204 @@
+/**
+ *    UI Input      List selector
+ *    @author       Adarsh Pastakia
+ *    @company      HMC
+ *    @copyright    2015-2016, Adarsh Pastakia
+ **/
+import {customElement, bindable, bindingMode, autoinject} from "aurelia-framework";
+import {UIListBehaviour} from "./ui-listing";
+import {_, UIUtils} from "../utils/ui-utils";
+import {UIEvent} from "../utils/ui-event";
+
+@autoinject
+@customElement('ui-list')
+export class UIList extends UIListBehaviour {
+
+	/**
+	 * @property    value
+	 * @type        array
+	 */
+	@bindable({ defaultBindingMode: bindingMode.twoWay })
+	value: Array<any> = [];
+	/**
+	 * @property    options
+	 * @type        array
+	 */
+	@bindable({ defaultBindingMode: bindingMode.twoWay })
+	options: Array<any> = [];
+	/**
+	 * @property    disabled
+	 * @type        boolean
+	 */
+	@bindable()
+	disabled: boolean = false;
+	/**
+	 * @property    readonly
+	 * @type        boolean
+	 */
+	@bindable()
+	readonly: boolean = false;
+
+	/**
+	 * @property    help-text
+	 * @type        string
+	 */
+	@bindable()
+	helpText: string;
+
+	/**
+	 * @property    value-property
+	 * @type        string
+	 */
+	@bindable()
+	valueProperty: string = 'id';
+	/**
+	 * @property    display-property
+	 * @type        string
+	 */
+	@bindable()
+	displayProperty: any = 'name';
+	/**
+	 * @property    display-property
+	 * @type        string
+	 */
+	@bindable()
+	countProperty: any = 'count';
+	/**
+	 * @property    icon-property
+	 * @type        string
+	 */
+	@bindable()
+	iconProperty: any = '';
+	/**
+	 * @property    icon-class
+	 * @type        string
+	 */
+	@bindable()
+	iconClass: any = '';
+
+	private placeholder = 'Filter...';
+
+	private __modeCopy = false;
+	private __searchable = false;
+	__onlyAvailable = true;
+
+	constructor(public element: Element) {
+		super(element);
+		if (element.hasAttribute('copy')) this.__modeCopy = true;
+		if (element.hasAttribute('searchable')) this.__searchable = true;
+	}
+
+	bind() {
+		this.disabled = this.element.hasAttribute('disabled') || isTrue(this.disabled);
+		this.readonly = this.element.hasAttribute('readonly') || isTrue(this.readonly);
+
+		this.optionsChanged(this.options);
+		super.bind();
+	}
+
+	valueChanged(newValue) {
+		// let v: any = newValue || [];
+		// if (!_.isArray(v)) v = v.split(',');
+		// this.__options = this.__available = _.cloneDeep(this.options);
+		// _['removeByValues'](this.__available, this.valueProperty, v);
+	}
+
+	optionsChanged(newValue) {
+		this.__noResult = isEmpty(newValue);
+		this.options = newValue;
+		this.__isFiltered = false;
+		this.__isGrouped = !_.isArray(newValue);
+		this.__options = this.__available = _.cloneDeep(this.options);
+	}
+
+	formatter() {
+		return this.value;
+	}
+
+	__select(item) {
+		this.__isNew = true;
+		this.__moveRight(item.model[this.valueProperty]);
+		if (this.__isFiltered) {
+			this.__isFiltered = false;
+			this.__searchText = '';
+			this.__options = _.cloneDeep(this.__available);
+			this.__noResult = isEmpty(this.__options);
+		}
+		this.__focus = false;
+	}
+
+	addAll() {
+		this.__searchText = '';
+		if (!this.__modeCopy) {
+			this.value = _.cloneDeep(this.options);
+			this.__options = this.__available = [];
+		}
+	}
+
+	removeAll() {
+		this.__searchText = '';
+		this.value = [];
+		this.__options = this.__available = _.cloneDeep(this.options);
+	}
+
+	addEl($event) {
+		let el: any = getParentByClass($event.target, 'ui-list-item', 'ui-list-group');
+		this.__isNew = true;
+		if (el) this.__moveRight(el.model[this.valueProperty]);
+	}
+
+	removeEl($event) {
+		let el: any = getParentByClass($event.target, 'ui-list-item', 'ui-list-group');
+		this.__isNew = false;
+		if (el) this.__moveLeft(el.model[this.valueProperty]);
+	}
+
+	__moveLeft(value) {
+		if (this.__isNew) return;
+		if (!this.__modeCopy) {
+			this.__options = _.concat(this.__options, _.remove(this.value, [this.valueProperty, value]));
+			this.__searchText = '';
+			this.__available = _.cloneDeep(this.__options || []);
+		}
+		else {
+			let o = _.find(this.value, [this.valueProperty, value]);
+			if (o[this.countProperty] > 1)
+				o[this.countProperty]--;
+			else {
+				_.remove(this.value, [this.valueProperty, value])
+			}
+		}
+	}
+
+	__moveRight(value) {
+		if (!this.__isNew) return;
+		if (!this.__modeCopy) {
+			this.value = _.concat(this.value, _.remove(this.__options, [this.valueProperty, value]));
+			this.__available = _.cloneDeep(this.__options || []);
+		}
+		else {
+			let o = _.find(this.value, [this.valueProperty, value]);
+			let p = _.find(this.__options, [this.valueProperty, value]);
+			if (o !== undefined)
+				o[this.countProperty]++;
+			else {
+				p[this.countProperty] = 1;
+				this.value = _.concat(this.value, [p]);
+			}
+		}
+	}
+
+	private __isNew;
+	private __model;
+	__dragStart($event, isNew) {
+		if (!$event.target.classList.contains('ui-list-item')) return false;
+		this.__isNew = isNew;
+		this.__model = $event.target.model[this.valueProperty];
+		return true;
+	}
+
+	__dragEnter($event) {
+		$event.preventDefault();
+		return false;
+	}
+}

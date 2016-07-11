@@ -28,6 +28,7 @@ define(["require", "exports", "./utils/ui-application", "./utils/ui-validation",
         aurelia.globalResources('./inputs/ui-date');
         aurelia.globalResources('./inputs/ui-date-view');
         aurelia.globalResources('./inputs/ui-reorder');
+        aurelia.globalResources('./inputs/ui-list');
         aurelia.globalResources('./utils/ui-converters');
         if (configCallback !== undefined && typeof configCallback === 'function') {
             configCallback(ui_application_1.UIApplication.defaults);

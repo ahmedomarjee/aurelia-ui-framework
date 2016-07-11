@@ -31,12 +31,27 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
                 { id: 11, name: 'December' }
             ];
             this.countries = index_1._.groupBy(window.countries, 'continent');
+            this.countryList = index_1._.clone(window.countries);
             this.model = {
                 email: '', lat: null, long: null, ctry: 'AE'
             };
             this.reorderList = [
                 'Alfa Romeo', 'Ferrari', 'Maseratti', 'Lamborghini', 'Lancia', 'Fiat', 'Aprilia', 'Vespa', 'Piaggio'
             ];
+            this.permissions = [
+                { id: 5, name: 'Admin' },
+                { id: 1, name: 'Change Password' },
+                { id: 2, name: 'Update Profile' },
+                { id: 3, name: 'Add User' },
+                { id: 4, name: 'Delete User' }
+            ];
+            this.permitted = [];
+            this.supplies = [
+                { id: 3, name: 'Stationary' },
+                { id: 1, name: 'Printer Toner' },
+                { id: 2, name: 'Printer Paper' }
+            ];
+            this.supplied = [];
             this.treeOpts = new index_1.UITreeOptions({
                 showCheckbox: true,
                 selectionLevel: 0

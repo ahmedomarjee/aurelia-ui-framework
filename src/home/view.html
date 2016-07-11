@@ -96,6 +96,7 @@
 					<ui-stat value="24" icon="fi-vaadin-clock">Hours</ui-stat>
 					<ui-stat value="365" icon="fi-vaadin-calendar-and-clock">Days</ui-stat>
 					<ui-stat value="42" icon="fi-vaadin-chat">Answer</ui-stat>
+					<ui-stat value="82" icon="fi-vaadin-chat">Answer2</ui-stat>
 				</ui-statsbar>
 			</div>
 			<hr/>
@@ -211,13 +212,17 @@
 						<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
 						<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
 						<ui-input file name="file">File</ui-input>
+						<ui-date-view date.bind="dt"></ui-date-view>
 						<div><pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
 					</ui-column>
 					<ui-column padded>
 						<ui-language language.bind="lang" languages.bind="langs">Language</ui-language>
 						<ui-markdown value.bind="content[lang]" disabled.bind="lang==null">Markdown Editor</ui-markdown>
-						<ui-date-view date.bind="dt"></ui-date-view>
 						<ui-file>Files</ui-file>
+						<ui-list options.bind="permissions" value.bind="permitted">Permissions</ui-list>
+						<ui-list copy options.bind="supplies" value.bind="supplied" help-text="Multiple items will be added">Supplies</ui-list>
+						<ui-list searchable value-property="iso2" icon-property="iso2" icon-class="ui-flag" options.bind="countryList" value.bind="myCountries">Permitted Countries</ui-list>
+						<!-- <p>${permitted | json}, ${supplied | json}</p> -->
 					</ui-column>
 				</ui-row>
 			</ui-form>

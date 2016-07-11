@@ -133,6 +133,13 @@ export class UIDateView {
             this.__changeDates();
             if (this.element.classList.contains('floating')) this.showing = false;
         }
+        else if ($event.target.classList.contains('cancelselect')) {
+			this.__years.classList.add('ui-hide');
+			this.__months.classList.add('ui-hide');
+			this.__dates.classList.remove('ui-hidden');
+            this.__changeDates();
+            if (this.element.classList.contains('floating')) this.showing = false;
+        }
         else if ($event.target.classList.contains('year')) {
             this.__current = $event.target['year'];
             this.__months.classList.remove('ui-hide');
