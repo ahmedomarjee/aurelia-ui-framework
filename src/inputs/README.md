@@ -9,9 +9,17 @@ INPUTS
 -	[UIOptionGroup](#uioptiongroup)
 -	[UIInput](#uiinput)
 -	[UIPhone](#uiphone)
+-	[UIFile](#uifile)
+-	[UIDate](#uidate)
+-	[UIDateView](#uidateview)
 -	[UIInputDual](#uiinputdual)
 -	[UITextArea](#uitextarea)
+-	[UILanguage](#uilanguage)
 -	[UIMarkdown](#uimarkdown)
+-	[UICombo](#uicombo)
+-	[UIList](#uilist)
+-	[UITags](#uitags)
+-	[UIReorder](#uireorder)
 
 ---
 
