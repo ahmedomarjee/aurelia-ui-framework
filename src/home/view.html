@@ -96,7 +96,6 @@
 					<ui-stat value="24" icon="fi-vaadin-clock">Hours</ui-stat>
 					<ui-stat value="365" icon="fi-vaadin-calendar-and-clock">Days</ui-stat>
 					<ui-stat value="42" icon="fi-vaadin-chat">Answer</ui-stat>
-					<ui-stat value="82" icon="fi-vaadin-chat">Answer2</ui-stat>
 				</ui-statsbar>
 			</div>
 			<hr/>
@@ -193,38 +192,54 @@
 				<ui-switch danger width="5" checked.bind="formBusy" label-on="Busy">Make Busy</ui-switch>
 			</div>
 			<ui-form busy.bind="formBusy" submit.trigger="onSubmit()">
-				<ui-row>
-					<ui-column padded>
-						<ui-input value="Hello" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
-						</ui-input>
-						<ui-input value="Hello" required readonly button-text="Send!">Readonly</ui-input>
-						<ui-input-dual required decimal checkbox prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.lat" value-second.bind="model.long" placeholder="-90 to 90" placeholder-second="-180 to 180">Location
-						</ui-input-dual>
-						<ui-textarea auto-complete.bind="autoCompWords" help-text="A multiline input, with auto-complete (Automobile manufacturers)" disabled.bind="!enabled" auto-complete.bind="autoCompleteList">Textarea</ui-textarea>
-						<ui-phone country.bind="model.ctry" area-code.bind="model.areaCode" phone.bind="model.phone">National Phone</ui-phone>
-						<ui-phone international value.bind="model.internationalPhone">International Phone</ui-phone>
-						<ui-date date="1979-03-02">Date</ui-date>
-						<ui-date range>Date Range</ui-date>
-						<ui-combo options.bind="months" disabled.bind="!enabled" value.bind="model.month">ComboBox</ui-combo>
-						<ui-combo options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.ctry}" display-property="name" value-property="iso2" value.bind="model.ctry">Countries
-						</ui-combo>
-						<ui-tags options.bind="months" disabled.bind="!enabled" value.bind="model.tags">Tag Input</ui-tags>
-						<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
-						<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
-						<ui-input file name="file">File</ui-input>
-						<ui-date-view date.bind="dt"></ui-date-view>
-						<div><pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
-					</ui-column>
-					<ui-column padded>
-						<ui-language language.bind="lang" languages.bind="langs">Language</ui-language>
-						<ui-markdown value.bind="content[lang]" disabled.bind="lang==null">Markdown Editor</ui-markdown>
-						<ui-file>Files</ui-file>
-						<ui-list options.bind="permissions" value.bind="permitted">Permissions</ui-list>
-						<ui-list copy options.bind="supplies" value.bind="supplied" help-text="Multiple items will be added">Supplies</ui-list>
-						<ui-list searchable value-property="iso2" icon-property="iso2" icon-class="ui-flag" options.bind="countryList" value.bind="myCountries">Permitted Countries</ui-list>
-						<!-- <p>${permitted | json}, ${supplied | json}</p> -->
-					</ui-column>
-				</ui-row>
+				<ui-fieldset label="Form Inputs">
+					<ui-row>
+						<ui-column padded>
+							<ui-fieldset label="Basic Inputs">
+								<ui-input value="Hello" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
+								</ui-input>
+								<ui-input value="Hello" required readonly button-text="Send!">Readonly</ui-input>
+								<ui-input-dual required decimal checkbox prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.lat" value-second.bind="model.long" placeholder="-90 to 90" placeholder-second="-180 to 180">Location
+								</ui-input-dual>
+								<ui-textarea auto-complete.bind="autoCompWords" help-text="A multiline input, with auto-complete (Automobile manufacturers)" disabled.bind="!enabled" auto-complete.bind="autoCompleteList">Textarea</ui-textarea>
+							</ui-fieldset>
+							<ui-fieldset label="Phone Numbers">
+								<ui-phone country.bind="model.ctry" area-code.bind="model.areaCode" phone.bind="model.phone">National Phone</ui-phone>
+								<ui-phone international value.bind="model.internationalPhone">International Phone</ui-phone>
+							</ui-fieldset>
+							<ui-fieldset label="Combobox & Tag Inputs">
+								<ui-combo options.bind="months" disabled.bind="!enabled" value.bind="model.month">ComboBox</ui-combo>
+								<ui-combo options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.ctry}" display-property="name" value-property="iso2" value.bind="model.ctry">Countries
+								</ui-combo>
+								<ui-tags options.bind="months" disabled.bind="!enabled" value.bind="model.tags">Tag Input</ui-tags>
+								<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
+								<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
+							</ui-fieldset>
+							<ui-fieldset label="Date Inputs">
+								<ui-date date="1979-03-02">Date</ui-date>
+								<ui-date range>Date Range</ui-date>
+								<ui-date-view date.bind="dt"></ui-date-view>
+							</ui-fieldset>
+							<div><pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
+						</ui-column>
+						<ui-column padded>
+							<ui-fieldset label="Multi-Language" enabled="true">
+								<ui-language language.bind="lang" languages.bind="langs">Language</ui-language>
+								<ui-markdown value.bind="content[lang]" disabled.bind="lang==null">Markdown Editor</ui-markdown>
+							</ui-fieldset>
+							<ui-fieldset label="File Upload Inputs">
+								<ui-input file name="file">Single File</ui-input>
+								<ui-file>Multiple Files</ui-file>
+							</ui-fieldset>
+							<ui-fieldset label="Multi-Select Lists">
+								<ui-list options.bind="permissions" value.bind="permitted" help-text.bind="permitted|json">Permissions</ui-list>
+								<ui-list copy options.bind="supplies" value.bind="supplied" help-text.bind="supplied|json">Supplies</ui-list>
+								<ui-list searchable value-property="iso3" icon-property="iso2" icon-class="ui-flag" options.bind="countryList" value.bind="myCountries" help-text.bind="myCountries|json">Permitted Countries</ui-list>
+								<!-- <p>${permitted | json}, ${supplied | json}</p> -->
+							</ui-fieldset>
+						</ui-column>
+					</ui-row>
+				</ui-fieldset>
 			</ui-form>
 			<hr/>
 			<h2>Panel</h2>
@@ -259,7 +274,7 @@
 					<ui-panel>
 						<ui-header collapse="true" primary>My Panel</ui-header>
 						<ui-body scroll>
-							<ui-datagrid auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
+							<ui-datagrid selectable rowselect.trigger="rowSelect($event)" auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
 								<ui-data-column locked center width="50" data-id="id">ID</ui-data-column>
 								<ui-data-column locked resizeable sortable link summary="Total" data-id="FName" display.call="formatName($event)">Name
 								</ui-data-column>

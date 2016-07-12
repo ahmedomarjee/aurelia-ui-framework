@@ -18,7 +18,7 @@ export class UIList extends UIListBehaviour {
 	 * @type        array
 	 */
 	@bindable({ defaultBindingMode: bindingMode.twoWay })
-	value: Array<any> = [];
+	value: any = '';
 	/**
 	 * @property    options
 	 * @type        array
@@ -80,7 +80,11 @@ export class UIList extends UIListBehaviour {
 
 	private __modeCopy = false;
 	private __searchable = false;
+
+	__value = [];
 	__onlyAvailable = true;
+
+	private __ignoreChange = false;
 
 	constructor(public element: Element) {
 		super(element);
@@ -92,15 +96,18 @@ export class UIList extends UIListBehaviour {
 		this.disabled = this.element.hasAttribute('disabled') || isTrue(this.disabled);
 		this.readonly = this.element.hasAttribute('readonly') || isTrue(this.readonly);
 
-		this.optionsChanged(this.options);
 		super.bind();
+
+		this.optionsChanged(this.options);
+		this.valueChanged(this.value);
 	}
 
 	valueChanged(newValue) {
-		// let v: any = newValue || [];
-		// if (!_.isArray(v)) v = v.split(',');
-		// this.__options = this.__available = _.cloneDeep(this.options);
-		// _['removeByValues'](this.__available, this.valueProperty, v);
+		if (this.__ignoreChange) return;
+		let v: any = newValue || [];
+		if (!_.isArray(v)) v = v.split(',');
+		this.__options = this.__available = _.cloneDeep(this.options);
+		this.__value = _['removeByValues'](this.__available, this.valueProperty, v);
 	}
 
 	optionsChanged(newValue) {
@@ -130,15 +137,17 @@ export class UIList extends UIListBehaviour {
 	addAll() {
 		this.__searchText = '';
 		if (!this.__modeCopy) {
-			this.value = _.cloneDeep(this.options);
+			this.__value = _.cloneDeep(this.options);
 			this.__options = this.__available = [];
 		}
+		this.__updateValue();
 	}
 
 	removeAll() {
 		this.__searchText = '';
-		this.value = [];
+		this.__value = [];
 		this.__options = this.__available = _.cloneDeep(this.options);
+		this.__updateValue();
 	}
 
 	addEl($event) {
@@ -156,36 +165,47 @@ export class UIList extends UIListBehaviour {
 	__moveLeft(value) {
 		if (this.__isNew) return;
 		if (!this.__modeCopy) {
-			this.__options = _.concat(this.__options, _.remove(this.value, [this.valueProperty, value]));
+			this.__options = _.concat(this.__options, _.remove(this.__value, [this.valueProperty, value]));
 			this.__searchText = '';
 			this.__available = _.cloneDeep(this.__options || []);
 		}
 		else {
-			let o = _.find(this.value, [this.valueProperty, value]);
+			let o = _.find(this.__value, [this.valueProperty, value]);
 			if (o[this.countProperty] > 1)
 				o[this.countProperty]--;
 			else {
-				_.remove(this.value, [this.valueProperty, value])
+				_.remove(this.__value, [this.valueProperty, value])
 			}
 		}
+		this.__updateValue();
 	}
 
 	__moveRight(value) {
 		if (!this.__isNew) return;
 		if (!this.__modeCopy) {
-			this.value = _.concat(this.value, _.remove(this.__options, [this.valueProperty, value]));
+			this.__value = _.concat(this.__value, _.remove(this.__options, [this.valueProperty, value]));
 			this.__available = _.cloneDeep(this.__options || []);
 		}
 		else {
-			let o = _.find(this.value, [this.valueProperty, value]);
+			let o = _.find(this.__value, [this.valueProperty, value]);
 			let p = _.find(this.__options, [this.valueProperty, value]);
 			if (o !== undefined)
 				o[this.countProperty]++;
 			else {
 				p[this.countProperty] = 1;
-				this.value = _.concat(this.value, [p]);
+				this.__value = _.concat(this.__value, [p]);
 			}
 		}
+		this.__updateValue();
+	}
+
+	__updateValue() {
+		this.__ignoreChange = true;
+		if (!this.__modeCopy)
+			this.value = _.map(this.__value, this.valueProperty).join(',');
+		else
+			this.value = _.chain(this.__value).mapKeys(this.valueProperty)['mapValues']('count');
+		setTimeout(() => this.__ignoreChange = false, 500);
 	}
 
 	private __isNew;

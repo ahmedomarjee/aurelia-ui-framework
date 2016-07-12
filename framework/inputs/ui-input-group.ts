@@ -15,8 +15,8 @@ export class UIInputGroup {
 
 	protected __type = 'text';
 	protected __format = 'text';
-	protected __value = '';
-	protected __value2 = '';
+	protected __value: any = '';
+	protected __value2: any = '';
 	protected __clear = false;
 	protected __checkbox = false;
 

@@ -19,7 +19,7 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
         function UIList(element) {
             _super.call(this, element);
             this.element = element;
-            this.value = [];
+            this.value = '';
             this.options = [];
             this.disabled = false;
             this.readonly = false;
@@ -31,7 +31,9 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
             this.placeholder = 'Filter...';
             this.__modeCopy = false;
             this.__searchable = false;
+            this.__value = [];
             this.__onlyAvailable = true;
+            this.__ignoreChange = false;
             if (element.hasAttribute('copy'))
                 this.__modeCopy = true;
             if (element.hasAttribute('searchable'))
@@ -40,10 +42,18 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
         UIList.prototype.bind = function () {
             this.disabled = this.element.hasAttribute('disabled') || isTrue(this.disabled);
             this.readonly = this.element.hasAttribute('readonly') || isTrue(this.readonly);
-            this.optionsChanged(this.options);
             _super.prototype.bind.call(this);
+            this.optionsChanged(this.options);
+            this.valueChanged(this.value);
         };
         UIList.prototype.valueChanged = function (newValue) {
+            if (this.__ignoreChange)
+                return;
+            var v = newValue || [];
+            if (!ui_utils_1._.isArray(v))
+                v = v.split(',');
+            this.__options = this.__available = ui_utils_1._.cloneDeep(this.options);
+            this.__value = ui_utils_1._['removeByValues'](this.__available, this.valueProperty, v);
         };
         UIList.prototype.optionsChanged = function (newValue) {
             this.__noResult = isEmpty(newValue);
@@ -69,14 +79,16 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
         UIList.prototype.addAll = function () {
             this.__searchText = '';
             if (!this.__modeCopy) {
-                this.value = ui_utils_1._.cloneDeep(this.options);
+                this.__value = ui_utils_1._.cloneDeep(this.options);
                 this.__options = this.__available = [];
             }
+            this.__updateValue();
         };
         UIList.prototype.removeAll = function () {
             this.__searchText = '';
-            this.value = [];
+            this.__value = [];
             this.__options = this.__available = ui_utils_1._.cloneDeep(this.options);
+            this.__updateValue();
         };
         UIList.prototype.addEl = function ($event) {
             var el = getParentByClass($event.target, 'ui-list-item', 'ui-list-group');
@@ -94,36 +106,47 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
             if (this.__isNew)
                 return;
             if (!this.__modeCopy) {
-                this.__options = ui_utils_1._.concat(this.__options, ui_utils_1._.remove(this.value, [this.valueProperty, value]));
+                this.__options = ui_utils_1._.concat(this.__options, ui_utils_1._.remove(this.__value, [this.valueProperty, value]));
                 this.__searchText = '';
                 this.__available = ui_utils_1._.cloneDeep(this.__options || []);
             }
             else {
-                var o = ui_utils_1._.find(this.value, [this.valueProperty, value]);
+                var o = ui_utils_1._.find(this.__value, [this.valueProperty, value]);
                 if (o[this.countProperty] > 1)
                     o[this.countProperty]--;
                 else {
-                    ui_utils_1._.remove(this.value, [this.valueProperty, value]);
+                    ui_utils_1._.remove(this.__value, [this.valueProperty, value]);
                 }
             }
+            this.__updateValue();
         };
         UIList.prototype.__moveRight = function (value) {
             if (!this.__isNew)
                 return;
             if (!this.__modeCopy) {
-                this.value = ui_utils_1._.concat(this.value, ui_utils_1._.remove(this.__options, [this.valueProperty, value]));
+                this.__value = ui_utils_1._.concat(this.__value, ui_utils_1._.remove(this.__options, [this.valueProperty, value]));
                 this.__available = ui_utils_1._.cloneDeep(this.__options || []);
             }
             else {
-                var o = ui_utils_1._.find(this.value, [this.valueProperty, value]);
+                var o = ui_utils_1._.find(this.__value, [this.valueProperty, value]);
                 var p = ui_utils_1._.find(this.__options, [this.valueProperty, value]);
                 if (o !== undefined)
                     o[this.countProperty]++;
                 else {
                     p[this.countProperty] = 1;
-                    this.value = ui_utils_1._.concat(this.value, [p]);
+                    this.__value = ui_utils_1._.concat(this.__value, [p]);
                 }
             }
+            this.__updateValue();
+        };
+        UIList.prototype.__updateValue = function () {
+            var _this = this;
+            this.__ignoreChange = true;
+            if (!this.__modeCopy)
+                this.value = ui_utils_1._.map(this.__value, this.valueProperty).join(',');
+            else
+                this.value = ui_utils_1._.chain(this.__value).mapKeys(this.valueProperty)['mapValues']('count');
+            setTimeout(function () { return _this.__ignoreChange = false; }, 500);
         };
         UIList.prototype.__dragStart = function ($event, isNew) {
             if (!$event.target.classList.contains('ui-list-item'))
@@ -138,7 +161,7 @@ define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-
         };
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
-            __metadata('design:type', Array)
+            __metadata('design:type', Object)
         ], UIList.prototype, "value", void 0);
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 

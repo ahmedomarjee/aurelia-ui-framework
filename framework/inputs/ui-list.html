@@ -11,7 +11,7 @@
                     <div class="ui-list-group" dragstart.delegate="__dragStart($event, true)" dblclick.delegate="addEl($event)">
                         <div model.bind="opt" repeat.for="opt of __options | sort:displayProperty" class="ui-list-item" data-value="${opt[valueProperty]}" draggable="true">
                             <span class="ui-icon ${iconClass} ${opt[iconProperty]}" if.bind="iconProperty"></span>
-                            <span class="ui-text ui-col-fill" innerhtml.bind="opt[displayProperty]"></span>
+                            <span class="ui-text ui-col-fill" innerhtml.bind="opt['__display'] || opt[displayProperty]"></span>
                         </div>
                     </div>
                     <p class="ui-text-muted ui-pad-all" if.bind="__noResult">${emptyText}</p>
@@ -26,7 +26,7 @@
             <div class="ui-input-wrapper">
                 <div class="ui-list ui-dual" dragover.trigger="__dragEnter($event)" drop.trigger="__moveRight(__model)">
                     <div class="ui-list-group" dragstart.delegate="__dragStart($event, false)" dblclick.delegate="removeEl($event)">
-                        <div model.bind="opt" repeat.for="opt of value | sort:displayProperty" class="ui-list-item" data-value="${opt[valueProperty]}" draggable="true">
+                        <div model.bind="opt" repeat.for="opt of __value | sort:displayProperty" class="ui-list-item" data-value="${opt[valueProperty]}" draggable="true">
                             <span class="ui-icon ${iconClass} ${opt[iconProperty]}" if.bind="iconProperty"></span>
                             <small if.bind="__modeCopy">&nbsp;(${opt[countProperty] || 1})</small>
                             <span class="ui-text ui-col-fill" innerhtml.bind="opt[displayProperty]"></span>

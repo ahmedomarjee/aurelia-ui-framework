@@ -21,6 +21,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             this.dataList = [];
             this.summaryRow = false;
             this.emptyText = '';
+            this.allowSelect = false;
             this.__isResizing = false;
             this.__startX = 0;
             this.__diff = 0;
@@ -32,6 +33,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             var _this = this;
             this.__sortColumn = this.defaultSort;
             this.__sortOrder = this.defaultOrder;
+            this.allowSelect = this.element.hasAttribute('selectable');
             this.__dataListChangeSubscriber = this.bindingEngine.collectionObserver(this.dataList).subscribe(function (e) {
                 _this.dataListChanged(_this.dataList);
             });
@@ -65,6 +67,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
         };
         UIDataGrid.prototype.linkClicked = function ($event, id, model) {
             $event.preventDefault();
+            $event.cancelBubble = true;
+            $event.stopPropagation();
             if (getParentByClass($event.target, 'ui-button', 'dg-col') === null &&
                 getParentByClass($event.target, 'ui-link', 'dg-col') === null) {
                 return false;
@@ -76,6 +80,11 @@ define(["require", "exports", "aurelia-framework", "aurelia-templating-resources
             }
             catch (e) {
             }
+            return false;
+        };
+        UIDataGrid.prototype.rowSelect = function (model) {
+            if (this.allowSelect)
+                ui_event_1.UIEvent.fireEvent('rowselect', this.element, model);
             return false;
         };
         UIDataGrid.prototype.sort = function ($event, column) {

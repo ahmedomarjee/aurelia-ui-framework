@@ -32,6 +32,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
             ];
             this.countries = index_1._.groupBy(window.countries, 'continent');
             this.countryList = index_1._.clone(window.countries);
+            this.myCountries = 'UAE,QAT';
             this.model = {
                 email: '', lat: null, long: null, ctry: 'AE'
             };
@@ -45,13 +46,13 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
                 { id: 3, name: 'Add User' },
                 { id: 4, name: 'Delete User' }
             ];
-            this.permitted = [];
+            this.permitted = '';
             this.supplies = [
                 { id: 3, name: 'Stationary' },
                 { id: 1, name: 'Printer Toner' },
                 { id: 2, name: 'Printer Paper' }
             ];
-            this.supplied = [];
+            this.supplied = '';
             this.treeOpts = new index_1.UITreeOptions({
                 showCheckbox: true,
                 selectionLevel: 0
@@ -257,6 +258,11 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
             else {
                 this.appState.toast({ theme: theme, icon: 'fi-vaadin-bell', message: 'Toasted message' });
             }
+        };
+        Home.prototype.rowSelect = function ($event) {
+            this.appState.toast({
+                message: $event.detail.id + " :: " + $event.detail.FName + " " + $event.detail.LName
+            });
         };
         Home.prototype.showAlert = function () {
             this.appState.alert('Hello World');

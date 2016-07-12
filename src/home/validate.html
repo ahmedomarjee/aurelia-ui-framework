@@ -15,7 +15,7 @@
                         <ui-phone required country.bind="model.country" value.bind="model.phone & validate">Phone</ui-phone>
                     </ui-column>
                     <ui-column padded>
-                        <ui-input-dual required decimal prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.latitude & validate" value-second.bind="model.longitude & validate" placeholder="-90 to 90" placeholder-second="-180 to 180">Location</ui-input-dual>
+                        <ui-input-dual checkbox required decimal prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.latitude & validate" value-second.bind="model.longitude & validate" placeholder="-90 to 90" placeholder-second="-180 to 180">Location</ui-input-dual>
                     </ui-column>
                 </ui-row>
                 <hr/>

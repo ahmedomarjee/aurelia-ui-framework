@@ -24,7 +24,7 @@ export class Home {
 	];
 	countries = _.groupBy(window.countries, 'continent');
 	countryList = _.clone(window.countries);
-
+	myCountries = 'UAE,QAT';
 	model = {
 		email: '', lat: null, long: null, ctry: 'AE'
 	};
@@ -44,14 +44,14 @@ export class Home {
 		{ id: 3, name: 'Add User' },
 		{ id: 4, name: 'Delete User' }
 	];
-	permitted = [];
+	permitted = '';
 
 	supplies = [
 		{ id: 3, name: 'Stationary' },
 		{ id: 1, name: 'Printer Toner' },
 		{ id: 2, name: 'Printer Paper' }
 	];
-	supplied = [];
+	supplied = '';
 
 	__page;
 	__content;
@@ -282,6 +282,12 @@ export class Home {
 		else {
 			this.appState.toast({ theme: theme, icon: 'fi-vaadin-bell', message: 'Toasted message' });
 		}
+	}
+
+	rowSelect($event) {
+		this.appState.toast({
+			message: `${$event.detail.id} :: ${$event.detail.FName} ${$event.detail.LName}`
+		});
 	}
 
 	showAlert() {
