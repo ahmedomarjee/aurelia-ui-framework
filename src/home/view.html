@@ -85,8 +85,8 @@
 						<ui-button icon="fi-vaadin-minus-button"></ui-button>
 					</ui-button-group>
 					<ui-divider></ui-divider>
-					<ui-button primary label="Tool"></ui-button>
-					<ui-button warning label="Tool"></ui-button>
+					<ui-button primary label="Alert" click.trigger="showAlert()"></ui-button>
+					<ui-button warning label="Confirm" click.trigger="showConfirm()"></ui-button>
 				</ui-toolbar>
 			</div>
 			<hr/>
@@ -179,7 +179,7 @@
 					</ui-checkbox>
 					<ui-checkbox disabled="true">Disabled</ui-checkbox>
 				</ui-option-group>
-				<ui-option-group label.bind="'Radios<small>Value:'+optVal+'</small>'" name="radio" value.bind="optVal" required change.trigger="change($event)">
+				<ui-option-group label.bind="'Radios<small>Value:'+optVal+'</small>'" class="ui-vertical" name="radio" value.bind="optVal" required change.trigger="change($event)">
 					<ui-radio disabled.bind="!enabled" value="1">Check 1</ui-radio>
 					<ui-radio disabled.bind="!enabled" value="2">Check 2</ui-radio>
 					<ui-radio disabled.bind="!enabled" value="3">Check 3</ui-radio>
@@ -191,55 +191,103 @@
 			<div>
 				<ui-switch danger width="5" checked.bind="formBusy" label-on="Busy">Make Busy</ui-switch>
 			</div>
-			<ui-form validate.bind="validation" busy.bind="formBusy" submit.trigger="onSubmit()">
-				<ui-row>
-					<ui-column padded>
-						<ui-input value="Hello" class="ui-invalid" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
-						</ui-input>
-						<ui-input value="Hello" required readonly button-text="Send!">Readonly</ui-input>
-						<ui-input-dual required decimal checkbox prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.lat" value-second.bind="model.long" placeholder="-90 to 90" placeholder-second="-180 to 180">Location
-						</ui-input-dual>
-						<ui-textarea help-text="A multiline input" disabled.bind="!enabled">Textarea</ui-textarea>
-						<ui-phone country.bind="model.ctry" area-code.bind="model.areaCode" phone.bind="model.phone">National Phone</ui-phone>
-						<ui-phone international value.bind="model.internationalPhone">International Phone</ui-phone>
-						<ui-date date="1979-03-02">Date</ui-date>
-						<ui-date range>Date Range</ui-date>
-						<ui-combo options.bind="months" disabled.bind="!enabled" value.bind="model.month">ComboBox</ui-combo>
-						<ui-combo options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.ctry}" display-property="name" value-property="iso2" value.bind="model.ctry">Countries
-						</ui-combo>
-						<ui-tags options.bind="months" disabled.bind="!enabled" value.bind="model.tags">Tag Input</ui-tags>
-						<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
-						<ui-input file button-icon="fi-ui-circle-remove" name="file">File</ui-input>
-						<div><pre>${getDisplay(model.email, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
-					</ui-column>
-					<ui-column padded>
-						<ui-language>Language</ui-language>
-						<ui-markdown>Markdown Editor</ui-markdown>
-						<ui-date-view date.bind="dt"></ui-date-view>
-					</ui-column>
-				</ui-row>
+			<ui-form busy.bind="formBusy" submit.trigger="onSubmit()">
+				<ui-fieldset label="Form Inputs">
+					<ui-row>
+						<ui-column padded>
+							<ui-fieldset label="Basic Inputs">
+								<ui-input value="Hello" required clear placeholder="Enter an email..." capitalize value.bind="model.email" disabled.bind="!enabled" prefix-icon="fi-vaadin-envelope-1" suffix-text="@clubhotel.com">Input
+								</ui-input>
+								<ui-input value="Hello" required readonly button-text="Send!">Readonly</ui-input>
+								<ui-input-dual required decimal checkbox prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.lat" value-second.bind="model.long" placeholder="-90 to 90" placeholder-second="-180 to 180">Location
+								</ui-input-dual>
+								<ui-textarea auto-complete.bind="autoCompWords" help-text="A multiline input, with auto-complete (Automobile manufacturers)" disabled.bind="!enabled" auto-complete.bind="autoCompleteList">Textarea</ui-textarea>
+							</ui-fieldset>
+							<ui-fieldset label="Phone Numbers">
+								<ui-phone country.bind="model.ctry" area-code.bind="model.areaCode" phone.bind="model.phone">National Phone</ui-phone>
+								<ui-phone international value.bind="model.internationalPhone">International Phone</ui-phone>
+							</ui-fieldset>
+							<ui-fieldset label="Combobox & Tag Inputs">
+								<ui-combo options.bind="months" disabled.bind="!enabled" value.bind="model.month">ComboBox</ui-combo>
+								<ui-combo options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.ctry}" display-property="name" value-property="iso2" value.bind="model.ctry">Countries
+								</ui-combo>
+								<ui-tags options.bind="months" disabled.bind="!enabled" value.bind="model.tags">Tag Input</ui-tags>
+								<ui-tags options.bind="countries" value-property="iso3" disabled.bind="!enabled" value.bind="model.ctries">Grouped Tag Input</ui-tags>
+								<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
+							</ui-fieldset>
+							<ui-fieldset label="Date Inputs">
+								<ui-date date="1979-03-02">Date</ui-date>
+								<ui-date range>Date Range</ui-date>
+								<ui-date-view date.bind="dt"></ui-date-view>
+							</ui-fieldset>
+							<div><pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre></div>
+						</ui-column>
+						<ui-column padded>
+							<ui-fieldset label="Multi-Language" enabled="true">
+								<ui-language language.bind="lang" languages.bind="langs">Language</ui-language>
+								<ui-markdown value.bind="content[lang]" disabled.bind="lang==null">Markdown Editor</ui-markdown>
+							</ui-fieldset>
+							<ui-fieldset label="File Upload Inputs">
+								<ui-input file name="file">Single File</ui-input>
+								<ui-file>Multiple Files</ui-file>
+							</ui-fieldset>
+							<ui-fieldset label="Multi-Select Lists">
+								<ui-list options.bind="permissions" value.bind="permitted" help-text.bind="permitted|json">Permissions</ui-list>
+								<ui-list copy options.bind="supplies" value.bind="supplied" help-text.bind="supplied|json">Supplies</ui-list>
+								<ui-list searchable value-property="iso3" icon-property="iso2" icon-class="ui-flag" options.bind="countryList" value.bind="myCountries" help-text.bind="myCountries|json">Permitted Countries</ui-list>
+								<!-- <p>${permitted | json}, ${supplied | json}</p> -->
+							</ui-fieldset>
+						</ui-column>
+					</ui-row>
+				</ui-fieldset>
 			</ui-form>
 			<hr/>
 			<h2>Panel</h2>
 			<ui-row>
-				<ui-column fill>
+				<ui-column size="md-6">
 					<ui-panel>
 						<ui-body>
-							<h3>A Simple Panel</h3>
+							<h3 class="ui-pad-all">A Simple Panel</h3>
+							<ui-combo options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.ctry}" display-property="name" value-property="iso2" value.bind="model.ctry">Countries
+							</ui-combo>
 						</ui-body>
 					</ui-panel>
 					<ui-panel>
-						<ui-header collapse="true" close="true" secondary>My Panel</ui-header>
+						<ui-header collapse="true" close="true" expand="true" secondary>My Panel</ui-header>
 						<ui-body>
-							<h3>A Closable Panel</h3>
+							<h3 class="ui-pad-all">A Closable Panel</h3>
 						</ui-body>
 					</ui-panel>
 				</ui-column>
-				<ui-column fill>
+				<ui-column size="md-6">
+					<ui-panel>
+						<ui-header secondary>Reorder List</ui-header>
+						<ui-body>
+							<ui-reorder list.bind="reorderList"></ui-reorder>
+						</ui-body>
+						<ui-toolbar>
+							${reorderList | json}
+						</ui-toolbar>
+					</ui-panel>
+				</ui-column>
+				<ui-column full>
 					<ui-panel>
 						<ui-header collapse="true" primary>My Panel</ui-header>
-						<ui-body>
-							<h3>A Panel with Header</h3>
+						<ui-body scroll>
+							<ui-datagrid selectable rowselect.trigger="rowSelect($event)" auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
+								<ui-data-column locked center width="50" data-id="id">ID</ui-data-column>
+								<ui-data-column locked resizeable sortable link summary="Total" data-id="FName" display.call="formatName($event)">Name
+								</ui-data-column>
+								<ui-data-column locked data-id="view" view button-title="Preview" width="90" button.call="checkAge($event)"></ui-data-column>
+								<ui-data-column locked data-id="edit" edit></ui-data-column>
+								<ui-data-column locked data-id="delete" delete></ui-data-column>
+								<ui-data-column date sortable data-id="SDate" format="DD MMM YYYY">Birthday</ui-data-column>
+								<ui-data-column data-id="SDate" from-now center></ui-data-column>
+								<ui-data-column data-id="Amount" currency symbol="$" summary="sum">Amount
+								</ui-data-column>
+								<ui-data-column data-id="Count" number format="0.000a" summary="sum">Count
+								</ui-data-column>
+							</ui-datagrid>
 						</ui-body>
 					</ui-panel>
 				</ui-column>
@@ -269,6 +317,7 @@
 								<ui-pager total="5"></ui-pager>
 							</ui-column>
 							<ui-divider></ui-divider>
+							<ui-button square small icon="fi-vaadin-add-square" click.trigger="addRecord()"></ui-button>
 							<ui-button square small icon="fi-vaadin-rotate-left"></ui-button>
 						</ui-toolbar>
 						<ui-datagrid data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
@@ -291,7 +340,7 @@
 							<ui-sidebar>
 								<ui-tree checked.trigger="checked = $event.detail" model.bind="treeModel" options.bind="treeOpts" view-model.ref="__tree"></ui-tree>
 							</ui-sidebar>
-							<ui-content scroll>
+							<ui-content scroll padded>
 								<h3>Tree View</h3>
 								<div>
 									<h3>Checked</h3>

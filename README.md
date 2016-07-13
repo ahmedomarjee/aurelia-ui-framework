@@ -20,6 +20,14 @@ AureliaUIFramework
 
 > Rethought and Reworked Framework
 
+#### Getting Started
+
+-	Download the [skeleton project](https://github.com/adarshpastakia/aurelia-ui-framework/archive/skeleton.zip).
+-	Run `init.sh` on Mac/Linux or `init.bat` on windows.
+-	Incase you dont want to change the default styles, pre-compiled stylesheets are included in the skeleton project.
+-	NOTE: This framework requires [Compass-SASS library](http://compass-style.org/install/) to be installed to build sass files.
+
+
 ### Sections
 
 -	[Core](framework/core)
