@@ -166,7 +166,7 @@ treeModel:Array<UITreeModel> = [{
 ### UIDataGrid
 
 ```html
-<ui-datagrid data-list.bind=? summary-row="true | false"
+<ui-datagrid data-list.bind=? summary-row="true | false" selectable rowselect.trigger=?
   default-sort=? default-order="asc | desc" linkclick.trigger=?>
     <ui-data-column data-id=? locked sortable resizeable
       (align) [start | center | end]
@@ -175,6 +175,14 @@ treeModel:Array<UITreeModel> = [{
     ...
 </ui-datagrid>
 ```
+
+- DataGrid Attributes
+
+  - `selectable` allow row selection
+
+  - `rowselect` event trigger, access row model `$event.detail`
+
+  - `linkclick` event trigger, `$event.detail = {dataId:column id, model: row model}`
 
 -	More Column Attributes
 

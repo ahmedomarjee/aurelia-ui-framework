@@ -6,8 +6,7 @@ Pending
 ##### Inputs
 
 -	[] Add time selector for date input
--	[] Add multi-select element
--	[] Add simple list element
+-	~~[] Add simple list element~~
 -	[] Combobox config and support for accepting non listed value
 
 Completed
@@ -36,6 +35,7 @@ Completed
 -	[-] Add tag input element
 -	[-] Add content language selector
 -	[-] Add support for textarea auto-complete
+-	[-] Add multi-select element
 
 ##### Components
 
