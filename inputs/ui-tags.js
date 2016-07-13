@@ -12,15 +12,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils/ui-utils", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_input_group_1, ui_utils_1, ui_event_1) {
+define(["require", "exports", "aurelia-framework", "./ui-listing", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_listing_1, ui_utils_1) {
     "use strict";
     var UITags = (function (_super) {
         __extends(UITags, _super);
         function UITags(element) {
             _super.call(this, element);
-            this.__noResult = false;
-            this.__reverse = false;
             this.__tags = [];
+            this.__onlyAvailable = true;
             this.value = '';
             this.checked = false;
             this.disabled = false;
@@ -138,132 +137,10 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             if (b !== null)
                 this.__deselect(b['model']);
         };
-        UITags.prototype.keyDown = function (evt) {
-            if (evt.ctrlKey || evt.altKey || evt.metaKey || (evt.keyCode || evt.which) === 0)
-                return true;
-            var code = (evt.keyCode || evt.which);
-            if (code == 13 && this.__focus) {
-                this.__focus = false;
-                this.__select(this.__hilight);
-                return false;
-            }
-            else if (code == 13 && !this.__focus) {
-                return ui_event_1.UIEvent.fireEvent('enterpressed', this.element, this);
-            }
-            this.__focus = true;
-            if (code === 8 && isEmpty(this.__searchText)) {
-                this.__deselect(null);
-            }
-            if (this.__noResult)
-                return true;
-            if (code === 38) {
-                var h = this.__list.querySelector('.ui-list-item.hilight');
-                if (h === null)
-                    h = this.__list.querySelector('.ui-list-item.selected');
-                if (h != null) {
-                    h = h.previousElementSibling;
-                    if (h.tagName === 'P')
-                        h = h.previousElementSibling;
-                    if (h !== null) {
-                        if (this.__hilight != null)
-                            this.__hilight.classList.remove('hilight');
-                        (this.__hilight = h).classList.add('hilight');
-                        this.__scrollIntoView();
-                    }
-                }
-                return false;
-            }
-            else if (code === 40) {
-                var h = this.__list.querySelector('.ui-list-item.hilight');
-                if (h === null)
-                    h = this.__list.querySelector('.ui-list-item.selected');
-                if (h !== null)
-                    h = h.nextElementSibling;
-                if (h === null)
-                    h = this.__list.querySelector('.ui-list-item');
-                if (h.tagName === 'P')
-                    h = h.nextElementSibling;
-                if (h !== null) {
-                    if (this.__hilight != null)
-                        this.__hilight.classList.remove('hilight');
-                    (this.__hilight = h).classList.add('hilight');
-                    this.__scrollIntoView();
-                }
-                return false;
-            }
-            return true;
-        };
-        UITags.prototype.keyPress = function (evt) {
-            if (evt.ctrlKey || evt.altKey || evt.metaKey || (evt.keyCode || evt.which) === 0)
-                return true;
-            var code = (evt.keyCode || evt.which);
-        };
         UITags.prototype.formatter = function () {
             return this.value;
         };
         UITags.prototype.__scrollIntoView = function () {
-        };
-        UITags.prototype.__searchTextChanged = function () {
-            var _this = this;
-            if (this.__noList)
-                return;
-            if (ui_utils_1._.isEmpty(this.__searchText)) {
-                this.__options = ui_utils_1._.cloneDeep(this.options);
-                this.__noResult = isEmpty(this.__options);
-                this.__isFiltered = false;
-                return;
-            }
-            var opts = ui_utils_1._.cloneDeep(this.__available);
-            var rx = new RegExp(ui_utils_1.UIUtils.getAscii(this.__searchText), 'i');
-            if (this.__isGrouped) {
-                this.__options = ui_utils_1._.forEach(opts, function (v, k) {
-                    opts[k] = ui_utils_1._.filter(v, function (n) {
-                        var lbl = n;
-                        if (!isEmpty(n[_this.displayProperty])) {
-                            lbl = n[_this.displayProperty];
-                        }
-                        lbl = lbl + '';
-                        var asc = ui_utils_1.UIUtils.getAscii(lbl);
-                        if (rx.test(asc)) {
-                            if (n.hasOwnProperty(_this.displayProperty)) {
-                                var start = asc.search(rx);
-                                lbl = lbl.substr(0, start + _this.__searchText.length) + '</u>' +
-                                    lbl.substr(start + _this.__searchText.length);
-                                lbl = lbl.substr(0, start) + '<u>' + lbl.substr(start);
-                                n['__display'] = lbl;
-                            }
-                            return true;
-                        }
-                        return false;
-                    });
-                    if (opts[k].length === 0)
-                        delete opts[k];
-                });
-            }
-            if (!this.__isGrouped) {
-                this.__options = ui_utils_1._.filter(opts, function (n) {
-                    var lbl = n;
-                    if (!isEmpty(n[_this.displayProperty])) {
-                        lbl = n[_this.displayProperty];
-                    }
-                    lbl = lbl + '';
-                    var asc = ui_utils_1.UIUtils.getAscii(lbl);
-                    if (rx.test(asc)) {
-                        if (n.hasOwnProperty(_this.displayProperty)) {
-                            var start = asc.search(rx);
-                            lbl = lbl.substr(0, start + _this.__searchText.length) + '</u>' +
-                                lbl.substr(start + _this.__searchText.length);
-                            lbl = lbl.substr(0, start) + '<u>' + lbl.substr(start);
-                            n['__display'] = lbl;
-                        }
-                        return true;
-                    }
-                    return false;
-                });
-            }
-            this.__isFiltered = true;
-            this.__noResult = isEmpty(this.__options);
-            setTimeout(function () { return _this.__hilight = _this.__list.querySelector(".ui-list-item") || null; }, 100);
         };
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
@@ -347,6 +224,6 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             __metadata('design:paramtypes', [Element])
         ], UITags);
         return UITags;
-    }(ui_input_group_1.UIInputGroup));
+    }(ui_listing_1.UIListBehaviour));
     exports.UITags = UITags;
 });

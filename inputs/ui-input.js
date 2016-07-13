@@ -78,7 +78,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
                 val = val.toLowerCase();
             }
             evt.target.value = val;
-            setTimeout(function () { return evt.target.selectionStart = evt.target.selectionEnd = start; }, 10);
+            setTimeout(function () { return evt.target.selectionStart = evt.target.selectionEnd = start; }, 50);
             return val;
         };
         __decorate([

@@ -72,6 +72,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
             if (this.ignoreUpdate)
                 return;
             this.ignoreUpdate = true;
+            var start = this.__input.selectionStart;
             if (this.__phoneFormat === PhoneLib.FORMAT.INTERNATIONAL) {
                 if (isEmpty(newValue))
                     this.prefixIcon = 'ui-flag';
@@ -83,6 +84,8 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
                     newValue = '';
                 this.__value =
                     PhoneLib.formatInput(newValue, this.__phoneFormat !== PhoneLib.FORMAT.INTERNATIONAL ? this.country : '', false, true);
+                if (this.__value.length > newValue.length)
+                    start += this.__value.length - newValue.length;
                 this.value =
                     PhoneLib.format(this.__value, this.__phoneFormat !== PhoneLib.FORMAT.INTERNATIONAL ? this.country : '', PhoneLib.FORMAT.FULL);
             }
@@ -90,7 +93,10 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
                 this.__value = '';
             }
             this.processValue();
-            setTimeout(function () { return _this.ignoreUpdate = false; }, 10);
+            setTimeout(function () {
+                _this.__input.selectionStart = _this.__input.selectionEnd = start;
+                _this.ignoreUpdate = false;
+            }, 50);
         };
         UIPhone.prototype.processValue = function () {
             if (this.__phoneFormat === PhoneLib.FORMAT.INTERNATIONAL) {

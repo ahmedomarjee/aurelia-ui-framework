@@ -28,7 +28,7 @@
 						<h3 class="ui-text-muted" innerhtml.bind="emptyText"></h3>
 					</td>
 				</tr>
-				<tr repeat.for="model of __data">
+				<tr repeat.for="model of __data" class="${allowSelect?'ui-datagrid-row':''}" click.delegate="rowSelect(model)">
 					<td repeat.for="col of columns" data-index="${$index}" css.bind="{'left':col.edge+'px'}" class="dg-col ${col.__locked ? 'sticky':''} ui-text-${col.__align} ${isLastLocked(col.__locked, $index)?'last-of-type':''}">
 
 						<div if.bind="col.__button" class="ui-button-bar" click.trigger="linkClicked($event, col.dataId, model)" innerhtml.bind="buildButton(model[col.dataId], col, model) & signal:__id">

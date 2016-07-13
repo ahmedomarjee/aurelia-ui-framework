@@ -91,6 +91,10 @@
                 tr.ui-ghost {
                     visibility: hidden;
                 }
+
+                tr.ui-datagrid-row:hover > td {
+                    background-color: rgba($secondary, .5);
+                }
             }
 
             td {

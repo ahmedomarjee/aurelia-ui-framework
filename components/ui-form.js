@@ -51,4 +51,36 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
         return UIForm;
     }());
     exports.UIForm = UIForm;
+    var UIFieldset = (function () {
+        function UIFieldset(element) {
+            this.element = element;
+            this.label = '';
+            this.enabled = true;
+            this.checkbox = false;
+            this.checkbox = this.element.hasAttribute('enabled');
+        }
+        UIFieldset.prototype.bind = function () {
+            this.enabled = isTrue(this.enabled);
+        };
+        UIFieldset.prototype.enabledChanged = function (newValue) {
+            this.enabled = isTrue(newValue);
+            this.element.classList[this.enabled ? 'remove' : 'add']('ui-disabled');
+        };
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', String)
+        ], UIFieldset.prototype, "label", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', Boolean)
+        ], UIFieldset.prototype, "enabled", void 0);
+        UIFieldset = __decorate([
+            aurelia_framework_1.autoinject,
+            aurelia_framework_1.customElement('ui-fieldset'),
+            aurelia_framework_1.inlineView('<template class="ui-fieldset"><fieldset><legend if.bind="label"><ui-checkbox checked.bind="enabled" if.bind="checkbox">${label}</ui-checkbox><span if.bind="!checkbox">${label}</span></legend><slot></slot></fieldset></template>'), 
+            __metadata('design:paramtypes', [Element])
+        ], UIFieldset);
+        return UIFieldset;
+    }());
+    exports.UIFieldset = UIFieldset;
 });
