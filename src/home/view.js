@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../../framework/index", "./my-dialog", "fetch"], function (require, exports, aurelia_framework_1, index_1, my_dialog_1) {
+define(["require", "exports", "aurelia-framework", "../../framework/index", "./my-dialog"], function (require, exports, aurelia_framework_1, index_1, my_dialog_1) {
     "use strict";
     var Home = (function () {
         function Home(appState, dialogService, httpClient) {

@@ -14,6 +14,7 @@ define(["require", "exports"], function (require, exports) {
                 'X-API-VERSION': '2'
             };
             config.Http.AuthorizationHeader = true;
+            config.HasCharting = true;
         });
         aurelia.start()
             .then(function (a) {

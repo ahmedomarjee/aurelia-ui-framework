@@ -1,4 +1,4 @@
-define(["require", "exports", "./utils/ui-application", "./utils/ui-validation", "./utils/ui-event", "./utils/ui-formatters", "./utils/ui-application", "./utils/ui-model", "./inputs/ui-language", "./components/ui-dialog", "./utils/ui-tree-models", "./utils/ui-http-service", "./utils/ui-validation", "./utils/ui-utils", 'fetch', 'lodash', 'moment', 'numeral', './libs/marked', './libs/phonelib', './data/fileTypes', './data/countries', './data/currencies'], function (require, exports, ui_application_1, ui_validation_1, ui_event_1, ui_formatters_1, ui_application_2, ui_model_1, ui_language_1, ui_dialog_1, ui_tree_models_1, ui_http_service_1, ui_validation_2, ui_utils_1) {
+define(["require", "exports", "./components/ui-chart", "./utils/ui-application", "./utils/ui-validation", "./components/ui-chart", "./utils/ui-event", "./utils/ui-formatters", "./utils/ui-application", "./utils/ui-model", "./inputs/ui-language", "./components/ui-dialog", "./utils/ui-tree-models", "./utils/ui-http-service", "./utils/ui-validation", "./utils/ui-utils", 'lodash', 'moment', 'numeral', './libs/marked', './libs/phonelib', './data/fileTypes', './data/countries', './data/currencies'], function (require, exports, ui_chart_1, ui_application_1, ui_validation_1, ui_chart_2, ui_event_1, ui_formatters_1, ui_application_2, ui_model_1, ui_language_1, ui_dialog_1, ui_tree_models_1, ui_http_service_1, ui_validation_2, ui_utils_1) {
     "use strict";
     function configure(aurelia, configCallback) {
         aurelia.container.registerHandler('ui-validator', function (container) { return container.get(ui_validation_1.UIValidationRenderer); });
@@ -32,9 +32,14 @@ define(["require", "exports", "./utils/ui-application", "./utils/ui-validation",
         aurelia.globalResources('./utils/ui-converters');
         if (configCallback !== undefined && typeof configCallback === 'function') {
             configCallback(ui_application_1.UIApplication.defaults);
+            if (ui_application_1.UIApplication.defaults.HasCharting) {
+                aurelia.globalResources('./components/ui-chart');
+                ui_chart_1.UIChart.init();
+            }
         }
     }
     exports.configure = configure;
+    exports.UIChart = ui_chart_2.UIChart;
     exports.UIEvent = ui_event_1.UIEvent;
     exports.UIFormat = ui_formatters_1.UIFormat;
     exports.UIApplication = ui_application_2.UIApplication;

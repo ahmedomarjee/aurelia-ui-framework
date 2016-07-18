@@ -1,0 +1,121 @@
+<template>
+    <ui-content scroll padded>
+        <h2>Viewport</h2>
+        <pre class="ui-markdown">
+        <xmp class="lang-html html hljs xml">
+<ui-viewport logout.trigger="logout()" router.bind="router" show-taskbar="true" show-menu="true"
+  subtitle="UI Framework for Business Apps" copyright="Copyright &copy; 2015-2016, Adarsh Pastakia">
+
+  <!-- Header Options -->
+  <ui-button icon="fi-material-painter-palette" click.trigger="toggleTheme()"></ui-button>
+  <ui-button icon="fi-material-swap-horizontal-orientation-arrows" click.trigger="toggleDir()"></ui-button>
+
+  <div slot="quick-links">
+    <ui-button icon="fi-material-painter-palette" click.trigger="toggleTheme()"></ui-button>
+    <ui-button icon="fi-material-swap-horizontal-orientation-arrows" click.trigger="toggleDir()"></ui-button>
+  </div>
+</ui-viewport>
+        </xmp>
+        </pre>
+        <hr/>
+        <h2>Page</h2>
+        <pre class="ui-markdown">
+        <xmp class="lang-html html hljs xml">
+<ui-page page-title="Example Page">
+  <ui-section row>
+    <ui-sidebar collapsible>
+      <ui-menu router.bind="childRouter"></ui-menu>
+    </ui-sidebar>
+    <ui-content scroll padded>
+      <router-view></router-view>
+    </ui-content>
+  </ui-section>
+</ui-page>
+        </xmp>
+        <xmp class="lang-html html hljs xml">
+<ui-page page-title="Example Page">
+  <ui-section column>
+    <ui-statsbar></ui-statsbar>
+    <ui-toolbar></ui-toolbar>
+    <ui-content scroll padded>
+      <!-- Content html -->
+    </ui-content>
+  </ui-section>
+</ui-page>
+        </xmp>
+        </pre>
+        <hr/>
+        <h2>Toolbar</h2>
+        <div ref="exToolbar">
+            <ui-toolbar>
+                <ui-column fill>Toolbar text</ui-column>
+                <ui-button-group square>
+                    <ui-button icon="fi-ui-edit-thick" info></ui-button>
+                    <ui-button icon="fi-ui-delete-black" danger></ui-button>
+                </ui-button-group>
+                <ui-button-group square>
+                    <ui-button icon="fi-vaadin-add-square"></ui-button>
+                    <ui-button icon="fi-vaadin-minus-button"></ui-button>
+                </ui-button-group>
+                <ui-divider></ui-divider>
+                <ui-button primary label="Alert" click.trigger="showAlert()"></ui-button>
+                <ui-button warning label="Confirm" click.trigger="showConfirm()"></ui-button>
+            </ui-toolbar>
+        </div>
+        <pre class="ui-markdown">
+          <xmp class="lang-html html hljs xml">
+<ui-toolbar>
+    <ui-column fill>Toolbar text</ui-column>
+    <ui-button-group square>
+        <ui-button icon="fi-ui-edit-thick" info></ui-button>
+        <ui-button icon="fi-ui-delete-black" danger></ui-button>
+    </ui-button-group>
+    <ui-button-group square>
+        <ui-button icon="fi-vaadin-add-square"></ui-button>
+        <ui-button icon="fi-vaadin-minus-button"></ui-button>
+    </ui-button-group>
+    <ui-divider></ui-divider>
+    <ui-button primary label="Alert" click.trigger="showAlert()"></ui-button>
+    <ui-button warning label="Confirm" click.trigger="showConfirm()"></ui-button>
+</ui-toolbar>
+          </xmp>
+        </pre>
+        <hr/>
+        <h2>StatsBar</h2>
+        <div>
+            <ui-statsbar>
+                <ui-stat value="24" icon="fi-vaadin-clock">Hours</ui-stat>
+                <ui-stat value="365" icon="fi-vaadin-calendar-and-clock">Days</ui-stat>
+                <ui-stat value="42" icon="fi-vaadin-chat">Answer</ui-stat>
+            </ui-statsbar>
+        </div>
+        <pre class="ui-markdown">
+          <xmp class="lang-html html hljs xml">
+<ui-statsbar>
+    <ui-stat value="24" icon="fi-vaadin-clock">Hours</ui-stat>
+    <ui-stat value="365" icon="fi-vaadin-calendar-and-clock">Days</ui-stat>
+    <ui-stat value="42" icon="fi-vaadin-chat">Answer</ui-stat>
+</ui-statsbar>
+          </xmp>
+        </pre>
+        <hr/>
+        <h2>Grid Layout</h2>
+        <pre class="ui-markdown">
+          <xmp class="lang-html html hljs xml">
+<ui-row class="ui-border-b">
+  <ui-column padded class="ui-bg-info" width="120px">Fixed Width</ui-column>
+  <ui-column padded class="ui-bg-success" auto>Auto Filled Column</ui-column>
+  <ui-column padded class="ui-bg-danger" fill>Stretched Column</ui-column>
+  <ui-column padded class="ui-bg-warning" full>Full Width Column Wrapped</ui-column>
+</ui-row>
+
+<ui-row class="ui-border-b">
+  <ui-column padded class="ui-bg-info" size="md-3">md-3</ui-column>
+  <ui-column padded class="ui-bg-success" size="md-3">md-3</ui-column>
+  <ui-column padded class="ui-bg-danger" size="md-3">md-3</ui-column>
+  <ui-column padded class="ui-bg-warning" size="md-3">md-3</ui-column>
+</ui-row>
+          </xmp>
+        </pre>
+    </ui-content>
+</template>

@@ -1,0 +1,38 @@
+<template>
+  <ui-page page-title="Charts Example">
+    <ui-content scroll padded>
+      <ui-row stretch>
+        <ui-column fill width="400px" flex>
+          <ui-bar theme="spectrum" export column stretch legend="bottom" chart-title="Column Chart" chart-data.bind="barData" chart-graphs.bind="barGraphs" x-axis="date">
+            <ui-button primary click.trigger="buildChart1()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+        <ui-column width="400px">
+          <ui-bar height="200" chart-title="Bar Chart" chart-data.bind="barData2" chart-graphs.bind="barGraphs2" x-axis="region">
+            <ui-button primary click.trigger="buildChart2()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+          <ui-bar height="200" chart-title="Bar Chart" chart-data.bind="barData3" chart-graphs.bind="barGraphs3" x-axis="region">
+            <ui-button primary click.trigger="buildChart3()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+      </ui-row>
+      <ui-row>
+        <ui-column fill>
+          <ui-pie legend height="300" chart-title="Pie Chart" chart-data.bind="pieData1" title-property="region" value-property="amount">
+            <ui-button primary click.trigger="buildPie1()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+        <ui-column fill>
+          <ui-pie height="300" export group donut theme="green" chart-title="Pie Chart" chart-data.bind="pieData2" title-property="region" value-property="amount">
+            <ui-button primary click.trigger="buildPie2()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+        <ui-column fill>
+          <ui-pie height="300" chart-title="Pie Chart" chart-data.bind="pieData3" title-property="region" value-property="amount" color-property="color">
+            <ui-button primary click.trigger="buildPie3()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+      </ui-row>
+    </ui-content>
+  </ui-page>
+</template>

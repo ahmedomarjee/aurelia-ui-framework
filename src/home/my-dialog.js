@@ -23,6 +23,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index"], fun
             this.modal = false;
             this.icon = 'fi-vaadin-exclamation-circle';
             this.title = "Dialog " + MyDialog.i++;
+            this.countries = _.groupBy(window.countries, 'continent');
         }
         MyDialog.prototype.canActivate = function (model) {
             var _this = this;

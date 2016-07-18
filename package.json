@@ -27,6 +27,7 @@
   "jspm": {
     "registry": "jspm",
     "dependencies": {
+      "amcharts/amcharts3": "github:amcharts/amcharts3@^3.20.9",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0-beta.1.1.2",
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@^1.0.0-beta.1.1.1",
       "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.0-beta.1.1.1",
@@ -37,6 +38,8 @@
       "aurelia-templating-resources": "npm:aurelia-templating-resources@^1.0.0-beta.1.1.1",
       "aurelia-validatejs": "npm:aurelia-validatejs@^0.5.0",
       "aurelia-validation": "npm:aurelia-validation@^0.9.0",
+      "css": "github:systemjs/plugin-css@^0.1.23",
+      "fabric": "npm:fabric@^1.6.3",
       "fetch": "github:github/fetch@^0.11.0",
       "lodash": "npm:lodash@^4.5.1",
       "moment": "npm:moment@^2.11.2",

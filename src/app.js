@@ -44,6 +44,14 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
                     auth: false,
                     name: 'validate'
                 }, {
+                    route: 'charts',
+                    moduleId: './home/chart',
+                    settings: { icon: 'fi-vaadin-chart' },
+                    title: 'Chart Example',
+                    nav: true,
+                    auth: false,
+                    name: 'charts'
+                }, {
                     route: 'colors',
                     moduleId: './home/colors',
                     settings: { icon: 'fi-material-painter-palette' },
@@ -59,14 +67,6 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
                     nav: true,
                     auth: true,
                     name: 'readme'
-                }, {
-                    route: 'todo',
-                    moduleId: './home/todo',
-                    settings: { icon: 'fi-vaadin-tasks' },
-                    title: 'ToDo',
-                    nav: true,
-                    auth: false,
-                    name: 'todo'
                 }, {
                     route: 'core',
                     moduleId: './core/view',

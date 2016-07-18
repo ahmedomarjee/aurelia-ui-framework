@@ -75,6 +75,8 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
                 this.element.classList.add('ui-align-middle');
             if (this.element.hasAttribute('stretch'))
                 this.element.classList.add('ui-align-stretch');
+            if (this.element.hasAttribute('flex'))
+                this.element.classList.add('ui-column-row');
         };
         __decorate([
             aurelia_framework_1.bindable(), 

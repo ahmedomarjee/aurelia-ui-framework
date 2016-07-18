@@ -1,8 +1,6 @@
 import {autoinject} from "aurelia-framework";
 import {_, moment, UIApplication, UITreeOptions, UIDialogService, UIHttpService, UIUtils} from "../../framework/index";
 import {MyDialog} from "./my-dialog";
-import {HttpClient} from "aurelia-fetch-client";
-import "fetch";
 
 @autoinject()
 export class Home {

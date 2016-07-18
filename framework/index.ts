@@ -4,7 +4,6 @@
  *    @company    HMC
  *    @copyright 2015-2016, Adarsh Pastakia
  **/
-import 'fetch';
 import 'lodash';
 import 'moment';
 import 'numeral';
@@ -14,6 +13,7 @@ import './data/fileTypes';
 import './data/countries';
 import './data/currencies';
 import {FrameworkConfiguration} from "aurelia-framework";
+import {UIChart} from "./components/ui-chart";
 import {UIApplication} from "./utils/ui-application";
 import {UIValidationRenderer} from "./utils/ui-validation";
 
@@ -58,9 +58,15 @@ export function configure(aurelia: FrameworkConfiguration, configCallback) {
 
 	if (configCallback !== undefined && typeof configCallback === 'function') {
 		configCallback(UIApplication.defaults);
+
+		if (UIApplication.defaults.HasCharting) {
+			aurelia.globalResources('./components/ui-chart');
+			UIChart.init();
+		}
 	}
 }
 
+export {UIChart} from "./components/ui-chart";
 export {UIEvent} from "./utils/ui-event";
 export {UIFormat} from "./utils/ui-formatters";
 export {UIApplication, AuthInterceptor} from "./utils/ui-application";

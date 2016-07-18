@@ -1,0 +1,37 @@
+<template>
+    <ui-content scroll padded>
+        <h2>Panel</h2>
+        <ui-row>
+            <ui-column size="md-6">
+                <ui-panel>
+                    <ui-body padded>
+                        <h3 class="ui-pad-all">A Simple Panel</h3>
+                    </ui-body>
+                    <ui-toolbar>
+                        <ui-button label="Submit"></ui-button>
+                    </ui-toolbar>
+                </ui-panel>
+            </ui-column>
+            <ui-column size="md-6">
+                <ui-panel>
+                    <ui-header collapse="true" close="true" expand="true" secondary>My Panel</ui-header>
+                    <ui-body>
+                        <h3 class="ui-pad-all">A Closable Panel</h3>
+                    </ui-body>
+                </ui-panel>
+            </ui-column>
+        </ui-row>
+        <hr/>
+        <pre class="ui-markdown">
+          <xmp class="lang-html html hljs xml">
+<ui-panel>
+  <ui-header collapse="true" close="true" expand="true" primary>My Panel</ui-header>
+  <ui-body>
+    <!-- HTML Content -->
+  </ui-body>
+  <ui-toolbar></ui-toolbar>
+</ui-panel>
+          </xmp>
+        </pre>
+    </ui-content>
+</template>

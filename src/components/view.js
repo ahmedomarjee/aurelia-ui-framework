@@ -15,6 +15,14 @@ define(["require", "exports"], function (require, exports) {
                     auth: false,
                     name: 'readme'
                 }, {
+                    route: 'home',
+                    moduleId: './home',
+                    settings: { icon: 'fi-vaadin-flask' },
+                    title: 'Examples',
+                    nav: true,
+                    auth: false,
+                    name: 'home'
+                }, {
                     route: '', redirect: 'readme'
                 }]);
         };
