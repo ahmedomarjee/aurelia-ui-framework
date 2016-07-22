@@ -26,7 +26,7 @@ export class UIApplication {
 			Headers: {},
 			AuthorizationHeader: false
 		},
-		HasCharting: false
+		UseCharts: false
 	};
 
 	private __logger;

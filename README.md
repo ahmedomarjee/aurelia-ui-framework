@@ -60,6 +60,9 @@ function configure(aurelia) {
            };
            // HTTPClient Send Basic Authorization Header
            config.Http.AuthorizationHeader = false;
+
+           // Enable AmCharts
+           config.UseCharts = true;
        });
 ```
 

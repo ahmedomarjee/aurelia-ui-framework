@@ -65,14 +65,22 @@ export class Home {
 		selectionLevel: 0
 	});
 
-	lang = 'EN';
-	langs = ['EN', 'ES', 'FR', 'DE']
+	lang = 'en';
+	langs = ['en', 'es', 'fr', 'de']
 	content = {
-		EN: 'Do you speak english?',
-		ES: 'Hablas español?',
-		FR: 'Parlez-vous français?',
-		DE: 'Sprechen sie deutsch?'
+		en: 'Do you speak english?',
+		es: 'Hablas español?',
+		fr: 'Parlez-vous français?',
+		de: 'Sprechen sie deutsch?'
 	}
+
+	dgMenu = [
+		{ id: 'view', text: "View Details", icon: 'fi-ui-preview-light' },
+		{ id: 'edit', text: "Edit", icon: 'fi-ui-edit-light' },
+		{ id: 'delete', text: "Delete", icon: 'fi-ui-delete-white' },
+		'-',
+		{ id: 'export', text: "Export Details", icon: 'fi-vaadin-download-symbol' }
+	]
 	data = [
 		{
 			id: 1,

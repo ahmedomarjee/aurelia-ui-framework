@@ -44,49 +44,87 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
         return UIChart;
     }());
     exports.UIChart = UIChart;
+    var UIChartBase = (function (_super) {
+        __extends(UIChartBase, _super);
+        function UIChartBase() {
+            _super.apply(this, arguments);
+            this.chartTitle = '';
+            this.chartOptions = {};
+            this.width = 600;
+            this.height = 400;
+        }
+        UIChartBase.prototype.chartDataChanged = function (newValue) {
+            if (ui_utils_1._.isEmpty(newValue))
+                return;
+            this.__buildChart();
+        };
+        UIChartBase.prototype.__buildChart = function () {
+            this.__chart = AmCharts.makeChart(this.__canvas, ui_utils_1._.cloneDeep(this.chartOptions));
+        };
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', String)
+        ], UIChartBase.prototype, "chartTitle", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', AmCharts.AmChart)
+        ], UIChartBase.prototype, "chartOptions", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', Number)
+        ], UIChartBase.prototype, "width", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(), 
+            __metadata('design:type', Number)
+        ], UIChartBase.prototype, "height", void 0);
+        UIChartBase = __decorate([
+            aurelia_framework_1.customElement('ui-chart'), 
+            __metadata('design:paramtypes', [])
+        ], UIChartBase);
+        return UIChartBase;
+    }(UIChart));
+    exports.UIChartBase = UIChartBase;
     var UIBar = (function (_super) {
         __extends(UIBar, _super);
         function UIBar(element) {
             _super.call(this);
             this.chartTitle = '';
             this.chartData = [];
-            this.chartGraphs = [];
+            this.chartOptions = {};
             this.width = 600;
             this.height = 400;
-            this.xAxis = '';
-            this.yAxis = '';
-            this.series = '';
             this.legend = 'right';
-            this.theme = 'default';
             this.isColumn = false;
             this.canExport = false;
             this.showLegend = false;
+            this.__graphs = [];
+            this.__options = {};
             this.isColumn = element.hasAttribute('column');
             this.canExport = element.hasAttribute('export');
             this.showLegend = element.hasAttribute('legend');
             if (element.hasAttribute('stretch'))
                 element.classList.add('ui-stretch');
         }
-        UIBar.prototype.attached = function () {
-        };
+        ;
         UIBar.prototype.chartDataChanged = function (newValue) {
             if (ui_utils_1._.isEmpty(newValue))
                 return;
             this.__buildChart();
         };
-        UIBar.prototype.__buildChart = function () {
-            var ds = {};
-            ds.type = "serial";
-            ds.theme = this.theme;
-            ds.precision = .5;
-            ds.usePrefixes = true;
-            ds.marginRight = this.canExport ? 70 : 30;
-            ds.startDuration = 2;
-            ds.rotate = !this.isColumn;
-            ds.chartCursor = {
+        UIBar.prototype.bind = function () {
+            var _this = this;
+            this.chartTitle = this.chartOptions.chartTitle || this.chartTitle;
+            this.__options.type = "serial";
+            this.__options.theme = this.chartOptions.theme || 'default';
+            this.__options.precision = 2;
+            this.__options.usePrefixes = true;
+            this.__options.marginRight = this.canExport ? 70 : 30;
+            this.__options.startDuration = 1;
+            this.__options.rotate = !this.isColumn;
+            this.__options.chartCursor = {
                 cursorPosition: "middle"
             };
-            ds.export = {
+            this.__options.export = {
                 enabled: this.canExport,
                 libs: { autoLoad: false },
                 menu: [{
@@ -94,23 +132,43 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
                         menu: ["PNG", "JPG", "CSV", "JSON"]
                     }]
             };
-            ds.balloon = {
+            this.__options.valueAxes = [{
+                    title: this.chartOptions.valueAxisTitle || '',
+                    unit: this.chartOptions.valueAxisUnit,
+                    unitPosition: 'left'
+                }];
+            this.__options.balloon = {
                 fillAlpha: .95
             };
             if (this.showLegend) {
-                ds.legend = {
+                this.__options.legend = {
                     horizontalGap: 10,
                     maxColumns: this.legend == 'bottom' ? 10 : 1,
-                    position: this.legend,
+                    position: this.legend || 'right',
                     useGraphSettings: true,
                     markerSize: 10
                 };
             }
-            ds.categoryField = this.xAxis;
-            ds.categoryAxis = {};
-            ds.graphs = ui_utils_1._.cloneDeep(this.chartGraphs);
-            ds.dataProvider = ui_utils_1._.cloneDeep(this.chartData);
-            this.__chart = AmCharts.makeChart(this.__canvas, ds);
+            this.__options.categoryField = this.chartOptions.categoryField;
+            this.__options.categoryAxis = {
+                title: this.chartOptions.categoryAxisTitle || ''
+            };
+            this.__graphs = [];
+            ui_utils_1._.forEach(this.chartOptions.series, function (v) {
+                _this.__graphs.push(Object.assign({}, {
+                    type: "column",
+                    balloonText: "<div style=\"font-size: 120%;\">[[title]]:</div><div style=\"font-size: 150%;\">" + (v['unitPrefix'] || '') + "[[value]]</div>",
+                    columnWidth: .85,
+                    fillAlphas: 0.8,
+                    lineAlpha: 0.2,
+                    fillColorsField: 'color'
+                }, v));
+            });
+        };
+        UIBar.prototype.__buildChart = function () {
+            this.__options.graphs = ui_utils_1._.cloneDeep(this.__graphs);
+            this.__options.dataProvider = ui_utils_1._.cloneDeep(this.chartData);
+            this.__chart = AmCharts.makeChart(this.__canvas, this.__options);
         };
         __decorate([
             aurelia_framework_1.bindable(), 
@@ -122,8 +180,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
         ], UIBar.prototype, "chartData", void 0);
         __decorate([
             aurelia_framework_1.bindable(), 
-            __metadata('design:type', Array)
-        ], UIBar.prototype, "chartGraphs", void 0);
+            __metadata('design:type', Object)
+        ], UIBar.prototype, "chartOptions", void 0);
         __decorate([
             aurelia_framework_1.bindable(), 
             __metadata('design:type', Number)
@@ -135,23 +193,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
         __decorate([
             aurelia_framework_1.bindable(), 
             __metadata('design:type', String)
-        ], UIBar.prototype, "xAxis", void 0);
-        __decorate([
-            aurelia_framework_1.bindable(), 
-            __metadata('design:type', String)
-        ], UIBar.prototype, "yAxis", void 0);
-        __decorate([
-            aurelia_framework_1.bindable(), 
-            __metadata('design:type', String)
-        ], UIBar.prototype, "series", void 0);
-        __decorate([
-            aurelia_framework_1.bindable(), 
-            __metadata('design:type', String)
         ], UIBar.prototype, "legend", void 0);
-        __decorate([
-            aurelia_framework_1.bindable(), 
-            __metadata('design:type', String)
-        ], UIBar.prototype, "theme", void 0);
         UIBar = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-bar'),
@@ -171,67 +213,66 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
             this.height = 400;
             this.valueProperty = '';
             this.titleProperty = '';
-            this.innerRadius = '0%';
             this.legend = 'right';
+            this.donut = '0%';
             this.theme = 'pie';
             this.colorProperty = '';
+            this.showDonut = false;
             this.canExport = false;
             this.groupExtras = false;
-            this.innerRadius = element.hasAttribute('donut') ? '30%' : '0%';
+            this.__options = {};
+            this.showDonut = element.hasAttribute('donut');
             this.canExport = element.hasAttribute('export');
             this.groupExtras = element.hasAttribute('group');
             if (element.hasAttribute('stretch'))
                 element.classList.add('ui-stretch');
         }
-        UIPie.prototype.attached = function () {
-        };
         UIPie.prototype.chartDataChanged = function (newValue) {
             if (ui_utils_1._.isEmpty(newValue))
                 return;
             this.__buildChart();
         };
         UIPie.prototype.__buildChart = function () {
-            var ds = {};
-            ds.type = "pie";
+            this.__options.type = "pie";
             switch (this.theme) {
                 case 'red':
-                    ds.colors = UIChart.CHART_RED;
+                    this.__options.colors = UIChart.CHART_RED;
                     break;
                 case 'pink':
-                    ds.colors = UIChart.CHART_PINK;
+                    this.__options.colors = UIChart.CHART_PINK;
                     break;
                 case 'blue':
-                    ds.colors = UIChart.CHART_BLUE;
+                    this.__options.colors = UIChart.CHART_BLUE;
                     break;
                 case 'green':
-                    ds.colors = UIChart.CHART_GREEN;
+                    this.__options.colors = UIChart.CHART_GREEN;
                     break;
                 case 'orange':
-                    ds.colors = UIChart.CHART_ORANGE;
+                    this.__options.colors = UIChart.CHART_ORANGE;
                     break;
                 case 'violet':
-                    ds.colors = UIChart.CHART_VIOLET;
+                    this.__options.colors = UIChart.CHART_VIOLET;
                     break;
                 case 'spectrum':
-                    ds.colors = UIChart.CHART_SPECTRUM;
+                    this.__options.colors = UIChart.CHART_SPECTRUM;
                     break;
                 default:
-                    ds.colors = UIChart.CHART_PIE;
+                    this.__options.colors = UIChart.CHART_PIE;
                     break;
             }
-            ds.addClassNames = true;
-            ds.precision = 2;
-            ds.groupPercent = this.groupExtras ? 10 : 0;
-            ds.radius = "40%";
-            ds.startRadius = "90%";
-            ds.startEffect = "easeOutSine";
-            ds.labelsEnabled = false;
-            ds.gradientRatio = [0, 0.2];
-            ds.startDuration = .5;
-            ds.usePrefixes = true;
-            ds.balloonText = "[[title]]:<br/><b>[[value]]</b>";
-            ds.innerRadius = this.innerRadius;
-            ds.export = {
+            this.__options.addClassNames = true;
+            this.__options.precision = 2;
+            this.__options.groupPercent = this.groupExtras ? 10 : 0;
+            this.__options.radius = "40%";
+            this.__options.startRadius = "90%";
+            this.__options.startEffect = "easeOutSine";
+            this.__options.labelsEnabled = false;
+            this.__options.gradientRatio = [0, 0.2];
+            this.__options.startDuration = .5;
+            this.__options.usePrefixes = true;
+            this.__options.balloonText = "[[title]]:<br/><b>[[value]]</b>";
+            this.__options.innerRadius = this.donut || '30%';
+            this.__options.export = {
                 enabled: this.canExport,
                 libs: { autoLoad: false },
                 menu: [{
@@ -240,21 +281,21 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
                     }]
             };
             if (this.colorProperty)
-                ds.colorField = this.colorProperty;
-            ds.balloon = {
+                this.__options.colorField = this.colorProperty;
+            this.__options.balloon = {
                 fillAlpha: .95
             };
-            ds.legend = {
+            this.__options.legend = {
                 horizontalGap: 10,
                 valueText: '[[percents]]%',
                 maxColumns: this.legend == 'bottom' ? 10 : 1,
                 position: this.legend || 'right',
                 markerSize: 10
             };
-            ds.valueField = this.valueProperty;
-            ds.titleField = this.titleProperty;
-            ds.dataProvider = ui_utils_1._.cloneDeep(this.chartData);
-            this.__chart = AmCharts.makeChart(this.__canvas, ds);
+            this.__options.valueField = this.valueProperty;
+            this.__options.titleField = this.titleProperty;
+            this.__options.dataProvider = ui_utils_1._.cloneDeep(this.chartData);
+            this.__chart = AmCharts.makeChart(this.__canvas, this.__options);
         };
         __decorate([
             aurelia_framework_1.bindable(), 
@@ -283,11 +324,11 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
         __decorate([
             aurelia_framework_1.bindable(), 
             __metadata('design:type', String)
-        ], UIPie.prototype, "innerRadius", void 0);
+        ], UIPie.prototype, "legend", void 0);
         __decorate([
             aurelia_framework_1.bindable(), 
             __metadata('design:type', String)
-        ], UIPie.prototype, "legend", void 0);
+        ], UIPie.prototype, "donut", void 0);
         __decorate([
             aurelia_framework_1.bindable(), 
             __metadata('design:type', String)

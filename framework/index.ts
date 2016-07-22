@@ -59,7 +59,7 @@ export function configure(aurelia: FrameworkConfiguration, configCallback) {
 	if (configCallback !== undefined && typeof configCallback === 'function') {
 		configCallback(UIApplication.defaults);
 
-		if (UIApplication.defaults.HasCharting) {
+		if (UIApplication.defaults.UseCharts) {
 			aurelia.globalResources('./components/ui-chart');
 			UIChart.init();
 		}

@@ -53,8 +53,8 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "aur
             this.longitude = 0;
             this.country = 'AE';
             this.languages = new Map();
-            this.languages.set('EN', new HotelLanguage());
-            this.languages.set('ES', new HotelLanguage());
+            this.languages.set('en', new HotelLanguage());
+            this.languages.set('es', new HotelLanguage());
         }
         __decorate([
             aurelia_validatejs_1.required, 

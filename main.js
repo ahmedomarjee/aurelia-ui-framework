@@ -3,6 +3,7 @@ define(["require", "exports"], function (require, exports) {
     function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
+            .developmentLogging()
             .plugin('aurelia-validation')
             .plugin('aurelia-validatejs')
             .feature('./framework', function (config) {
@@ -14,7 +15,7 @@ define(["require", "exports"], function (require, exports) {
                 'X-API-VERSION': '2'
             };
             config.Http.AuthorizationHeader = true;
-            config.HasCharting = true;
+            config.UseCharts = true;
         });
         aurelia.start()
             .then(function (a) {

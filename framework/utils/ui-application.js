@@ -188,7 +188,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "./ui-util
                 Headers: {},
                 AuthorizationHeader: false
             },
-            HasCharting: false
+            UseCharts: false
         };
         UIApplication = __decorate([
             aurelia_framework_1.singleton(),

@@ -32,7 +32,7 @@ define(["require", "exports", "./components/ui-chart", "./utils/ui-application",
         aurelia.globalResources('./utils/ui-converters');
         if (configCallback !== undefined && typeof configCallback === 'function') {
             configCallback(ui_application_1.UIApplication.defaults);
-            if (ui_application_1.UIApplication.defaults.HasCharting) {
+            if (ui_application_1.UIApplication.defaults.UseCharts) {
                 aurelia.globalResources('./components/ui-chart');
                 ui_chart_1.UIChart.init();
             }

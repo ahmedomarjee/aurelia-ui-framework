@@ -3,7 +3,7 @@ import {Aurelia} from "aurelia-framework";
 export function configure(aurelia: Aurelia) {
 	aurelia.use
 		.standardConfiguration()
-		// .developmentLogging()
+		.developmentLogging()
 		.plugin('aurelia-validation')
 		.plugin('aurelia-validatejs')
 		.feature('./framework', function(config) {
@@ -23,7 +23,7 @@ export function configure(aurelia: Aurelia) {
 			// HTTPClient Send Basic Authorization Header
 			config.Http.AuthorizationHeader = true;
 
-			config.HasCharting = true;
+			config.UseCharts = true;
 		});
 
 

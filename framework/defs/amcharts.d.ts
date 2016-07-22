@@ -2161,6 +2161,7 @@ If you do not set properties such as dashLength, lineAlpha, lineColor, etc - val
             chart.addGraph(graph);
     */
     class AmGraph {
+		unitPrefix: string
         /** Name of the alpha field in your dataProvider. */
         alphaField: string;
         /** Value balloon color. Will use graph or data item color if not set. */

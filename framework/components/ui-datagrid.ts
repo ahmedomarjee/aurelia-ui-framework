@@ -18,9 +18,13 @@ export class UIDataGrid {
 	private __id;
 	private __data;
 	private __table;
+	private __tableLocked;
 	private __columns;
+	private __columnsLocked;
+	private __columnsList;
 	private __ghost;
 	private __indicator;
+	private __focusRow = 2;
 	private __isProcessing = false;
 
 	private columns = [];
@@ -78,13 +82,16 @@ export class UIDataGrid {
 			cols.push(c['columnDef']);
 		});
 
-		this.columns = _.orderBy(cols, ['locked'], ['desc']);
+		this.columns = _.orderBy(cols, ['__locked'], ['desc']);
+
+		this.__columnsLocked = _.filter(cols, ['__locked', true]);
+		this.__columnsList = _.filter(cols, ['__locked', false]);
 
 		var w = 0;
-		_.forEach(this.columns, (c: any) => {
+		_.forEach(this.__columnsList, (c: any) => {
 			c.edge = w;
 			w += parseInt(c.width || 250);
-			return c.__locked;
+			// return c.__locked;
 		});
 		this.__table.width = w;
 
@@ -103,7 +110,7 @@ export class UIDataGrid {
 		return (locked && !(this.columns[index + 1] || { __locked: false }).__locked);
 	}
 
-	linkClicked($event, id, model) {
+	linkClicked($event, col, model) {
 		$event.preventDefault();
 		$event.cancelBubble = true;
 		$event.stopPropagation();
@@ -114,10 +121,43 @@ export class UIDataGrid {
 		try {
 			let target = getParentByClass($event.target, 'ui-button', 'dg-col') ||
 				getParentByClass($event.target, 'ui-link', 'dg-col');
-			UIEvent.fireEvent('linkclick', this.element, { dataId: id, target: target, model: model });
+			if (!col.__hasMenu) {
+				UIEvent.fireEvent('linkclick', this.element, { dataId: col.dataId, target: target, model: model });
+			}
+			if (col.__hasMenu) {
+				let menu = document.querySelector('.ui-floating.show');
+				if (menu) {
+					menu.classList.remove('show');
+					getParentByTag(menu, 'tr').classList.remove('focus');
+				}
+
+				// let el = <HTMLElement>target.parentElement.nextElementSibling;
+				// let sc = el.parentElement.offsetParent.offsetParent.offsetParent;
+				// if (sc.scrollTop + sc['offsetHeight'] < el.offsetHeight + el.offsetTop + 50) {
+				// 	// this.__reverse = true;
+				// 	el.style.bottom = el.offsetHeight + 'px';
+				// }
+				// else {
+				// 	// this.__reverse = false;
+				// 	el.style.bottom = "auto";
+				// }
+
+				target.parentElement.nextElementSibling.classList.add('show');
+				getParentByTag(target, 'tr').classList.add('focus');
+			}
 		}
 		catch (e) {
+			console.log(e);
 		}
+		return false;
+	}
+
+	menuClicked($event, col, model) {
+		$event.preventDefault();
+		$event.cancelBubble = true;
+		$event.stopPropagation();
+		getParentByTag($event.target, 'tr').classList.remove('focus');
+		UIEvent.fireEvent('linkclick', this.element, { dataId: $event.detail, target: $event.target, model: model });
 		return false;
 	}
 
@@ -257,6 +297,7 @@ export class UIDataGrid {
 		document.addEventListener('mouseup', this.__stop = e => this.resizeEnd(e));
 
 		this.__column = this.__table.querySelector(`colgroup col[data-index="${this.__index}"]`);
+		if (!this.__column) this.__column = this.__tableLocked.querySelector(`colgroup col[data-index="${this.__index}"]`);
 		this.__startX = ($event.x || $event.clientX);
 		this.__isResizing = true;
 		this.__diff = 0;
@@ -291,14 +332,14 @@ export class UIDataGrid {
 		this.__isResizing = false;
 
 		this.__column.width = column.width = (parseInt(this.__column.width) + this.__diff);
-		this.__table.width = parseInt(this.__table.width) + this.__diff;
+		if (!column.__locked) this.__table.width = parseInt(this.__table.width) + this.__diff;
 
-		var w = 0;
-		_.forEach(this.columns, (c: any) => {
-			c.edge = w;
-			w += parseInt(c.width || 250);
-			return c.__locked;
-		});
+		// var w = 0;
+		// _.forEach(this.columns, (c: any) => {
+		// 	c.edge = w;
+		// 	w += parseInt(c.width || 250);
+		// 	return c.__locked;
+		// });
 	}
 }
 
@@ -333,6 +374,8 @@ export class UIDataColumn {
 	buttonIcon: string = '';
 	@bindable
 	buttonTheme: string = '';
+	@bindable
+	buttonMenu: Array<any>;
 
 	@bindable
 	class: string = '';
@@ -352,6 +395,7 @@ export class UIDataColumn {
 	private __locked = false;
 	private __sortable = false;
 	private __resizeable = false;
+	public __hasMenu = false;
 
 	constructor(public element: Element) {
 		if (this.element.hasAttribute('center')) this.__align = 'center';
@@ -375,9 +419,12 @@ export class UIDataColumn {
 	}
 
 	bind() {
-		if (this.element.hasAttribute('view')) this.buttonIcon = 'fi-ui-view';
-		if (this.element.hasAttribute('edit')) this.buttonIcon = 'fi-ui-edit';
-		if (this.element.hasAttribute('delete')) this.buttonIcon = 'fi-ui-delete';
+		if (this.element.hasAttribute('view')) this.buttonIcon = this.buttonIcon || 'fi-ui-view';
+		if (this.element.hasAttribute('edit')) this.buttonIcon = this.buttonIcon || 'fi-ui-edit';
+		if (this.element.hasAttribute('delete')) this.buttonIcon = this.buttonIcon || 'fi-ui-delete';
+
+		this.__hasMenu = !!this.buttonMenu && this.buttonMenu.length > 0;
+		if (this.__hasMenu) this.buttonIcon = this.buttonIcon || 'fi-ui-overflow-menu-alt';
 
 		if (this.__button = !(isEmpty(this.buttonIcon) && isEmpty(this.buttonTitle) && !this.element.hasAttribute('button'))) this.__align = 'center';
 

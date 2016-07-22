@@ -280,13 +280,14 @@
 				<ui-panel>
 					<ui-header collapse="true" primary>My Panel</ui-header>
 					<ui-body scroll>
-						<ui-datagrid selectable rowselect.trigger="rowSelect($event)" auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
+						<ui-datagrid selectable auto-height rowselect.trigger="rowSelect($event)" auto-height data-list.bind="data" summary-row="true" default-sort="FName" linkclick.trigger="linkClicked($event)">
 							<ui-data-column locked center width="50" data-id="id">ID</ui-data-column>
 							<ui-data-column locked resizeable sortable link summary="Total" data-id="FName" display.call="formatName($event)">Name
 							</ui-data-column>
 							<ui-data-column locked data-id="view" view button-title="Preview" width="90" button.call="checkAge($event)"></ui-data-column>
 							<ui-data-column locked data-id="edit" edit></ui-data-column>
 							<ui-data-column locked data-id="delete" delete></ui-data-column>
+							<ui-data-column locked data-id="menu" button-menu.bind="dgMenu"></ui-data-column>
 							<ui-data-column date sortable data-id="SDate" format="DD MMM YYYY">Birthday</ui-data-column>
 							<ui-data-column data-id="SDate" from-now center></ui-data-column>
 							<ui-data-column data-id="Amount" currency symbol="$" summary="sum">Amount
@@ -333,6 +334,7 @@
 						<ui-data-column locked data-id="view" view button-title="Preview" width="90" button.call="checkAge($event)"></ui-data-column>
 						<ui-data-column locked data-id="edit" edit></ui-data-column>
 						<ui-data-column locked data-id="delete" delete></ui-data-column>
+						<ui-data-column locked data-id="menu" button-menu.bind="dgMenu"></ui-data-column>
 						<ui-data-column date sortable data-id="SDate" format="DD MMM YYYY">Birthday</ui-data-column>
 						<ui-data-column data-id="SDate" from-now center></ui-data-column>
 						<ui-data-column data-id="Amount" currency symbol="$" summary="sum">Amount

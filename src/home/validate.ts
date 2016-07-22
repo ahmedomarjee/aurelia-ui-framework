@@ -55,8 +55,8 @@ export class Hotel extends UIModel {
 		super();
 		this.languages = new Map<string, HotelLanguage>();
 
-		this.languages.set('EN', new HotelLanguage());
-		this.languages.set('ES', new HotelLanguage());
+		this.languages.set('en', new HotelLanguage());
+		this.languages.set('es', new HotelLanguage());
 	}
 }
 

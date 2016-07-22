@@ -8,6 +8,16 @@ declare module "aurelia-ui-framework" {
 	export var numeral: numeral.Numeral;
 }
 
+declare interface UIBarOptions {
+	chartTitle?: string;
+	valueAxisTitle?: string;
+	valueAxisUnit?: string;
+	categoryAxisTitle?: string;
+	categoryField: string;
+	theme?: string;
+	series: Array<AmCharts.AmGraph>;
+}
+
 /** CORE **/
 declare module "aurelia-ui-framework" {
 	// import {ValidationGroup} from "aurelia-validation";

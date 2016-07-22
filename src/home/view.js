@@ -57,14 +57,21 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
                 showCheckbox: true,
                 selectionLevel: 0
             });
-            this.lang = 'EN';
-            this.langs = ['EN', 'ES', 'FR', 'DE'];
+            this.lang = 'en';
+            this.langs = ['en', 'es', 'fr', 'de'];
             this.content = {
-                EN: 'Do you speak english?',
-                ES: 'Hablas español?',
-                FR: 'Parlez-vous français?',
-                DE: 'Sprechen sie deutsch?'
+                en: 'Do you speak english?',
+                es: 'Hablas español?',
+                fr: 'Parlez-vous français?',
+                de: 'Sprechen sie deutsch?'
             };
+            this.dgMenu = [
+                { id: 'view', text: "View Details", icon: 'fi-ui-preview-light' },
+                { id: 'edit', text: "Edit", icon: 'fi-ui-edit-light' },
+                { id: 'delete', text: "Delete", icon: 'fi-ui-delete-white' },
+                '-',
+                { id: 'export', text: "Export Details", icon: 'fi-vaadin-download-symbol' }
+            ];
             this.data = [
                 {
                     id: 1,

@@ -41,6 +41,9 @@ define(["require", "exports", "aurelia-framework", "aurelia-router", "../utils/u
             var menu = document.querySelector('.ui-floating.show');
             if (menu)
                 menu.classList.remove('show');
+            var focusRow = document.querySelector('.ui-datagrid-row.focus');
+            if (focusRow)
+                focusRow.classList.remove('focus');
             return true;
         };
         UIViewport.prototype.logout = function () {
