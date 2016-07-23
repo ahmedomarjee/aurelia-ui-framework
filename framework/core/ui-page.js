@@ -81,7 +81,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         UISidebar.prototype.bind = function () {
             this.collapsible = this.element.hasAttribute('collapsible');
             if (!this.collapsible && this.element.hasAttribute('scroll'))
-                this.element.classList.add('ui-scroll');
+                this.__content.classList.add('ui-scroll');
         };
         UISidebar.prototype.attached = function () {
             var _this = this;
@@ -106,7 +106,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         };
         UISidebar.prototype.showOverlay = function () {
             if (this.element.classList.contains('collapse'))
-                this.element.classList.add('overlay');
+                this.element.classList.toggle('overlay');
         };
         __decorate([
             aurelia_framework_1.bindable(), 

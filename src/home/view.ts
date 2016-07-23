@@ -60,9 +60,14 @@ export class Home {
 	__tree;
 	checked;
 	treeModel;
+	treeSelected = 'UAE';
 	treeOpts = new UITreeOptions({
 		showCheckbox: true,
 		selectionLevel: 0
+	});
+	treeOpts2 = new UITreeOptions({
+		showCheckbox: false,
+		selectionLevel: 1
 	});
 
 	lang = 'en';

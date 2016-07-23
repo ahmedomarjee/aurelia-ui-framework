@@ -53,9 +53,14 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
                 { id: 2, name: 'Printer Paper' }
             ];
             this.supplied = '';
+            this.treeSelected = 'UAE';
             this.treeOpts = new index_1.UITreeOptions({
                 showCheckbox: true,
                 selectionLevel: 0
+            });
+            this.treeOpts2 = new index_1.UITreeOptions({
+                showCheckbox: false,
+                selectionLevel: 1
             });
             this.lang = 'en';
             this.langs = ['en', 'es', 'fr', 'de'];

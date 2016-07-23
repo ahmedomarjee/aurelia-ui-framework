@@ -345,11 +345,16 @@
 				</ui-tab>
 				<ui-tab label="Tree" flex>
 					<ui-section row>
-						<ui-sidebar>
+						<ui-sidebar scroll>
 							<ui-tree checked.trigger="checked = $event.detail" model.bind="treeModel" options.bind="treeOpts" view-model.ref="__tree"></ui-tree>
 						</ui-sidebar>
 						<ui-content scroll padded>
 							<h3>Tree View</h3>
+							<div>
+								<h3>Single Select</h3>
+
+								<p>${treeSelected}</p>
+							</div>
 							<div>
 								<h3>Checked</h3>
 
@@ -361,6 +366,10 @@
 								<p repeat.for="n of checked.partial">${n}</p>
 							</div>
 						</ui-content>
+						<ui-sidebar scroll>
+							<ui-tree value.bind="treeSelected" model.bind="treeModel" options.bind="treeOpts2" view-model.ref="__tree2"></ui-tree>
+						</ui-sidebar>
+
 					</ui-section>
 				</ui-tab>
 			</ui-tab-panel>

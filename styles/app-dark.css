@@ -3414,12 +3414,23 @@ hr {
   position: relative;
   color: #fcfcfa;
   background-color: rgba(77, 77, 73, 0.5);
+  overflow: hidden;
   -webkit-flex: 0 0 auto;
   flex: 0 0 auto;
   -moz-transition: width 0.5s;
   -o-transition: width 0.5s;
   -webkit-transition: width 0.5s;
   transition: width 0.5s;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-justify-content: flex-start;
+  -webkit-flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 .ui-sidebar:first-child {
   -webkit-border-end: 1px solid #636360;
@@ -3445,18 +3456,19 @@ hr {
   background: #96c5dd;
 }
 .ui-sidebar .ui-sidebar-content {
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  -webkit-flex: 1 1 0;
+  flex: 1 1 0;
 }
 .ui-sidebar.collapse {
   width: 2em !important;
+  overflow: visible;
 }
 .ui-sidebar.collapse .ui-sidebar-content {
   position: absolute;
   top: 0;
   left: -20em;
   width: 20em;
+  bottom: 0;
   z-index: 500;
   background-color: #4d4d49;
   -moz-transition: left 0.5s, right 0.5s;
