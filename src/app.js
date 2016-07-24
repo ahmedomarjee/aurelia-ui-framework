@@ -109,9 +109,18 @@ define(["require", "exports", "../framework/index", "aurelia-framework", './high
         App.prototype.toggleDir = function () {
             document.body.dir = document.body.dir == 'rtl' ? 'ltr' : 'rtl';
         };
-        App.prototype.toggleTheme = function () {
+        App.prototype.toggleTheme = function (id) {
             var css = document.getElementById('baseStyle');
-            css.href = css.href.indexOf('light') == -1 ? 'styles/app-light.css' : 'styles/app-dark.css';
+            var _css = 'light';
+            switch (id) {
+                case 'green':
+                    _css = 'green';
+                    break;
+                case 'dark':
+                    _css = 'dark';
+                    break;
+            }
+            css.href = "styles/app-" + _css + ".css";
         };
         App = __decorate([
             aurelia_framework_1.autoinject(), 

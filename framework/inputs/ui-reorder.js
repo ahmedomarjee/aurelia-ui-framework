@@ -23,7 +23,7 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
             if ($event.button != 0)
                 return;
             this.ghostModel = opt;
-            this.__dragEl = $event.target.parentElement;
+            this.__dragEl = getParentByClass($event.target, 'ui-list-item', 'ui-list-group');
             this.__top = this.__diff = this.__dragEl.offsetTop;
             this.__dragEl.classList.add('dragging');
             this.__list = this.element.querySelectorAll('.ui-list-item');

@@ -3044,7 +3044,7 @@ hr {
   background-size: auto 2.8em;
 }
 .ui-viewport .ui-app-header {
-  z-index: 1;
+  z-index: 5;
   color: #fcfcfa;
   background: #0e5480;
   display: -webkit-flex;
@@ -5926,16 +5926,13 @@ hr {
   position: relative;
 }
 .ui-list.ui-reorder .ui-list-item {
-  cursor: default;
+  cursor: move;
 }
 .ui-list.ui-reorder .ui-list-item:hover {
   background: none;
 }
 .ui-list.ui-reorder .ui-list-item.dragging {
   visibility: hidden;
-}
-.ui-list.ui-reorder .ui-list-item > .ui-icon {
-  cursor: pointer;
 }
 .ui-list.ui-reorder .ui-ghost {
   color: #322e2d;
@@ -6100,6 +6097,11 @@ hr {
   color: #646261;
   border-color: #e0e0e2;
   background: #ededee;
+}
+.ui-button.ui-button-secondary {
+  color: #322e2d;
+  border-color: #83bad7;
+  background: #96c5dd;
 }
 .ui-button.ui-button-primary {
   color: #fcfcfa;

@@ -10,6 +10,7 @@
 
 // Optional CSS and Fonts
 @import "utility/flags";
+@import "utility/copic";
 
 // fonts
 @import url(font_url("material/flaticon.css", true));
@@ -22,6 +23,17 @@
 
 // IMPORT OVERRIDE VARIABLES HERE
 // @import "app-vars";
+
+$primary: $ocean-green;
+$secondary: $verdigris;
+
+$app-header-bg: $bronze;
+$page-title-bg: $abyss-green;
+
+$statsbar-bg: $sea-green;
+$statsbar-text: $pinetree-green;
+
+$input-focus-border: $ocean-green;
 
 // App Theme Defaults
 @import "theme-light!";

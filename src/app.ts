@@ -109,8 +109,14 @@ export class App {
 		document.body.dir = document.body.dir == 'rtl' ? 'ltr' : 'rtl';
 	}
 
-	toggleTheme() {
+	toggleTheme(id) {
 		let css = document.getElementById('baseStyle') as HTMLLinkElement;
-		css.href = css.href.indexOf('light') == -1 ? 'styles/app-light.css' : 'styles/app-dark.css';
+		// css.href = css.href.indexOf('light') == -1 ? 'styles/app-light.css' : 'styles/app-dark.css';
+		let _css = 'light';
+		switch (id) {
+			case 'green': _css = 'green'; break;
+			case 'dark': _css = 'dark'; break;
+		}
+		css.href = `styles/app-${_css}.css`;
 	}
 }
