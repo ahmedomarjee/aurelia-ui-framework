@@ -96,9 +96,12 @@
         }
     }
 
-    & > xmp,
+    pre {
+        position: relative;
+    }
+
     pre > code {
-        position     : relative;
+        position     : static;
         display      : block;
         @include scroll();
         max-height   : 48em;
@@ -114,7 +117,7 @@
             font-size  : .7em;
             position   : absolute;
             top        : 0;
-            right      : 0;
+            right      : 1.5em;
             padding    : .2em .7em;
             color      : #f0f0f0;
             background : #6a6a6a;

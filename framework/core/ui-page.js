@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_utils_1, ui_event_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../utils/ui-event", "../utils/ui-formatters"], function (require, exports, aurelia_framework_1, ui_utils_1, ui_event_1, ui_formatters_1) {
     "use strict";
     var UIPage = (function () {
         function UIPage(element) {
@@ -176,4 +176,22 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "../util
         return UIStat;
     }());
     exports.UIStat = UIStat;
+    var UIMdView = (function () {
+        function UIMdView(element) {
+            this.element = element;
+            this.type = 'html';
+            if (element.hasAttribute('ts'))
+                this.type = 'typescript';
+        }
+        UIMdView.prototype.attached = function () {
+            this.element.innerHTML = ui_formatters_1.UIFormat.mdHilight('```' + this.type + '\n' + this.element.textContent.replace(/^\s{8,8}/gm, '') + '```');
+        };
+        UIMdView = __decorate([
+            aurelia_framework_1.customElement('ui-md-view'),
+            aurelia_framework_1.inlineView('<template class="ui-markdown"><slot></slot></template>'), 
+            __metadata('design:paramtypes', [Element])
+        ], UIMdView);
+        return UIMdView;
+    }());
+    exports.UIMdView = UIMdView;
 });

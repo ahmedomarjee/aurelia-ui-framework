@@ -2770,9 +2770,11 @@ big {
 .ui-markdown a > img:hover {
   box-shadow: 0 0 0.25em 1px rgba(0, 148, 99, 0.8);
 }
-.ui-markdown > xmp,
-.ui-markdown pre > code {
+.ui-markdown pre {
   position: relative;
+}
+.ui-markdown pre > code {
+  position: static;
   display: block;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -2784,13 +2786,12 @@ big {
   border-radius: 0.2em;
   background: rgba(223, 222, 214, 0.4);
 }
-.ui-markdown > xmp:after,
 .ui-markdown pre > code:after {
   font-family: "Open Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: .7em;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 1.5em;
   padding: .2em .7em;
   color: #f0f0f0;
   background: #6a6a6a;
@@ -2801,18 +2802,14 @@ big {
   -webkit-border-bottom-left-radius: 0.2em;
   border-bottom-left-radius: 0.2em;
 }
-.ui-markdown > xmp.lang-html:after,
 .ui-markdown pre > code.lang-html:after {
   content: 'HTML';
   background: #01786f;
 }
-.ui-markdown > xmp.lang-javascript:after, .ui-markdown > xmp.lang-typescript:after,
-.ui-markdown pre > code.lang-javascript:after,
-.ui-markdown pre > code.lang-typescript:after {
+.ui-markdown pre > code.lang-javascript:after, .ui-markdown pre > code.lang-typescript:after {
   content: 'JavaScript';
   background: #e6735c;
 }
-.ui-markdown > xmp.lang-scss:after,
 .ui-markdown pre > code.lang-scss:after {
   content: 'SCSS';
   background: #008080;

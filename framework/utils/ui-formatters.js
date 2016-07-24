@@ -6,6 +6,14 @@ define(["require", "exports", "./ui-utils"], function (require, exports, ui_util
             return marked(md);
         }
         UIFormat.toHTML = toHTML;
+        function mdHilight(md) {
+            return marked(md || '', {
+                highlight: function (code) {
+                    return hljs.highlightAuto(code).value;
+                }
+            });
+        }
+        UIFormat.mdHilight = mdHilight;
         function date(dt, ft) {
             if (ft === void 0) { ft = 'DD MMM YYYY hh:mm A'; }
             var x;

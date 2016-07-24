@@ -10,6 +10,7 @@ import {customElement, bindable, inlineView} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {UIUtils} from "../utils/ui-utils";
 import {UIEvent} from "../utils/ui-event";
+import {UIFormat} from "../utils/ui-formatters";
 
 @customElement('ui-page')
 export class UIPage {
@@ -144,4 +145,17 @@ export class UIStat {
 	value;
 	@bindable()
 	icon;
+}
+
+@customElement('ui-md-view')
+@inlineView('<template class="ui-markdown"><slot></slot></template>')
+export class UIMdView {
+	private type = 'html';
+	constructor(public element: Element) {
+		if (element.hasAttribute('ts')) this.type = 'typescript';
+	}
+
+	attached() {
+		this.element.innerHTML = UIFormat.mdHilight('```' + this.type + '\n' + this.element.textContent.replace(/^\s{8,8}/gm, '') + '```');
+	}
 }

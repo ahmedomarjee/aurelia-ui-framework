@@ -13,11 +13,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function CodeHighlightValueConverter() {
         }
         CodeHighlightValueConverter.prototype.toView = function (value) {
-            return marked(value || '', {
-                highlight: function (code) {
-                    return hljs.highlightAuto(code).value;
-                }
-            });
+            return ui_formatters_1.UIFormat.mdHilight(value || '');
         };
         return CodeHighlightValueConverter;
     }());
