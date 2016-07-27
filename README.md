@@ -39,6 +39,8 @@ $project_folder> au new --here
     6. Create: Yes
     7. Install Dependencies: Yes
 
+    > After creating a new aurelia app, copy the contents of the skeleton project into `$project_folder`
+
 ##### 2. Install UI Framework and amCharts
 
 ```
