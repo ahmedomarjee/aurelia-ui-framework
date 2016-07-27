@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_utils_1) {
     "use strict";
     var UIReorder = (function () {
         function UIReorder(element) {
@@ -54,7 +54,7 @@ define(["require", "exports", "aurelia-framework"], function (require, exports, 
             this.ghostModel = null;
             var list = this.element.querySelectorAll('.ui-list-item');
             var newList = [];
-            _.forEach(list, function (l) {
+            ui_utils_1._.forEach(list, function (l) {
                 if (l.model)
                     newList.push(l.model);
             });

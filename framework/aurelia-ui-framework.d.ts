@@ -23,6 +23,9 @@ declare module "aurelia-ui-framework" {
 	// import {ValidationGroup} from "aurelia-validation";
 	import {Logger} from "aurelia-logging";
 
+	export function validatemap(targetOrConfig?: any, key?: any, descriptor?: any): any;
+	export function validatephone(targetOrConfig?: any, key?: any, descriptor?: any): any;
+
 	export class UIDialog {
 		close();
 		focus();
@@ -227,7 +230,6 @@ declare module "aurelia-ui-framework" {
 	}
 }
 
-declare function validatemap(targetOrConfig?: any, key?: any, descriptor?: any): any;
 
 // Global methods
 declare var __seed;

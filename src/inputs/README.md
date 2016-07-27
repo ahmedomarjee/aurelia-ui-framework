@@ -187,6 +187,31 @@ Attributes common to all input elements except checkbox/radio
 
 ---
 
+### UIDate
+
+```html
+<ui-date date.bind=? format="DD-MMM-YYYY" date-end.bind=? options.bind=UIDateOptions>Label</ui-date>
+```
+
+> To enable time input, format should have `hh:mm`
+
+-	Singular attributes
+
+	-	`range`: enable date range input, `date-end` bind is only available for date range.
+
+```typescript
+interface UIDateOptions {
+  minDate = null;
+  maxDate = null;
+  validDates: Array<any> | Function;
+  invalidDates: Array<any> | Function;
+}
+```
+
+> validDates/invalidDates check is not implemented yet.
+
+---
+
 ### UITextArea
 
 ```html

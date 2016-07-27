@@ -12,7 +12,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "./ui-input-group"], function (require, exports, aurelia_framework_1, ui_input_group_1) {
+define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_input_group_1, ui_utils_1) {
     "use strict";
     var UIPhone = (function (_super) {
         __extends(UIPhone, _super);
@@ -106,7 +106,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group"], function
                     this.prefixIcon = 'ui-flag ' + (PhoneLib.getIso2Code(this.value) || 'US');
             }
             try {
-                var info = PhoneLib.getNumberInfo(_.trim(this.value), this.__phoneFormat !== PhoneLib.FORMAT.INTERNATIONAL ? this.country : PhoneLib.getIso2Code(this.__value));
+                var info = PhoneLib.getNumberInfo(ui_utils_1._.trim(this.value), this.__phoneFormat !== PhoneLib.FORMAT.INTERNATIONAL ? this.country : PhoneLib.getIso2Code(this.__value));
                 this.isdCode = isNaN(info.countryCode) ? '' : info.countryCode;
                 this.areaCode = isNaN(info.areaCode) ? '' : info.areaCode;
                 this.phone = isNaN(info.phone) ? '' : info.phone;

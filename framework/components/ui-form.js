@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_event_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_event_1, ui_utils_1) {
     "use strict";
     var UIForm = (function () {
         function UIForm(element) {
@@ -25,7 +25,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
         };
         UIForm.prototype.busyChanged = function (newValue) {
             var els = this.element.querySelectorAll('ui-button,ui-combo,ui-date,ui-input,ui-input-dual,ui-language,ui-markdown,ui-checkbox,ui-radio,ui-phone,ui-switch,ui-tags,ui-textarea');
-            _.forEach(els, function (el) {
+            ui_utils_1._.forEach(els, function (el) {
                 try {
                     el.au.controller.viewModel.disable(isTrue(newValue));
                 }

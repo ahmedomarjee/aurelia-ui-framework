@@ -6,6 +6,7 @@
  **/
 import {autoinject, customElement, bindable, inlineView} from "aurelia-framework";
 import {UIEvent} from "../utils/ui-event";
+import {_, UIUtils} from "../utils/ui-utils";
 
 @autoinject
 @customElement('ui-form')

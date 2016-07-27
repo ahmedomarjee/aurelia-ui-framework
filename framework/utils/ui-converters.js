@@ -1,4 +1,4 @@
-define(["require", "exports", "./ui-formatters"], function (require, exports, ui_formatters_1) {
+define(["require", "exports", "./ui-formatters", "./ui-utils"], function (require, exports, ui_formatters_1, ui_utils_1) {
     "use strict";
     var MarkdownValueConverter = (function () {
         function MarkdownValueConverter() {
@@ -78,7 +78,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function GroupValueConverter() {
         }
         GroupValueConverter.prototype.toView = function (object, property) {
-            return _.groupBy(object, property);
+            return ui_utils_1._.groupBy(object, property);
         };
         return GroupValueConverter;
     }());
@@ -87,7 +87,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function SortValueConverter() {
         }
         SortValueConverter.prototype.toView = function (value, property) {
-            return _.sortBy(value, property);
+            return ui_utils_1._.sortBy(value, property);
         };
         return SortValueConverter;
     }());
@@ -105,7 +105,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function IsStringValueConverter() {
         }
         IsStringValueConverter.prototype.toView = function (value) {
-            return _.isString(value);
+            return ui_utils_1._.isString(value);
         };
         return IsStringValueConverter;
     }());
@@ -114,7 +114,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function IsArrayValueConverter() {
         }
         IsArrayValueConverter.prototype.toView = function (value) {
-            return _.isArray(value);
+            return ui_utils_1._.isArray(value);
         };
         return IsArrayValueConverter;
     }());
@@ -123,7 +123,7 @@ define(["require", "exports", "./ui-formatters"], function (require, exports, ui
         function IsObjectValueConverter() {
         }
         IsObjectValueConverter.prototype.toView = function (value) {
-            return _.isObject(value);
+            return ui_utils_1._.isObject(value);
         };
         return IsObjectValueConverter;
     }());

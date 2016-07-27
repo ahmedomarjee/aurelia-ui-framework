@@ -6,6 +6,7 @@
  **/
 import {customElement, bindable, useView, bindingMode, autoinject} from "aurelia-framework";
 import {UIInputGroup} from "./ui-input-group";
+import {_, UIUtils} from "../utils/ui-utils";
 
 @autoinject()
 @useView('./ui-input.html')

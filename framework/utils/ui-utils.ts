@@ -311,7 +311,6 @@ export module UIUtils {
 		}
 	});
 
-
 	//export function getFloatPosition(
 	//	anchor,
 	//	floater,

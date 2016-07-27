@@ -32,12 +32,17 @@ define(["require", "exports", "./ui-utils"], function (require, exports, ui_util
         UIFormat.fromNow = fromNow;
         function number(nm, fm) {
             if (fm === void 0) { fm = '0,0[.]00'; }
-            return nm === null || isNaN(nm) ? '' :
-                ui_utils_1.numeral(nm)
-                    .format(fm)
-                    .replace(/[^\d\.]+/g, function (txt) {
-                    return "<small>" + txt.toUpperCase() + "</small>";
-                });
+            var ret = nm === null || isNaN(nm) ? '' : ui_utils_1.numeral(nm).format(fm);
+            if (fm.indexOf('{') === 0) {
+                var minlen = fm.length - 2;
+                if (ret.length < minlen) {
+                    ret = Array(minlen - ret.length + 1).join('0') + ret;
+                }
+            }
+            ret.replace(/[^\d\.]+/g, function (txt) {
+                return "<small>" + txt.toUpperCase() + "</small>";
+            });
+            return ret;
         }
         UIFormat.number = number;
         function currency(nm, sy, fm) {

@@ -220,9 +220,10 @@
 							<ui-tags value.bind="model.custom" no-list>Tag Input</ui-tags>
 						</ui-fieldset>
 						<ui-fieldset label="Date Inputs">
-							<ui-date date="1979-03-02">Date</ui-date>
+							<ui-date date="1979-03-02" format="DD-MMM-YYYY hh:mm A">Date</ui-date>
 							<ui-date range>Date Range</ui-date>
-							<ui-date-view date.bind="dt"></ui-date-view>
+							<ui-date-view date.bind="dt" time="true"></ui-date-view>
+							<p>${dt | date}</p>
 						</ui-fieldset>
 						<div>
 							<pre>${getDisplay(model.email, model.custom, model.lat, model.long, model.tags, model.month, model.phone, model.internationalPhone, model.ctry, model.ctries)}</pre>

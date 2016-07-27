@@ -1,5 +1,5 @@
 import {autoinject} from "aurelia-framework";
-import {UIModel, validatemap, validatephone} from "../../framework/index";
+import {UIModel, validatemap, validatephone, _} from "../../framework/index";
 import {required, email, length, ValidationRules, numericality} from "aurelia-validatejs";
 import {ValidationController} from "aurelia-validation";
 
@@ -16,6 +16,7 @@ export class ValidationTester {
 
 	onSubmit() {
 		this.errors = this.controller.validate();
+		// console.log(this.errors);
 	}
 
 	languageModel = null;
@@ -64,6 +65,7 @@ export class HotelLanguage extends UIModel {
 	// @required
 	// title: string = '';
 	@required
+	@length({ minimum: 5 })
 	description: string = '';
 	// @required
 	// address: string = '';

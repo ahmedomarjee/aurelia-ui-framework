@@ -5,6 +5,7 @@
  *    @copyright   2015-2016, Adarsh Pastakia
  **/
 import {customElement, bindable, bindingMode, autoinject} from "aurelia-framework";
+import {_, UIUtils} from "../utils/ui-utils";
 
 @autoinject()
 @customElement('ui-reorder')

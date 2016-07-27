@@ -5655,7 +5655,6 @@ hr {
   border-radius: 0.2em;
   background: #fefeff;
 }
-.ui-date-view,
 .ui-date-view .ui-date-wrapper > div > div {
   display: -webkit-flex;
   -webkit-flex-direction: row;
@@ -5667,11 +5666,6 @@ hr {
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: nowrap;
-}
-.ui-date-view .ui-date-wrapper {
-  position: relative;
-  -webkit-flex: 0 0 auto;
-  flex: 0 0 auto;
 }
 .ui-date-view .ui-date-wrapper span {
   position: relative;
@@ -5815,7 +5809,61 @@ hr {
   -webkit-flex: 1 1 0;
   flex: 1 1 0;
 }
-.ui-date-view .ui-date-wrapper .alt-view {
+.ui-date-view .ui-time-wrapper {
+  padding: 1em 0;
+  border-top: 1px solid rgba(170, 170, 164, 0.5);
+}
+.ui-date-view .ui-time-wrapper .ui-time {
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.ui-date-view .ui-time-wrapper .ui-time > div {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-justify-content: flex-start;
+  -webkit-flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.ui-date-view .ui-time-wrapper .ui-time > div.ui-sep,
+.ui-date-view .ui-time-wrapper .ui-time > div > span {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding: .2em;
+  font-size: 1.3em;
+  height: 1.5em;
+  width: 2.5em;
+  margin: .25em .5em;
+  text-align: center;
+  border-radius: 0.2em;
+}
+.ui-date-view .ui-time-wrapper .ui-time > div > span:hover {
+  cursor: pointer;
+  color: #fcfcfa;
+  background: rgba(11, 139, 203, 0.7);
+}
+.ui-date-view .ui-date-wrapper,
+.ui-date-view .ui-time-wrapper {
+  position: relative;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+.ui-date-view .ui-date-wrapper .alt-view,
+.ui-date-view .ui-time-wrapper .alt-view {
   position: absolute;
   left: 0;
   right: 0;
@@ -5833,12 +5881,16 @@ hr {
   flex-wrap: nowrap;
 }
 .ui-date-view .ui-date-wrapper .alt-view .months,
-.ui-date-view .ui-date-wrapper .alt-view .years {
+.ui-date-view .ui-date-wrapper .alt-view .years,
+.ui-date-view .ui-time-wrapper .alt-view .months,
+.ui-date-view .ui-time-wrapper .alt-view .years {
   -webkit-flex: 1 1 0;
   flex: 1 1 0;
 }
 .ui-date-view .ui-date-wrapper .alt-view .months span,
-.ui-date-view .ui-date-wrapper .alt-view .years span {
+.ui-date-view .ui-date-wrapper .alt-view .years span,
+.ui-date-view .ui-time-wrapper .alt-view .months span,
+.ui-date-view .ui-time-wrapper .alt-view .years span {
   -webkit-align-self: stretch;
   align-self: stretch;
 }

@@ -42,7 +42,7 @@ export class ChartExample {
 		chartTitle: 'Sales vs. Target',
 		categoryField: 'date',
 		valueAxisUnit: '$',
-		series: [{
+		series: <AmCharts.AmGraph[]>[{
 			title: 'Profit Target',
 			clustered: false,
 			columnWidth: .85,

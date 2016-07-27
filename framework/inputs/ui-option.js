@@ -12,7 +12,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_event_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-event", "../utils/ui-utils"], function (require, exports, aurelia_framework_1, ui_event_1, ui_utils_1) {
     "use strict";
     var UIOption = (function () {
         function UIOption(element) {
@@ -132,7 +132,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
             var _this = this;
             setTimeout(function () {
                 var radios = _this.element.querySelectorAll('.ui-radio .ui-option-input');
-                _.forEach(radios, function (b) {
+                ui_utils_1._.forEach(radios, function (b) {
                     b.setAttribute('name', _this.name || _this.__name);
                     if (_this.value + '' === b.value + '') {
                         b.setAttribute('checked', "true");

@@ -2211,6 +2211,7 @@ If you do not set properties such as dashLength, lineAlpha, lineColor, etc - val
             @default true
         */
         connect: boolean;
+        clustered: boolean;
         /** Corner radius of column. It can be set both in pixels or in percents. The chart's depth and angle styles must be set to 0. The default value is 0. Note, cornerRadiusTop will be applied for all corners of the column, JavaScript charts do not have a possibility to set separate corner radius for top and bottom. As we want all the property names to be the same both on JS and Flex, we didn't change this too. */
         cornerRadiusTop: number;
         /** If bulletsEnabled of ChartCurosor is true, a bullet on each graph follows the cursor. You can set opacity of each graphs bullet. In case you want to disable these bullets for a certain graph, set opacity to 0.

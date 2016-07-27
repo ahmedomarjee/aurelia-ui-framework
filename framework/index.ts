@@ -16,6 +16,7 @@ import {FrameworkConfiguration} from "aurelia-framework";
 import {UIChart} from "./components/ui-chart";
 import {UIApplication} from "./utils/ui-application";
 import {UIValidationRenderer} from "./utils/ui-validation";
+import * as ld from 'lodash';
 
 export function configure(aurelia: FrameworkConfiguration, configCallback) {
 	aurelia.container.registerHandler('ui-validator', container => container.get(UIValidationRenderer));

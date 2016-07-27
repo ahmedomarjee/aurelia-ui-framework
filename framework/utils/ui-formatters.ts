@@ -37,12 +37,17 @@ export module UIFormat {
 
 	// Numbers
 	export function number(nm: any, fm: string = '0,0[.]00'): string {
-		return nm === null || isNaN(nm) ? '' :
-			numeral(nm)
-				.format(fm)
-				.replace(/[^\d\.]+/g, (txt) => {
-					return `<small>${txt.toUpperCase()}</small>`;
-				});
+		let ret = nm === null || isNaN(nm) ? '' : numeral(nm).format(fm);
+		if (fm.indexOf('{') === 0) {
+			let minlen = fm.length - 2;
+			if (ret.length < minlen) {
+				ret = Array(minlen - ret.length + 1).join('0') + ret;
+			}
+		}
+		ret.replace(/[^\d\.]+/g, (txt) => {
+			return `<small>${txt.toUpperCase()}</small>`;
+		});
+		return ret;
 	}
 
 	export function currency(nm: any, sy: string = '$', fm: string = '$ 0,0[.]00'): string {

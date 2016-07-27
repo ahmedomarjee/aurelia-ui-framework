@@ -5,6 +5,7 @@
  *    @copyright    2015-2016, Adarsh Pastakia
  **/
 import {UIFormat} from "./ui-formatters";
+import {_, UIUtils} from "./ui-utils";
 
 export class MarkdownValueConverter {
 	toView(value: string) {

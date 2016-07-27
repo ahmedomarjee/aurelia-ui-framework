@@ -17,7 +17,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "aur
     var ValidationTester = (function () {
         function ValidationTester(controller) {
             this.controller = controller;
-            this.countries = _.groupBy(window.countries, 'continent');
+            this.countries = index_1._.groupBy(window.countries, 'continent');
             this.languageModel = null;
             this.model = new Hotel();
         }
@@ -93,7 +93,8 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "aur
             this.description = '';
         }
         __decorate([
-            aurelia_validatejs_1.required, 
+            aurelia_validatejs_1.required,
+            aurelia_validatejs_1.length({ minimum: 5 }), 
             __metadata('design:type', String)
         ], HotelLanguage.prototype, "description", void 0);
         return HotelLanguage;

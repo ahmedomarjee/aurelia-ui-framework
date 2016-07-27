@@ -69,15 +69,11 @@
 	border-radius: $base-border-radius;
 	background   : $base-bg;
 
-	&,
 	.ui-date-wrapper > div > div {
 		@include flex-row(stretch, $wrap: false);
 	}
 
 	.ui-date-wrapper {
-		position: relative;
-		@include flex(0 0 auto);
-
 		span {
 			position  : relative;
 			padding   : .45em .4em;
@@ -238,6 +234,45 @@
 				@include flex(1 1 0);
 			}
 		}
+
+	}
+
+	.ui-time-wrapper {
+		padding   : 1em 0;
+		border-top: 1px solid rgba($base-border-color,.5);
+
+		.ui-time {
+			@include flex-row($align:center, $justify: center, $wrap:false);
+
+			> div {
+				@include flex(0 0 auto);
+				@include flex-column();
+
+				 &.ui-sep,
+				> span {
+					@include flex(0 0 auto);
+					padding      : .2em;
+					font-size    : 1.3em;
+					height       : 1.5em;
+					width        : 2.5em;
+					margin       : .25em .5em;
+					text-align   : center;
+					border-radius: $base-border-radius;
+				}
+
+				> span:hover {
+					cursor    : pointer;
+					color     : $date-selected-text;
+					background: rgba($date-selected-bg, .7);
+				}
+			}
+		}
+	}
+
+	.ui-date-wrapper,
+	.ui-time-wrapper {
+		position: relative;
+		@include flex(0 0 auto);
 
 		.alt-view {
 			@include position(absolute, 0, 0, 0, 0);

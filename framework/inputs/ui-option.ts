@@ -6,6 +6,7 @@
  **/
 import {autoinject, customElement, bindable, useView, bindingMode} from "aurelia-framework";
 import {UIEvent} from "../utils/ui-event";
+import {_, UIUtils} from "../utils/ui-utils";
 
 export class UIOption {
     protected __id = `auf-${__seed++}`;
