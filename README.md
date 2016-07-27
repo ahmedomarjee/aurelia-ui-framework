@@ -22,171 +22,71 @@ AureliaUIFramework
 
 #### Getting Started
 
--	Download the [skeleton project](https://github.com/adarshpastakia/aurelia-ui-framework/archive/skeleton.zip).
--	Run `init.sh` on Mac/Linux or `init.bat` on windows.
--	Incase you dont want to change the default styles, pre-compiled stylesheets are included in the skeleton project.
--	NOTE: This framework requires [Compass-SASS library](http://compass-style.org/install/) to be installed to build sass files.
+This skeleton is for using AureliaUIFramework with AureliaCli
 
+##### 1. Create an aurelia project using `aurelia-cli`
 
-### Sections
-
--	[Core](framework/core)
--	[Inputs](framework/inputs)
--	[Components](framework/components)
--	[Utils](framework/utils)
-
-#### Usage `main.js`
-
-```typescript
-function configure(aurelia) {
-    aurelia.use
-       .standardConfiguration()
-       .developmentLogging()
-       .plugin('aurelia-validation')
-       .plugin('aurelia-validatejs')
-       .plugin('aurelia-ui-framework', function (config) {
-           // AppKey for local/session storage key prefix
-           config.App.Key = 'App';
-           // Application Title
-           config.App.Title = 'Aurelia UI Framework';
-           // Application Version
-           config.App.Version = '1.00';
-
-           // HTTPClient Base API URL
-           config.Http.BaseUrl = './';
-           // HTTPClient Extra Headers
-           config.Http.Headers = {
-               'X-API-VERSION': '1'
-           };
-           // HTTPClient Send Basic Authorization Header
-           config.Http.AuthorizationHeader = false;
-
-           // Enable AmCharts
-           config.UseCharts = true;
-       });
+```
+$project_folder> au new --here
 ```
 
----
+  Aurelia new app choices
+    1. Platform: Web
+    2. Transpiler: TypeScript
+    3. CSS: None
+    4. Unit Testing: any
+    5. Editor: any
+    6. Create: Yes
+    7. Install Dependencies: Yes
 
-### Changes
+##### 2. Install UI Framework and amCharts
 
-> For using aurelia-validation and aurelia-validatejs
->
-> Read about the new [Aurelia Validation Alpha](http://blog.durandal.io/2016/06/14/new-validation-alpha-is-here/)
+```
+npm install validate.js aurelia-validation aurelia-validatejs aurelia-ui-framework amcharts moment numeral fabric whatwg-fetch --save
+```
 
-* Data model
+##### 3. Modify `aurelia_project/aurelia.json`
 
-```typescript
-export class MyModel extends UIModel {
-  @required
-  name: string = '';
-  @required
-  @numericality({ onlyInteger: false, lessThanOrEqualTo: 90, greaterThanOrEqualTo: -90 })
-  latitude: number = 0;
-  @required
-  @numericality({ onlyInteger: false, lessThanOrEqualTo: 180, greaterThanOrEqualTo: -180 })
-  longitude: number = 0;
+Add the following to the  `vendor-bundle` -> `prepend` array
+```
+"node_modules/fabric/dist/fabric.js",
+"node_modules/whatwg-fetch/fetch.js"
+```
+
+Add the following to the  `vendor-bundle` -> `dependencies` array
+```
+"lodash",
+"moment",
+"numeral",
+"aurelia-validatejs",
+"aurelia-fetch-client",
+{
+  "name": "amcharts",
+  "path": "../node_modules/amcharts/dist",
+  "main": "amcharts",
+  "resources": [
+    "amcharts/plugins/export/export.css"
+  ]
+},
+{
+  "name": "validate.js",
+  "path": "../node_modules/validate.js",
+  "main": "validate"
+},
+{
+  "name": "aurelia-validation",
+  "path": "../node_modules/aurelia-validation/dist/amd",
+  "main": "aurelia-validation"
+},
+{
+  "name": "aurelia-ui-framework",
+  "path": "../node_modules/aurelia-ui-framework",
+  "main": "aurelia-ui-framework"
 }
 ```
 
-* Form Page
+Add the next line to `dtsSource` under `transpiler`
 
-```html
-<ui-form submit.trigger="onSubmit()">
-    <ui-row>
-        <ui-column padded>
-            <ui-input value.bind="model.name & validate" required clear>Name</ui-input>
-        </ui-column>
-        <ui-column padded>
-            <ui-input-dual required decimal prefix-icon="fi-vaadin-placeholder" prefix-text="Lat." center-text="Long." value.bind="model.latitude & validate" value-second.bind="model.longitude & validate" placeholder="-90 to 90" placeholder-second="-180 to 180">Location</ui-input-dual>
-        </ui-column>
-    </ui-row>
-</ui-form>
 ```
-
-All properties must use the `validate` binding behavior
-
-* Form ViewModel
-
-```typescript
-export class MyFormView {
-  constructor(public controller: ValidationController) {
-    this.model = new MyModel();
-  }
-  onSubmit() {
-    let errors = this.controller.validate();
-    if(errors.length>0) // form has errors
-    else // form is valid
-  }
-}
+"./node_modules/aurelia-ui-framework/**/*.d.ts"
 ```
-
----
-
-#### Core Components
-
--	Viewport - main app viewport
--	Page - (has page title, to be used as route viewport)
--	Section - row/column layout
--	Content - auto/fill
--	Sidebar - can collapse
--	Header
--	Toolbar
--	Statsbar
--	Grid
-
-#### Inputs
-
--	BaseInput (Private) - Generic input class to handle common functionality between all input controls
--	Input - Single line input control
-	-	Text
-	-	Number
-	-	Email
-	-	Url
--	Date
--	Combo
--	List
--	Tags
--	Textarea
--	Option (Private) - Generic option control
-	-	Checkbox
-	-	Radio
--	Switch
--	Button
--	Markdown
--	Language
--	MultiSelect
-
-#### Components
-
--	Form
--	Tree
--	Ribbon
--	Pager
--	Menu
--	Login
--	Dialog
--	Panel
--	Tabs
--	Datagrid
-
-#### Utils
-
--	UIApplication
--	UIConverters - Global value converters
--	UIFormatters - Module containing common formatting methods
--	UIHttpService - HttpService extending Aurelie-Fetch
--	UIValidation - Aurelia validation strategy
--	UIEvent
--	UIUtils
--	UIModel
--	UITreeModel
-
-### Dependencies
-
--	`Marked`, `Moment`, `Numeral`, `LoDash`
-
-### Changes
-
--	Removed external UI dependencies.
--	Removed dependency on jQuery, instead using pure javascript DOM manipulation

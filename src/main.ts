@@ -1,9 +1,9 @@
 import {Aurelia} from "aurelia-framework";
+import environment from './environment';
 
 export function configure(aurelia: Aurelia) {
 	aurelia.use
 		.standardConfiguration()
-		// .developmentLogging()
 		.plugin('aurelia-validation')
 		.plugin('aurelia-validatejs')
 		.plugin('aurelia-ui-framework', function(config) {
@@ -25,12 +25,13 @@ export function configure(aurelia: Aurelia) {
 
 			config.UseCharts = true;
 		});
+	if (environment.debug) {
+		aurelia.use.developmentLogging();
+	}
 
-
-
-	aurelia.start()
+	return aurelia.start()
 		.then(a => {
-			return a.setRoot('./src/app.js');
+			return a.setRoot('./app.js');
 		})
 		.then(() => {
 			var splash = window.document.querySelector('.ui-splash');
