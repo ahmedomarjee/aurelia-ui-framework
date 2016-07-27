@@ -1,0 +1,50 @@
+<template>
+  <ui-page page-title="Validation Tester">
+    <ui-content scroll>
+      <ui-form submit.trigger="onSubmit()">
+        <ui-row>
+          <ui-column padded>
+            <ui-input value.bind="model.name & validate" required clear>Name</ui-input>
+          </ui-column>
+          <ui-column padded>
+            <ui-combo required options.bind="countries" icon-property="iso2" icon-class="ui-flag" prefix-icon="ui-flag ${model.country}" display-property="name" value-property="iso2" value.bind="model.country & validate">Country</ui-combo>
+          </ui-column>
+        </ui-row>
+        <ui-row>
+          <ui-column padded>
+            <ui-phone required country.bind="model.country" value.bind="model.phone & validate">Phone</ui-phone>
+          </ui-column>
+          <ui-column padded>
+            <ui-input-dual
+              checkbox
+              required
+              decimal
+              prefix-icon="fi-vaadin-placeholder"
+              prefix-text="Lat."
+              center-text="Long."
+              value.bind="model.latitude & validate"
+              value-second.bind="model.longitude & validate"
+              placeholder="-90 to 90"
+              placeholder-second="-180 to 180">Location</ui-input-dual>
+          </ui-column>
+        </ui-row>
+        <hr/>
+        <ui-row>
+          <ui-column padded>
+            <ui-language languages.bind="model.languages & validate" select.trigger="changeLanguage($event)" add.trigger="addLanguage($event)" delete.trigger="removeLanguage($event)">Language</ui-language>
+          </ui-column>
+          <ui-column></ui-column>
+        </ui-row>
+        <ui-row>
+          <ui-column padded>
+            <ui-markdown value.bind="languageModel.description & validate" disabled.bind="languageModel==null">Description</ui-markdown>
+          </ui-column>
+        </ui-row>
+
+      </ui-form>
+    </ui-content>
+    <ui-toolbar>
+      <ui-button label='Validate' click.trigger="onSubmit()"></ui-button>
+    </ui-toolbar>
+  </ui-page>
+</template>

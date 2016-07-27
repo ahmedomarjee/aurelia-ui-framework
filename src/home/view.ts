@@ -1,8 +1,6 @@
 import {autoinject} from "aurelia-framework";
 import {_, moment, UIApplication, UITreeOptions, UIDialogService, UIHttpService, UIUtils} from "aurelia-ui-framework";
 import {MyDialog} from "./my-dialog";
-import {HttpClient} from "aurelia-fetch-client";
-import "fetch";
 
 @autoinject()
 export class Home {
@@ -62,19 +60,32 @@ export class Home {
 	__tree;
 	checked;
 	treeModel;
+	treeSelected = 'UAE';
 	treeOpts = new UITreeOptions({
 		showCheckbox: true,
 		selectionLevel: 0
 	});
+	treeOpts2 = new UITreeOptions({
+		showCheckbox: false,
+		selectionLevel: 1
+	});
 
-	lang = 'EN';
-	langs = ['EN', 'ES', 'FR', 'DE']
+	lang = 'en';
+	langs = ['en', 'es', 'fr', 'de']
 	content = {
-		EN: 'Do you speak english?',
-		ES: 'Hablas español?',
-		FR: 'Parlez-vous français?',
-		DE: 'Sprechen sie deutsch?'
+		en: 'Do you speak english?',
+		es: 'Hablas español?',
+		fr: 'Parlez-vous français?',
+		de: 'Sprechen sie deutsch?'
 	}
+
+	dgMenu = [
+		{ id: 'view', text: "View Details", icon: 'fi-ui-preview-light' },
+		{ id: 'edit', text: "Edit", icon: 'fi-ui-edit-light' },
+		{ id: 'delete', text: "Delete", icon: 'fi-ui-delete-white' },
+		'-',
+		{ id: 'export', text: "Export Details", icon: 'fi-vaadin-download-symbol' }
+	]
 	data = [
 		{
 			id: 1,

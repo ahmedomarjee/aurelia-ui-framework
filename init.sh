@@ -21,5 +21,11 @@ jspm install aurelia-logging
 jspm install aurelia-event-aggregator
 jspm install aurelia-templating-resources
 
+echo "Do you wish to use amcharts? (yes): "
+read hasChart
+
+if [$hasChart != "n"]; then
+  jspm install amcharts/amcharts3
+fi
 
 typings install

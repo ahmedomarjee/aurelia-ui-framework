@@ -1,0 +1,179 @@
+<template>
+  <style>
+    .chart-theme-dot {
+      display: inline-block;
+      width: 40px;
+      margin: 0 2px;
+    }
+    .chart-theme-name {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+    }
+
+  </style>
+  <ui-page page-title="Charts Example">
+    <ui-content scroll padded>
+      <h3>Charts built using
+        <a href="http://amcharts.com" target="_blank">amCharts</a>. Scroll down for usage examples.
+      </h3>
+      <ui-row stretch>
+        <ui-column fill width="400px" flex>
+          <ui-bar export column stretch legend="bottom" chart-options.bind="salesTargets" chart-data.bind="barData">
+            <ui-button primary click.trigger="buildChart1()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+        <ui-column width="400px">
+          <ui-bar height="200" chart-options.bind="profitsOptions" chart-data.bind="barData2">
+            <ui-button info menuclick.trigger="buildChart2($event)" label.bind="currentPeriod1">
+              <menu id="30">Last 30 Days</menu>
+              <menu id="60">Last 60 Days</menu>
+              <menu id="90">Last 90 Days</menu>
+            </ui-button>
+            <ui-button primary click.trigger="buildChart2()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+          <ui-bar height="200" chart-options.bind="salesOptions" chart-data.bind="barData3">
+            <ui-button primary click.trigger="buildChart3()" icon="fi-ui-refresh"></button>
+          </ui-bar>
+        </ui-column>
+      </ui-row>
+      <ui-row>
+        <ui-column fill>
+          <ui-pie legend height="300" chart-title="Pie Chart" chart-data.bind="pieData1" title-property="region" value-property="amount">
+            <ui-button primary click.trigger="buildPie1()" icon="fi-ui-refresh"></button>
+          </ui-pie>
+        </ui-column>
+        <ui-column fill>
+          <ui-pie height="300" export group donut theme="green" chart-title="Pie Chart" chart-data.bind="pieData2" title-property="region" value-property="amount">
+            <ui-button primary click.trigger="buildPie2()" icon="fi-ui-refresh"></button>
+          </ui-pie>
+        </ui-column>
+        <ui-column fill>
+          <ui-pie height="300" chart-title="Pie Chart" chart-data.bind="pieData3" title-property="region" value-property="amount" color-property="color">
+            <ui-button primary click.trigger="buildPie3()" icon="fi-ui-refresh"></button>
+          </ui-pie>
+        </ui-column>
+      </ui-row>
+      <hr/>
+      <div>
+        <h3>Chart Themes</h3>
+        <p>
+          <span class="chart-theme-name">default:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_DEFAULT" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">pie:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_PIE" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">red:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_RED" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">blue:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_BLUE" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">pink:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_PINK" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">green:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_GREEN" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">orange:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_ORANGE" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">violet:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_VIOLET" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>
+          <span class="chart-theme-name">spectrum:</span>
+          <span class="chart-theme-dot" repeat.for="col of __chart.CHART_SPECTRUM" css.bind="{background: col}">&nbsp;</span>
+        </p>
+        <p>&nbsp;</p>
+      </div>
+      <hr/>
+      <div>
+        <h3>
+          Chart Element</h3>
+        <p>
+          basic chart element that accepts complete amCharts chart option. See amChart
+          <a target="_blank" href="https://www.amcharts.com/demos/">
+            A demos</a>
+          or
+          <a target="_blank" href="https://docs.amcharts.com/3/javascriptcharts/AmChart">
+            docs</a>
+        </p>
+        <pre class="ui-markdown">
+<xmp class="lang-html html hljs xml">
+<ui-chart chart-title="" chart-options="<AmChart Options>" height="<number>">
+<!-- panel header buttons -->
+</ui-chart>
+</xmp>
+</pre>
+        <p>&nbsp;</p>
+      </div>
+      <hr/>
+      <div>
+        <h3>Bar Chart Element</h3>
+        <pre class="ui-markdown">
+<xmp class="lang-html html hljs xml">
+<ui-bar chart-title="" chart-options="UIBarChartOptions" height="<number>" chart-data="?">
+<!-- panel header buttons -->
+</ui-bar>
+</xmp>
+<xmp class="lang-typscript javascript hljs xml">
+// UIBarChartOptions
+chartTitle?: string;
+valueAxisTitle?: string;
+valueAxisUnit?: string;
+categoryAxisTitle?: string;
+categoryField: string;
+theme?: string;
+series: Array<AmCharts.AmGraph>
+</xmp>
+                 </pre>
+        <h5>Attributes</h5>
+        <ul>
+          <li>
+            <code>column</code>
+            - Display chart as columns, default display is bars</li>
+          <li>
+            <code>export</code>
+            - Enable export options</li>
+          <li>
+            <code>legend</code>
+            - Display legend ('bottom' | '<strong>right</strong>')</li>
+        </ul>
+        <p>&nbsp;</p>
+      </div>
+      <hr/>
+      <div>
+        <h3>Pie Chart Element</h3>
+        <pre class="ui-markdown">
+        <xmp class="lang-html html hljs xml">
+<ui-bar chart-title="" height="<number>" chart-data="?" value-property="?" title-property="?" color-property="?" theme="pie">
+<!-- panel header buttons -->
+</ui-bar>
+        </xmp>
+      </pre>
+        <h5>Attributes</h5>
+        <ul>
+          <li>
+            <code>export</code>
+            - Enable export options</li>
+          <li>
+            <code>legend</code>
+            - Display legend ('bottom' | '<strong>right</strong>')</li>
+          <li>
+            <code>donut</code>
+            - Create donut pie with default radius of 30%, or pass a % value to overide the default</li>
+        </ul>
+        <p>&nbsp;</p>
+      </div>
+    </ui-content>
+  </ui-page>
+</template>
