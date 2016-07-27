@@ -23,22 +23,12 @@ define(["require", "exports", "aurelia-framework", 'aurelia-validation', "aureli
             formGroup.classList.remove('ui-valid');
             if (formGroup.lastElementChild !== null)
                 formGroup = formGroup.lastElementChild;
-            var helpBlock = formGroup.lastElementChild;
-            if (isDual && helpBlock.prop != error.propertyName)
-                helpBlock = helpBlock.previousSibling;
-            if (helpBlock) {
-                if (!helpBlock.classList) {
-                    helpBlock = null;
-                }
-                else if (!helpBlock.classList.contains('ui-input-error')) {
-                    helpBlock = null;
-                }
-            }
+            var helpBlock;
             if (!helpBlock) {
                 helpBlock = aurelia_framework_1.DOM.createElement('div');
                 helpBlock.classList.add('ui-input-help');
                 helpBlock.classList.add('ui-input-error');
-                helpBlock.prop = error.propertyName;
+                helpBlock.prop = error.message;
                 formGroup.appendChild(helpBlock);
             }
             helpBlock.error = error;
@@ -53,9 +43,6 @@ define(["require", "exports", "aurelia-framework", 'aurelia-validation', "aureli
             var i = messages.length;
             while (i--) {
                 var message = messages[i];
-                if (message.prop !== error.propertyName) {
-                    continue;
-                }
                 message.error = null;
                 message.remove();
             }
@@ -76,7 +63,6 @@ define(["require", "exports", "aurelia-framework", 'aurelia-validation', "aureli
     validate_js_1.validate.validators.map = function (map) {
         var errors = [];
         map.forEach(function (v, k) {
-            console.log(v, validator.validateObject(v));
             if (validator.validateObject(v).length > 0)
                 errors.push(k);
         });

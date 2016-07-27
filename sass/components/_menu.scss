@@ -26,6 +26,14 @@
             pointer-events: all;
             max-height    : 18em;
         }
+
+        &.reverse {
+            top: -100%;
+        }
+
+        .ui-menu-link {
+            padding: .4em .5em;
+        }
     }
 
     .ui-menu-title {

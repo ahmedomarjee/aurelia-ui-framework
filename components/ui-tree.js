@@ -28,6 +28,16 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
                 name: this.options.rootLabel,
                 children: this.model
             }, null);
+            if (!this.options.showCheckbox)
+                this.select(this.value, this.options.selectionLevel);
+        };
+        UITree.prototype.attached = function () {
+            var _this = this;
+            setTimeout(function () {
+                var x;
+                if ((x = _this.element.querySelector('.ui-active')) !== null)
+                    x.scrollIntoView();
+            }, 200);
         };
         UITree.prototype.detached = function () {
             this.__subscribeSelect.dispose();
@@ -46,8 +56,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
                 this.selectedNode.active = false;
             }
             (this.selectedNode = node).active = true;
-            this.value = this.selectedNode.id;
-            ui_event_1.UIEvent.fireEvent('change', this.element, this.selectedNode);
+            this.value = node.id;
+            ui_event_1.UIEvent.fireEvent('change', this.element, node);
         };
         UITree.prototype.__itemChecked = function (node) {
             ui_event_1.UIEvent.fireEvent('checked', this.element, this.getChecked());
@@ -65,6 +75,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
             this.__filter(this.root.children, newValue);
         };
         UITree.prototype.__filter = function (obj, value, parentVisible) {
+            var _this = this;
             if (parentVisible === void 0) { parentVisible = false; }
             var self = this, ret = false, rx = new RegExp(ui_utils_1.UIUtils.getAscii(value), 'gi');
             ui_utils_1._.forEach(obj, function (n) {
@@ -77,6 +88,11 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
                         p.expanded = true;
                         p = p.parent;
                     }
+                    setTimeout(function () {
+                        var x;
+                        if ((x = _this.element.querySelector('.ui-active')) !== null)
+                            x.scrollIntoView();
+                    }, 200);
                 }
                 var match = rx.test(ui_utils_1.UIUtils.getAscii(n.name));
                 if (!ui_utils_1._.isEmpty(value) && match) {
@@ -96,7 +112,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
             if (value === void 0) { value = true; }
             var self = this;
             return ui_utils_1._.find(obj, function (n) {
-                var found = n.id == id && n.level == level;
+                var found = n.id == id && n.level >= level;
                 if (!found && ui_utils_1._.isArray(n.children)) {
                     found = !ui_utils_1._.isEmpty(self.__find(n.children, id, level, field, value));
                     n.expanded = found;
@@ -145,7 +161,7 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-tree-models", ".
             this.__find(this.root.children, id, level, 'checked', check);
         };
         __decorate([
-            aurelia_framework_1.bindable(), 
+            aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
             __metadata('design:type', Object)
         ], UITree.prototype, "value", void 0);
         __decorate([

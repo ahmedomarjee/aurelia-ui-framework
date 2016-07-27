@@ -17,11 +17,18 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "./ui-da
             this.date = ui_utils_1.moment().format();
             this.options = new ui_date_1.UIDateOptions();
             this.showing = true;
+            this.time = false;
         }
         UIDateView.prototype.bind = function () {
-            if (ui_utils_1.moment(this.date).isValid())
+            if (ui_utils_1.moment(this.date).isValid()) {
                 this.__current = ui_utils_1.moment(this.date);
+                this.__hour = ui_utils_1.moment(this.date).hour();
+                this.__minute = ui_utils_1.moment(this.date).minute();
+                this.__minute -= this.__minute % 5;
+                this.date = ui_utils_1.moment(this.date).hour(this.__hour).minute(this.__minute).format();
+            }
             this.__changeDates();
+            this.time = isTrue(this.time);
         };
         UIDateView.prototype.showingChanged = function (newValue) {
             if (this.showing = isTrue(newValue)) {
@@ -132,12 +139,31 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "./ui-da
                 this.__changeDates();
             }
             else if ($event.target.classList.contains('date')) {
-                this.date = $event.target['date'].format();
+                this.date = $event.target['date'].hour(this.__hour).minute(this.__minute).format();
                 this.__current = $event.target['date'];
                 this.__changeDates();
                 if (this.element.classList.contains('floating'))
                     this.showing = false;
             }
+        };
+        UIDateView.prototype.timePanelClick = function ($event) {
+            if ($event.target.classList.contains('disabled') ||
+                $event.target.classList.contains('selected')) {
+                return;
+            }
+            else if ($event.target.classList.contains('uphour')) {
+                this.__hour = ++this.__hour > 23 ? 0 : this.__hour;
+            }
+            else if ($event.target.classList.contains('downhour')) {
+                this.__hour = --this.__hour < 0 ? 23 : this.__hour;
+            }
+            else if ($event.target.classList.contains('upmin')) {
+                this.__minute = this.__minute + 5 > 55 ? 0 : this.__minute + 5;
+            }
+            else if ($event.target.classList.contains('downmin')) {
+                this.__minute = this.__minute - 5 < 0 ? 55 : this.__minute - 5;
+            }
+            this.date = ui_utils_1.moment(this.date).hour(this.__hour).minute(this.__minute).format();
         };
         UIDateView.prototype.__changeDates = function () {
             this.__current.startOf('month');
@@ -181,6 +207,10 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "./ui-da
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
             __metadata('design:type', Object)
         ], UIDateView.prototype, "showing", void 0);
+        __decorate([
+            aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
+            __metadata('design:type', Object)
+        ], UIDateView.prototype, "time", void 0);
         UIDateView = __decorate([
             aurelia_framework_1.autoinject(),
             aurelia_framework_1.customElement('ui-date-view'), 

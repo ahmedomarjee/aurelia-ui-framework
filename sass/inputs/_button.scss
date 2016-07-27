@@ -41,6 +41,7 @@
     border-radius : $base-border-radius;
     @include box-shadow(2px 2px 4px 0 $base-shadow-color);
     @include button-style(default, $button-default-bg, $button-default-text);
+    @include button-style(secondary, $secondary, $secondary-text);
     @include button-style(primary, $button-primary-bg, $button-primary-text);
     @include button-style(info, $button-info-bg, $button-info-text);
     @include button-style(danger, $button-danger-bg, $button-danger-text);

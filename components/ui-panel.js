@@ -100,6 +100,8 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-event"], functio
                 this.element.classList.add('ui-scroll');
             if (this.element.hasAttribute('padded'))
                 this.element.classList.add('ui-pad-all');
+            if (this.element.hasAttribute('flex'))
+                this.element.classList.add('ui-flexed');
         }
         UIBody.prototype.expand = function ($event) {
             if ($event)

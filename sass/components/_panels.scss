@@ -35,6 +35,11 @@
 			opacity: 1;
 		}
 
+		&.ui-button {
+			padding   : .2em;
+			box-shadow: none !important;
+		}
+
 		&.ui-close {
 			font-size: .5em;
 		}
@@ -44,8 +49,7 @@
 		}
 
 		&.ui-expand span:before {
-			content    : '\e0a5';
-			font-family: Vaadin;
+			content: $font-ui-panel-expand;
 		}
 
 		&.ui-collapse span:before {
@@ -98,9 +102,12 @@
 		display   : block;
 
 		max-height: 40em;
-		padding   : 0 !important;
 		@include transition(all .5s);
 		@include flex(0 0 auto);
+
+		&.ui-chart-body {
+			max-height: inherit;
+		}
 	}
 
 	&.ui-collapse {
@@ -108,6 +115,7 @@
 
 		> .ui-panel-body {
 			max-height: 0;
+			padding   : 0 !important;
 		}
 
 		button.ui-collapse span:before {
@@ -117,7 +125,7 @@
 
 	&.ui-expanded {
 		.ui-header .ui-expand span:before {
-			content: $font-ui-arrow-up;
+			content: $font-ui-panel-restore;
 		}
 		@include position(fixed, 0, 0, 0, 0);
 		margin : 1em;

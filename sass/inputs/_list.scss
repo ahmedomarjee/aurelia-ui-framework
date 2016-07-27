@@ -86,7 +86,7 @@
         position: relative;
 
         .ui-list-item {
-            cursor: default;
+            cursor: move;
 
             &:hover {
                 background: none;
@@ -97,7 +97,7 @@
             }
 
             > .ui-icon {
-                cursor: pointer;
+                // cursor: pointer;
             }
         }
 

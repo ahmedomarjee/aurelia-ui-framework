@@ -62,8 +62,10 @@
     position        : relative;
     color           : $sidebar-text;
     background-color: $sidebar-bg;
+    overflow        : hidden;
     @include flex(0 0 auto);
     @include transition(width 0.5s);
+    @include flex-column();
 
     &:first-child {
         @include border(end, 1px solid $base-border-color);
@@ -84,18 +86,20 @@
     }
 
     .ui-sidebar-content {
-        height: 100%;
-        @include scroll();
+        @include flex(1 1 0);
+        // @include scroll();
     }
 
     &.collapse {
-        width: 2em !important;
+        width   : 2em !important;
+        overflow: visible;
 
         .ui-sidebar-content {
             position        : absolute;
             top             : 0;
             left            : -20em;
             width           : 20em;
+            bottom          : 0;
             z-index         : $z-index-floating;
             background-color: rgba($sidebar-bg, 1);
             @include transition(left 0.5s, right 0.5s);

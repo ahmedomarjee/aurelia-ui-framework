@@ -4,22 +4,17 @@
  *	@company	HMC
  *  @copyright 	2015-2016, Adarsh Pastakia
  **/
-@mixin grid-columns($prefix, $size)
-{
-    @media only screen and (min-width : $size)
-    {
-        @for $i from 1 through 12
-        {
-            > .ui-col-#{$prefix}-#{$i}
-            {
+@mixin grid-columns($prefix, $size) {
+     @media only screen and (min-width : $size){
+        @for $i from 1 through 12 {
+            > .ui-col-#{$prefix}-#{$i} {
                 @include flex(0 0 (($i/12)*100%));
             }
         }
     }
 }
 
-.ui-row
-{
+.ui-row {
     @include flex-row(flex-start);
     @include grid-columns(xs, $grid-xs-min);
     @include grid-columns(sm, $grid-sm-min);
@@ -28,84 +23,76 @@
     @include grid-columns(xl, $grid-xl-min);
 }
 
-.ui-column-row
-{
+.ui-column-row {
     @include flex-column();
 }
 
-.ui-row,
-.ui-column-row
-{
-    &.ui-align-top
-    {
+.ui-column-row,
+.ui-row {
+    &.ui-align-top {
         @include align-items(flex-start);
     }
-    &.ui-align-middle
-    {
+
+    &.ui-align-middle {
         @include align-items(center);
     }
-    &.ui-align-bottom
-    {
+
+    &.ui-align-bottom {
         @include align-items(flex-end);
     }
-    &.ui-align-stretch
-    {
+
+    &.ui-align-stretch {
         @include align-items(stretch);
     }
 
-    &.ui-align-start
-    {
+    &.ui-align-start {
         @include justify-content(flex-start);
     }
-    &.ui-align-center
-    {
+
+    &.ui-align-center {
         @include justify-content(center);
     }
-    &.ui-align-end
-    {
+
+    &.ui-align-end {
         @include justify-content(flex-end);
     }
-    &.ui-align-spaced
-    {
+
+    &.ui-align-spaced {
         @include justify-content(space-around);
     }
 }
 
-.ui-column
-{
-    display: block;
-
+.ui-column {
+    &:not(.ui-column-row) {
+        display: block;
+    }
     @include flex(0 0 100%);
 
-    &.ui-align-top
-    {
+    &.ui-align-top {
         @include align-self(flex-start);
     }
-    &.ui-align-middle
-    {
+
+    &.ui-align-middle {
         @include align-self(center);
     }
-    &.ui-align-bottom
-    {
+
+    &.ui-align-bottom {
         @include align-self(flex-end);
     }
-    &.ui-align-stretch
-    {
+
+    &.ui-align-stretch {
         @include align-self(stretch);
     }
 }
 
-.ui-col-auto
-{
+.ui-col-auto {
     @include flex(0 0 auto);
 }
 
-.ui-col-fill
-{
+.ui-col-fill {
     @include flex(1 1 0);
 }
 
-.ui-col-full
-{
+.ui-col-full {
     @include flex(1 1 100%);
 }

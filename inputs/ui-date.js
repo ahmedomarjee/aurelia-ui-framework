@@ -30,6 +30,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             this.options = new UIDateOptions();
             this.__dateStart = new UIDateOptions();
             this.__dateEnd = new UIDateOptions();
+            this.showTime = false;
         }
         UIDate.prototype.bind = function () {
             _super.prototype.bind.call(this);
@@ -38,6 +39,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             Object.assign(this.__dateStart, this.options);
             Object.assign(this.__dateEnd, this.options);
             this.dateChanged(this.date);
+            this.showTime = this.format.toLowerCase().indexOf('hh:mm') > 0;
             if (this.__dual) {
                 this.dateEndChanged(this.dateEnd);
                 this.__dateEnd.minDate = this.date;

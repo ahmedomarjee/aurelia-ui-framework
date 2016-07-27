@@ -46,6 +46,20 @@
 				</div>
 			</div>
 		</div>
-		<div></div>
+		<div class="ui-time-wrapper" click.delegate="timePanelClick($event)" if.bind="time">
+			<div ref="__time" class="ui-time">
+				<div>
+					<span class="fi-ui-arrow-up uphour"></span>
+					<span class="ui-hour">${__hour | number:'{00}'}</span>
+					<span class="fi-ui-arrow-down downhour"></span>
+				</div>
+				<div class="ui-sep">:</div>
+				<div>
+					<span class="fi-ui-arrow-up upmin"></span>
+					<span class="ui-min">${__minute | number:'{00}'}</span>
+					<span class="fi-ui-arrow-down downmin"></span>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>

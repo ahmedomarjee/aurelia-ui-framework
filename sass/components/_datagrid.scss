@@ -17,7 +17,7 @@
     }
 
     .ui-ghost {
-        z-index: 20;
+        z-index: 50;
         @include position(absolute);
 
         &.resize {
@@ -43,178 +43,201 @@
     }
 
     .ui-datagrid-wrapper {
-        @include position(absolute, 0, 0, 0, 0);
-        @include scroll();
+        @include flex-row($align:stretch,$wrap:false);
+        max-height: 100%;
 
-         > table > thead,
-        > table > tfoot {
-            z-index: 20;
-            @include sticky();
-        }
+        > .ui-table-wrapper {
+            @include flex(1 1 0);
+            height: 100%;
 
-        > table {
-            min-width   : 100%;
-            min-height  : 100%;
-            table-layout: fixed;
-
-            > thead {
-                top: 0;
-            }
-
-            > tfoot {
-                bottom: -1px;
-            }
-
-            > tbody {
-                z-index: 10;
-
-                tr:nth-of-type(odd) > td {
-                    background-color: $datagrid-odd-bg;
-                }
-
-                tr:nth-of-type(even) > td {
-                    background-color: $datagrid-even-row;
-                }
-
-                tr:last-child {
-                    height: 100%;
-
-                     > td,
-                    > td > div {
-                        height     : 100%;
-                        padding    : 0;
-                        line-height: 0;
-                        min-height : 0;
-                    }
-                }
-
-                tr.ui-ghost {
-                    visibility: hidden;
-                }
-
-                tr.ui-datagrid-row:hover > td {
-                    background-color: rgba($secondary, .5);
-                }
-            }
-
-            td {
-                > div {
-                    line-height   : 1.5;
-                    padding       : .35em .5em;
-                    vertical-align: middle;
-                    color         : $datagrid-text;
-                    border-right  : 1px solid rgba($base-border-color, .2);
-                    @include text-truncate();
-
-                    &.ui-button-bar {
-                        padding: .1em;
-
-                        .fi-ui-view:before {
-                            content: $datagrid-button-view;
-                        }
-
-                        .fi-ui-edit:before {
-                            content: $datagrid-button-edit;
-                        }
-
-                        .fi-ui-delete:before {
-                            content: $datagrid-button-delete;
-                        }
-                    }
-
-                    a {
-                        font-weight: $font-weight-normal;
-                    }
-                }
-            }
-
-            td.sticky {
-                z-index: 10;
-                left   : 0;
+            &.sticky {
+                z-index   : 30;
+                left      : 0;
+                background: $base-bg;
                 @include sticky();
-
-                &.last-of-type > div {
-                    border-right: 1px solid $base-border-color !important;
-                }
+                @include flex(0 0 auto);
+                // border-right: 1px solid $base-border-color !important;
             }
 
-            thead td {
-                > div {
-                    padding      : 0;
-                    border-bottom: 1px solid $base-border-color;
-                    background   : $datagrid-header-bg;
-                    @include flex-row(stretch);
+            .ui-locked-table td:last-child {
+                border-right: 1px solid $base-border-color !important;
+            }
 
-                    > span:first-child {
-                        padding: .3em .5em;
-                        @include flex(1 1 0);
+             > table > tfoot,
+            > table > thead {
+                z-index: 20;
+                @include sticky();
+            }
 
-                        &.sortable {
-                            position     : relative;
-                            padding-right: 1.2em;
-                            cursor       : pointer;
+            > table {
+                min-width   : 100%;
+                min-height  : 100%;
+                table-layout: fixed;
 
-                            &:hover {
-                                background-color: $datagrid-header-hover-bg;
+                > thead {
+                    top: 0;
+                }
+
+                > tfoot {
+                    bottom: -1px;
+                }
+
+                > tbody {
+                    z-index: 10;
+
+                    tr:nth-of-type(odd) > td {
+                        background-color: $datagrid-odd-bg;
+                    }
+
+                    tr:nth-of-type(even) > td {
+                        background-color: $datagrid-even-row;
+                    }
+
+                    tr:last-child {
+                        height: 100%;
+
+                         > td > div,
+                        > td {
+                            height     : 100%;
+                            padding    : 0;
+                            line-height: 0;
+                            min-height : 0;
+                        }
+                    }
+
+                    tr.ui-ghost {
+                        visibility: hidden;
+                    }
+
+                    tr.ui-datagrid-row.focus > td {
+                        background-color: rgba($secondary, .5);
+                    }
+                }
+
+                td {
+                    > div {
+                        line-height   : 1.5;
+                        padding       : .35em .5em;
+                        vertical-align: middle;
+                        color         : $datagrid-text;
+                        border-right  : 1px solid rgba($base-border-color, .2);
+
+                        &:not(.ui-button-bar) {
+                            @include text-truncate();
+                        }
+
+                        &.ui-button-bar {
+                            padding    : .1em;
+                            white-space: nowrap;
+                            position   : relative;
+
+                            .fi-ui-view:before {
+                                content: $datagrid-button-view;
                             }
 
-                            &:before {
-                                font-family: Framework;
-                                font-weight: $font-weight-normal;
-                                display    : block;
-                                width      : 1em;
-                                content    : $font-ui-sort-asc;
-                                color      : rgba($datagrid-indicator-color, .3);
-                                @include position(absolute, $t: 0, $r : 0);
+                            .fi-ui-edit:before {
+                                content: $datagrid-button-edit;
                             }
 
-                            &:after {
-                                font-family: Framework;
-                                font-weight: $font-weight-normal;
-                                display    : block;
-                                width      : 1em;
-                                content    : $font-ui-sort-desc;
-                                color      : rgba($datagrid-indicator-color, .3);
-                                @include position(absolute, $b: 0, $r : 0);
+                            .fi-ui-delete:before {
+                                content: $datagrid-button-delete;
                             }
+                        }
 
-                            &.asc:before {
-                                color: $datagrid-indicator-color;
+                        a {
+                            font-weight: $font-weight-normal;
+                        }
+                    }
+                }
+
+                td.sticky {
+                    // z-index: 10;
+                    // left   : 0;
+                    // //@include sticky();
+                    //
+                    // &.last-of-type > div {
+                    //     border-right: 1px solid $base-border-color !important;
+                    // }
+                }
+
+                thead td {
+                    > div {
+                        padding      : 0;
+                        border-bottom: 1px solid $base-border-color;
+                        background   : $datagrid-header-bg;
+                        @include flex-row(stretch);
+
+                        > span:first-child {
+                            padding: .3em .5em;
+                            @include flex(1 1 0);
+
+                            &.sortable {
+                                position     : relative;
+                                padding-right: 1.2em;
+                                cursor       : pointer;
+
+                                &:hover {
+                                    background-color: $datagrid-header-hover-bg;
+                                }
+
+                                &:before {
+                                    font-family: Framework;
+                                    font-weight: $font-weight-normal;
+                                    display    : block;
+                                    width      : 1em;
+                                    content    : $font-ui-sort-asc;
+                                    color      : rgba($datagrid-indicator-color, .3);
+                                    @include position(absolute, $t: 0, $r : 0);
+                                }
+
+                                &:after {
+                                    font-family: Framework;
+                                    font-weight: $font-weight-normal;
+                                    display    : block;
+                                    width      : 1em;
+                                    content    : $font-ui-sort-desc;
+                                    color      : rgba($datagrid-indicator-color, .3);
+                                    @include position(absolute, $b: 0, $r : 0);
+                                }
+
+                                &.asc:before {
+                                    color: $datagrid-indicator-color;
+                                }
+
+                                &.desc:after {
+                                    color: $datagrid-indicator-color;
+                                }
                             }
+                        }
 
-                            &.desc:after {
-                                color: $datagrid-indicator-color;
+                        > span.resizer {
+                            margin-left: 4px;
+                            @include flex(0 0 1px);
+
+                            &.enable {
+                                cursor      : ew-resize;
+                                border-right: 1px solid lighten($base-border-color, 30%);
+                                border-left : 1px solid $base-border-color;
                             }
                         }
                     }
 
-                    > span.resizer {
-                        margin-left: 4px;
-                        @include flex(0 0 1px);
+                    tr:hover:not(.active) > td > div {
+                        background-color: $datagrid-hover-bg;
+                        @include transition(background .2s linear .5s);
+                    }
 
-                        &.enable {
-                            cursor      : ew-resize;
-                            border-right: 1px solid lighten($base-border-color, 30%);
-                            border-left : 1px solid $base-border-color;
-                        }
+                    tr.active > td > div {
+                        background-color: $datagrid-active-bg;
+                        @include transition(background .05s linear 0s);
                     }
                 }
 
-                tr:hover:not(.active) > td > div {
-                    background-color: $datagrid-hover-bg;
-                    @include transition(background .2s linear .5s);
-                }
-
-                tr.active > td > div {
-                    background-color: $datagrid-active-bg;
-                    @include transition(background .05s linear 0s);
-                }
-            }
-
-            tfoot td {
-                > div {
-                    border-top: 1px solid $base-border-color;
-                    background: $datagrid-footer-bg;
+                tfoot td {
+                    > div {
+                        border-top: 1px solid $base-border-color;
+                        background: $datagrid-footer-bg;
+                    }
                 }
             }
         }
@@ -222,6 +245,11 @@
 
     &.ui-auto-height > .ui-datagrid-wrapper {
         position: static;
+    }
+
+    &:not(.ui-auto-height) > .ui-datagrid-wrapper {
+        @include scroll();
+        @include position(absolute, 0, 0, 0, 0);
     }
 }
 
