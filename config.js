@@ -8,7 +8,7 @@ System.config({
   },
 
   map: {
-    "amcharts/amcharts3": "github:amcharts/amcharts3@3.20.9",
+    "amcharts": "github:amcharts/amcharts3@3.20.9",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-rc.1.0.1",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.0-rc.1.0.0",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-rc.1.0.1",

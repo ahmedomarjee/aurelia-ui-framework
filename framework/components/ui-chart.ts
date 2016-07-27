@@ -6,18 +6,17 @@
  **/
 import {autoinject, customElement, bindable, useView, bindingMode, inlineView, BindingEngine} from "aurelia-framework";
 import {_} from "../utils/ui-utils";
-import "amcharts/amcharts3";
-import "amcharts/amcharts3/amcharts/pie";
-import "amcharts/amcharts3/amcharts/serial";
-import "amcharts/amcharts3/amcharts/themes/light";
-import "amcharts/amcharts3/amcharts/plugins/export/export";
-import "amcharts/amcharts3/amcharts/plugins/export/export.css!";
+import "amcharts/amcharts/amcharts";
+import "amcharts/amcharts/pie";
+import "amcharts/amcharts/serial";
+import "amcharts/amcharts/themes/light";
+import "amcharts/amcharts/plugins/export/export";
+// import "amcharts/amcharts/plugins/export/export.css!";
 // import "amcharts/amcharts3/amcharts/plugins/export/libs/blob.js/blob";
 // import "amcharts/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric";
 // import "amcharts/amcharts3/amcharts/plugins/export/libs/jszip/jszip";
 // import "amcharts/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake";
 // import "amcharts/amcharts3/amcharts/plugins/export/libs/xlsx/xlsx";
-import "fabric";
 
 export class UIChart {
 	static CHART_RED = ["#7C2722", "#A73A21", "#DA3926", "#DE4834", "#E46A6A", "#EB898C", "#ED969B"];

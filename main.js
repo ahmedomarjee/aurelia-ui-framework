@@ -1,8 +1,9 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "fetch", "fabric"], function (require, exports) {
     "use strict";
     function configure(aurelia) {
         aurelia.use
             .standardConfiguration()
+            .developmentLogging()
             .plugin('aurelia-validation')
             .plugin('aurelia-validatejs')
             .feature('./framework', function (config) {

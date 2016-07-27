@@ -9,7 +9,6 @@ import {HttpClient, json} from "aurelia-fetch-client";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {UIApplication} from "./ui-application";
 import {Response} from "fetch";
-import "fetch";
 
 @autoinject()
 export class UIHttpService {

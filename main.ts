@@ -1,9 +1,11 @@
 import {Aurelia} from "aurelia-framework";
+import "fetch";
+import "fabric";
 
 export function configure(aurelia: Aurelia) {
 	aurelia.use
 		.standardConfiguration()
-		// .developmentLogging()
+		.developmentLogging()
 		.plugin('aurelia-validation')
 		.plugin('aurelia-validatejs')
 		.feature('./framework', function(config) {

@@ -9,9 +9,9 @@ jspm install fetch
 jspm install lodash
 jspm install moment
 jspm install numeral
-jspm install amcharts/amcharts3
 jspm install aurelia-bootstrapper
 jspm install aurelia-validation
 jspm install aurelia-fetch-client
+jspm install amcharts=github:amcharts/amcharts3
 
 typings install
