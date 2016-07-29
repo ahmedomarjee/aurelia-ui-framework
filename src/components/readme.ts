@@ -13,7 +13,7 @@ export class ReadMe {
 
   activate() {
     return this.httpClient
-      .text('./src/components/README.md')
+      .text('./markdown/components/README.md')
       .then(resp=> this.readme = resp)
   }
 
