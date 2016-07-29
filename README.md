@@ -22,6 +22,8 @@ AureliaUIFramework
 
 #### Getting Started
 
+> To use the framework with `aurelia-cli` download https://github.com/adarshpastakia/aurelia-ui-framework/archive/skeleton-cli.zip and follow the instructions in its `README.md`
+
 -	Download the [skeleton project](https://github.com/adarshpastakia/aurelia-ui-framework/archive/skeleton.zip).
 -	Run `init.sh` on Mac/Linux or `init.bat` on windows.
 -	Incase you dont want to change the default styles, pre-compiled stylesheets are included in the skeleton project.

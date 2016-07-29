@@ -12,7 +12,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amcharts/amcharts3", "amcharts/amcharts3/amcharts/pie", "amcharts/amcharts3/amcharts/serial", "amcharts/amcharts3/amcharts/themes/light", "amcharts/amcharts3/amcharts/plugins/export/export", "amcharts/amcharts3/amcharts/plugins/export/export.css!", "fabric"], function (require, exports, aurelia_framework_1, ui_utils_1) {
+define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amcharts/amcharts/amcharts", "amcharts/amcharts/pie", "amcharts/amcharts/serial", "amcharts/amcharts/themes/light", "amcharts/amcharts/plugins/export/export"], function (require, exports, aurelia_framework_1, ui_utils_1) {
     "use strict";
     var UIChart = (function () {
         function UIChart() {

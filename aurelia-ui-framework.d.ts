@@ -1,11 +1,11 @@
 declare module "aurelia-ui-framework" {
-	import * as _ from "lodash";
-	import * as moment from "moment";
-	import * as numeral from "numeral";
+	import * as ld from "lodash";
+	import * as mm from "moment";
+	import * as nm from "numeral";
 
-	export var _: _.LoDashStatic;
-	export var moment: moment.MomentStatic;
-	export var numeral: numeral.Numeral;
+	export var _: ld.LoDashStatic;
+	export var moment: mm.MomentStatic;
+	export var numeral: nm.Numeral;
 }
 
 declare interface UIBarOptions {
