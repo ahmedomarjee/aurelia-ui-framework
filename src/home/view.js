@@ -219,7 +219,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index", "./m
         Home.prototype.canActivate = function (model) {
             var _this = this;
             return this.httpClient
-                .text('./src/home/example.md')
+                .text('./markdown/example.md')
                 .then(function (resp) { return _this.md = resp; });
         };
         Home.prototype.onSubmit = function () {

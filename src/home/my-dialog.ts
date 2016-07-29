@@ -18,7 +18,7 @@ export class MyDialog extends UIDialog {
 	canActivate(model) {
 		this.modal = (model || { modal: false }).modal;
 		return this.httpClient
-			.text('./src/home/example.md')
+			.text('./markdown/example.md')
 			.then(resp => this.md = resp)
 	}
 

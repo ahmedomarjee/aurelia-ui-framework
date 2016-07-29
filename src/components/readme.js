@@ -17,7 +17,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index"], fun
         ReadMe.prototype.activate = function () {
             var _this = this;
             return this.httpClient
-                .text('./src/components/README.md')
+                .text('./markdown/components/README.md')
                 .then(function (resp) { return _this.readme = resp; });
         };
         ReadMe.prototype.attached = function () {

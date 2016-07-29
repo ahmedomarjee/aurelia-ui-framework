@@ -29,7 +29,7 @@ define(["require", "exports", "aurelia-framework", "../../framework/index"], fun
             var _this = this;
             this.modal = (model || { modal: false }).modal;
             return this.httpClient
-                .text('./src/home/example.md')
+                .text('./markdown/example.md')
                 .then(function (resp) { return _this.md = resp; });
         };
         MyDialog.i = 1;

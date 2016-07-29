@@ -19,7 +19,6 @@
     "noLib": false
   },
   "files": [
-    "main.ts",
     "src/app.ts",
     "src/components/home.ts",
     "src/components/readme.ts",
@@ -37,6 +36,7 @@
     "src/inputs/readme.ts",
     "src/inputs/view.ts",
     "src/login/view.ts",
+    "src/main.ts",
     "src/utils/readme.ts",
     "src/utils/view.ts",
     "framework/aurelia-ui-framework.d.ts",
