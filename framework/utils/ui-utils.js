@@ -1,4 +1,4 @@
-define(["require", "exports", "lodash", "moment", "numeral", "aurelia-framework"], function (require, exports, ld, mm, nm, aurelia_framework_1) {
+define(["require", "exports", "lodash", "moment", "numeral", "aurelia-framework", "amcharts/amcharts/amcharts"], function (require, exports, ld, mm, nm, aurelia_framework_1) {
     "use strict";
     exports._ = ld;
     exports.moment = mm;
@@ -45,6 +45,34 @@ define(["require", "exports", "lodash", "moment", "numeral", "aurelia-framework"
             value: {}
         }
     });
+    var UIChartStatic;
+    (function (UIChartStatic) {
+        UIChartStatic.CHART_RED = ["#7C2722", "#A73A21", "#DA3926", "#DE4834", "#E46A6A", "#EB898C", "#ED969B"];
+        UIChartStatic.CHART_PINK = ["#80364B", "#AA2D52", "#C8235D", "#DE2265", "#E66395", "#EB7FA5", "#EF96B2"];
+        UIChartStatic.CHART_BLUE = ["#127BB3", "#2094C6", "#68B7DC", "#7EC1DC", "#B0D9E4", "#B8DEE5", "#DCEBE6"];
+        UIChartStatic.CHART_GREEN = ["#0A4D44", "#118173", "#179987", "#1CB4A1", "#3BBCAD", "#67C4B8", "#96D5CC"];
+        UIChartStatic.CHART_ORANGE = ["#6F3610", "#944216", "#BD521B", "#F56B23", "#FC954F", "#FDB27E", "#FBCEA8"];
+        UIChartStatic.CHART_VIOLET = ["#4E2354", "#602A82", "#732F97", "#86509F", "#9B65A7", "#BA87BD", "#CBA2CA"];
+        UIChartStatic.CHART_SPECTRUM = ["#850509", "#CB2515", "#E2491A", "#FE7722", "#FE9C27", "#FFCD42", "#FFEE54"];
+        UIChartStatic.CHART_DEFAULT = ["#D53530", "#EF6B28", "#9D6E4B", "#EDEC47", "#5DAF43", "#38D046", "#279F79", "#5AC5C4", "#338EBD", "#375FA7", "#7C53A2", "#A6216A", "#DF8097"];
+        UIChartStatic.CHART_PIE = ["#B52F30", "#F68F31", "#8FC649", "#A0C4C8", "#A54797", "#977E6D", "#954D43", "#FBCC2E", "#5C8158", "#5D86A3", "#B10D5F", "#0E6BA8", "#0B6848"];
+        function init() {
+            var colors = { red: 'CHART_RED', pink: 'CHART_PINK', blue: 'CHART_BLUE', green: 'CHART_GREEN', orange: 'CHART_ORANGE', violet: 'CHART_VIOLET', spectrum: 'CHART_SPECTRUM', default: 'CHART_DEFAULT', pie: 'CHART_PIE' };
+            exports._.forEach(colors, function (v, k) {
+                AmCharts['themes'][k] = Object.assign({}, AmCharts['themes'].light, {
+                    themeName: k,
+                    AmCoordinateChart: {
+                        colors: UIChartStatic[v]
+                    },
+                    AmStockChart: {
+                        colors: UIChartStatic[v]
+                    }
+                });
+            });
+            AmCharts['theme'] = AmCharts['themes'].default;
+        }
+        UIChartStatic.init = init;
+    })(UIChartStatic = exports.UIChartStatic || (exports.UIChartStatic = {}));
     var UIUtils;
     (function (UIUtils) {
         var __container;

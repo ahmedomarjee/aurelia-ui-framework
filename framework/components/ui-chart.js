@@ -17,30 +17,6 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
     var UIChart = (function () {
         function UIChart() {
         }
-        UIChart.init = function () {
-            var colors = { red: 'CHART_RED', pink: 'CHART_PINK', blue: 'CHART_BLUE', green: 'CHART_GREEN', orange: 'CHART_ORANGE', violet: 'CHART_VIOLET', spectrum: 'CHART_SPECTRUM', default: 'CHART_DEFAULT', pie: 'CHART_PIE' };
-            ui_utils_1._.forEach(colors, function (v, k) {
-                AmCharts['themes'][k] = Object.assign({}, AmCharts['themes'].light, {
-                    themeName: k,
-                    AmCoordinateChart: {
-                        colors: UIChart[v]
-                    },
-                    AmStockChart: {
-                        colors: UIChart[v]
-                    }
-                });
-            });
-            AmCharts['theme'] = AmCharts['themes'].default;
-        };
-        UIChart.CHART_RED = ["#7C2722", "#A73A21", "#DA3926", "#DE4834", "#E46A6A", "#EB898C", "#ED969B"];
-        UIChart.CHART_PINK = ["#80364B", "#AA2D52", "#C8235D", "#DE2265", "#E66395", "#EB7FA5", "#EF96B2"];
-        UIChart.CHART_BLUE = ["#127BB3", "#2094C6", "#68B7DC", "#7EC1DC", "#B0D9E4", "#B8DEE5", "#DCEBE6"];
-        UIChart.CHART_GREEN = ["#0A4D44", "#118173", "#179987", "#1CB4A1", "#3BBCAD", "#67C4B8", "#96D5CC"];
-        UIChart.CHART_ORANGE = ["#6F3610", "#944216", "#BD521B", "#F56B23", "#FC954F", "#FDB27E", "#FBCEA8"];
-        UIChart.CHART_VIOLET = ["#4E2354", "#602A82", "#732F97", "#86509F", "#9B65A7", "#BA87BD", "#CBA2CA"];
-        UIChart.CHART_SPECTRUM = ["#850509", "#CB2515", "#E2491A", "#FE7722", "#FE9C27", "#FFCD42", "#FFEE54"];
-        UIChart.CHART_DEFAULT = ["#D53530", "#EF6B28", "#9D6E4B", "#EDEC47", "#5DAF43", "#38D046", "#279F79", "#5AC5C4", "#338EBD", "#375FA7", "#7C53A2", "#A6216A", "#DF8097"];
-        UIChart.CHART_PIE = ["#B52F30", "#F68F31", "#8FC649", "#A0C4C8", "#A54797", "#977E6D", "#954D43", "#FBCC2E", "#5C8158", "#5D86A3", "#B10D5F", "#0E6BA8", "#0B6848"];
         return UIChart;
     }());
     exports.UIChart = UIChart;
@@ -236,28 +212,28 @@ define(["require", "exports", "aurelia-framework", "../utils/ui-utils", "amchart
             this.__options.type = "pie";
             switch (this.theme) {
                 case 'red':
-                    this.__options.colors = UIChart.CHART_RED;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_RED;
                     break;
                 case 'pink':
-                    this.__options.colors = UIChart.CHART_PINK;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_PINK;
                     break;
                 case 'blue':
-                    this.__options.colors = UIChart.CHART_BLUE;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_BLUE;
                     break;
                 case 'green':
-                    this.__options.colors = UIChart.CHART_GREEN;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_GREEN;
                     break;
                 case 'orange':
-                    this.__options.colors = UIChart.CHART_ORANGE;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_ORANGE;
                     break;
                 case 'violet':
-                    this.__options.colors = UIChart.CHART_VIOLET;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_VIOLET;
                     break;
                 case 'spectrum':
-                    this.__options.colors = UIChart.CHART_SPECTRUM;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_SPECTRUM;
                     break;
                 default:
-                    this.__options.colors = UIChart.CHART_PIE;
+                    this.__options.colors = ui_utils_1.UIChartStatic.CHART_PIE;
                     break;
             }
             this.__options.addClassNames = true;

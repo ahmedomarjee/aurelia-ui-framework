@@ -8,6 +8,7 @@ import * as ld from "lodash";
 import * as mm from "moment";
 import * as nm from "numeral";
 import {Lazy, Container, NewInstance, ViewCompiler, ViewResources, ViewSlot} from "aurelia-framework";
+import "amcharts/amcharts/amcharts";
 
 export var _ = ld;
 export var moment = mm;
@@ -55,6 +56,33 @@ Object.defineProperties(window, {
 	}
 });
 
+export module UIChartStatic {
+	export var CHART_RED = ["#7C2722", "#A73A21", "#DA3926", "#DE4834", "#E46A6A", "#EB898C", "#ED969B"];
+	export var CHART_PINK = ["#80364B", "#AA2D52", "#C8235D", "#DE2265", "#E66395", "#EB7FA5", "#EF96B2"];
+	export var CHART_BLUE = ["#127BB3", "#2094C6", "#68B7DC", "#7EC1DC", "#B0D9E4", "#B8DEE5", "#DCEBE6"];
+	export var CHART_GREEN = ["#0A4D44", "#118173", "#179987", "#1CB4A1", "#3BBCAD", "#67C4B8", "#96D5CC"];
+	export var CHART_ORANGE = ["#6F3610", "#944216", "#BD521B", "#F56B23", "#FC954F", "#FDB27E", "#FBCEA8"];
+	export var CHART_VIOLET = ["#4E2354", "#602A82", "#732F97", "#86509F", "#9B65A7", "#BA87BD", "#CBA2CA"];
+	export var CHART_SPECTRUM = ["#850509", "#CB2515", "#E2491A", "#FE7722", "#FE9C27", "#FFCD42", "#FFEE54"];
+	export var CHART_DEFAULT = ["#D53530", "#EF6B28", "#9D6E4B", "#EDEC47", "#5DAF43", "#38D046", "#279F79", "#5AC5C4", "#338EBD", "#375FA7", "#7C53A2", "#A6216A", "#DF8097"];
+	export var CHART_PIE = ["#B52F30", "#F68F31", "#8FC649", "#A0C4C8", "#A54797", "#977E6D", "#954D43", "#FBCC2E", "#5C8158", "#5D86A3", "#B10D5F", "#0E6BA8", "#0B6848"];
+
+	export function init() {
+		let colors = { red: 'CHART_RED', pink: 'CHART_PINK', blue: 'CHART_BLUE', green: 'CHART_GREEN', orange: 'CHART_ORANGE', violet: 'CHART_VIOLET', spectrum: 'CHART_SPECTRUM', default: 'CHART_DEFAULT', pie: 'CHART_PIE' }
+		_.forEach(colors, (v, k) => {
+			AmCharts['themes'][k] = Object.assign({}, AmCharts['themes'].light, {
+				themeName: k,
+				AmCoordinateChart: {
+					colors: UIChartStatic[v]
+				},
+				AmStockChart: {
+					colors: UIChartStatic[v]
+				}
+			});
+		});
+		AmCharts['theme'] = AmCharts['themes'].default;
+	}
+}
 
 export module UIUtils {
 	var __container: Container;

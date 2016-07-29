@@ -7,6 +7,7 @@
 import {customElement, bindable, bindingMode, autoinject} from "aurelia-framework";
 import {UIInputGroup} from "./ui-input-group";
 import {_, UIUtils} from "../utils/ui-utils";
+import {UIApplication} from "../utils/ui-application";
 import {UIEvent} from "../utils/ui-event";
 
 @autoinject
@@ -18,32 +19,9 @@ export class UILanguage extends UIInputGroup {
 	__languages;
 	__available;
 
+	static LANGUAGES = UIApplication.defaults.Languages;
 
-	static LANGUAGES = [
-		{ id: 'ar', name: 'العربية (Arabic)', rtl: true },
-		{ id: 'de', name: 'Deutsche (German)' },
-		{ id: 'el', name: 'ελληνικά (Greek)' },
-		{ id: 'en', name: 'English' },
-		{ id: 'es', name: 'Español (Spanish)' },
-		{ id: 'fr', name: 'Français (French)' },
-		{ id: 'hi', name: 'हिंदी (Hindi)' },
-		{ id: 'id', name: 'Bahasa (Indonesia)' },
-		{ id: 'it', name: 'Italiano (Italian)' },
-		{ id: 'ja', name: '日本 (Japanese)' },
-		{ id: 'ko', name: '한국어 (Korean)' },
-		{ id: 'ms', name: 'Malay (Malaysian)' },
-		{ id: 'nl', name: 'Nederlands (Dutch)' },
-		{ id: 'pt', name: 'Português (Portuguese)' },
-		{ id: 'pt-br', name: 'Português (Brasil)' },
-		{ id: 'ru', name: 'Русский (Russian)' },
-		{ id: 'th', name: 'ภาษาไทย (Thai)' },
-		{ id: 'tl', name: 'Tagalog (Philipines)' },
-		{ id: 'tw', name: '繁體中文 (Traditional Chinese)' },
-		{ id: 'vi', name: 'Tiếng Việt (Vietnamese)' },
-		{ id: 'zh', name: '简体中文 (Simplified Chinese)' }
-	];
-
-	constructor(element: Element) {
+	constructor(element: Element, app: UIApplication) {
 		super(element);
 	}
 

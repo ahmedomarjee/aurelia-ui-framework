@@ -107,35 +107,37 @@
           <a target="_blank" href="https://docs.amcharts.com/3/javascriptcharts/AmChart">
             docs</a>
         </p>
-        <pre class="ui-markdown">
-<xmp class="lang-html html hljs xml">
-<ui-chart chart-title="" chart-options="<AmChart Options>" height="<number>">
-<!-- panel header buttons -->
-</ui-chart>
-</xmp>
-</pre>
+        <ui-md-view html>
+          <xmp>
+            <ui-chart chart-title="" chart-options="<AmChart Options>" height="<number>">
+              <!-- panel header buttons -->
+            </ui-chart>
+          </xmp>
+        </ui-md-view>
         <p>&nbsp;</p>
       </div>
       <hr/>
       <div>
         <h3>Bar Chart Element</h3>
-        <pre class="ui-markdown">
-<xmp class="lang-html html hljs xml">
-<ui-bar chart-title="" chart-options="UIBarChartOptions" height="<number>" chart-data="?">
-<!-- panel header buttons -->
-</ui-bar>
-</xmp>
-<xmp class="lang-typscript javascript hljs xml">
-// UIBarChartOptions
-chartTitle?: string;
-valueAxisTitle?: string;
-valueAxisUnit?: string;
-categoryAxisTitle?: string;
-categoryField: string;
-theme?: string;
-series: Array<AmCharts.AmGraph>
-</xmp>
-                 </pre>
+        <ui-md-view html>
+          <xmp>
+            <ui-bar chart-title="" chart-options="UIBarChartOptions" height="<number>" chart-data="?">
+              <!-- panel header buttons -->
+            </ui-bar>
+          </xmp>
+        </ui-md-view>
+        <ui-md-view typscript>
+          <pre>
+            // UIBarChartOptions
+            chartTitle?: string;
+            valueAxisTitle?: string;
+            valueAxisUnit?: string;
+            categoryAxisTitle?: string;
+            categoryField: string;
+            theme?: string;
+            series: Array&lt;AmCharts.AmGraph>;
+          </pre>
+        </ui-md-view>
         <h5>Attributes</h5>
         <ul>
           <li>
@@ -153,13 +155,13 @@ series: Array<AmCharts.AmGraph>
       <hr/>
       <div>
         <h3>Pie Chart Element</h3>
-        <pre class="ui-markdown">
-        <xmp class="lang-html html hljs xml">
-<ui-bar chart-title="" height="<number>" chart-data="?" value-property="?" title-property="?" color-property="?" theme="pie">
-<!-- panel header buttons -->
-</ui-bar>
-        </xmp>
-      </pre>
+        <ui-md-view html>
+          <xmp>
+            <ui-bar chart-title="" height="<number>" chart-data="?" value-property="?" title-property="?" color-property="?" theme="pie">
+              <!-- panel header buttons -->
+            </ui-bar>
+          </xmp>
+        </ui-md-view>
         <h5>Attributes</h5>
         <ul>
           <li>

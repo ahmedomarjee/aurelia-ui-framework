@@ -13,7 +13,7 @@ import './data/fileTypes';
 import './data/countries';
 import './data/currencies';
 import {FrameworkConfiguration} from "aurelia-framework";
-import {UIChart} from "./components/ui-chart";
+import {UIChartStatic} from "./utils/ui-utils";
 import {UIApplication} from "./utils/ui-application";
 import {UIValidationRenderer} from "./utils/ui-validation";
 import * as ld from 'lodash';
@@ -62,19 +62,19 @@ export function configure(aurelia: FrameworkConfiguration, configCallback) {
 
 		if (UIApplication.defaults.UseCharts) {
 			aurelia.globalResources('./components/ui-chart');
-			UIChart.init();
+			UIChartStatic.init();
 		}
 	}
 }
 
-export {UIChart} from "./components/ui-chart";
+// export {UIChart} from "./components/ui-chart";
 export {UIEvent} from "./utils/ui-event";
 export {UIFormat} from "./utils/ui-formatters";
 export {UIApplication, AuthInterceptor} from "./utils/ui-application";
 export {UIModel} from "./utils/ui-model";
-export {UILanguage} from "./inputs/ui-language";
+// export {UILanguage} from "./inputs/ui-language";
 export {UIDialogService, UIDialog} from "./components/ui-dialog";
 export {UITreeModel, UITreeOptions, UITreePanel} from "./utils/ui-tree-models";
 export {UIHttpService} from "./utils/ui-http-service";
 export {validatemap, validatephone} from "./utils/ui-validation";
-export {UIUtils, _, moment, numeral} from "./utils/ui-utils";
+export {UIChartStatic, UIUtils, _, moment, numeral} from "./utils/ui-utils";

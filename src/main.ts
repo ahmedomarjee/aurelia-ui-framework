@@ -26,13 +26,16 @@ export function configure(aurelia: Aurelia) {
 			config.Http.AuthorizationHeader = true;
 
 			config.UseCharts = true;
+
+			// To override default language list, uncomment the following
+			// config.Languages = [{ id: 'en', name: 'English' }]
 		});
 
 
 
-	aurelia.start()
+	return aurelia.start()
 		.then(a => {
-			return a.setRoot('./src/app.js');
+			return a.setRoot();
 		})
 		.then(() => {
 			var splash = window.document.querySelector('.ui-splash');

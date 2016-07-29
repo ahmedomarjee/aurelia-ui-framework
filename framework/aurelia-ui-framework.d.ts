@@ -170,7 +170,20 @@ declare module "aurelia-ui-framework" {
 
 		reupload(slug: string, form: HTMLFormElement): Promise<any | string | void>;
 	}
+	// ChartStatic
+	export module UIChartStatic {
+		export var CHART_RED;
+		export var CHART_PINK;
+		export var CHART_BLUE;
+		export var CHART_GREEN;
+		export var CHART_ORANGE;
+		export var CHART_VIOLET;
+		export var CHART_SPECTRUM;
+		export var CHART_DEFAULT;
+		export var CHART_PIE;
 
+		export function init();
+	}
 	// Utilities
 	export module UIUtils {
 		export function container(container: Container);

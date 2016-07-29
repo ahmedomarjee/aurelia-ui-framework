@@ -12,11 +12,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils/ui-utils", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_input_group_1, ui_utils_1, ui_event_1) {
+define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils/ui-utils", "../utils/ui-application", "../utils/ui-event"], function (require, exports, aurelia_framework_1, ui_input_group_1, ui_utils_1, ui_application_1, ui_event_1) {
     "use strict";
     var UILanguage = (function (_super) {
         __extends(UILanguage, _super);
-        function UILanguage(element) {
+        function UILanguage(element, app) {
             _super.call(this, element);
             this.language = '';
             this.languages = [];
@@ -71,29 +71,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
             this.__select(this.__languages[0] || { id: '' });
             this.__focus = false;
         };
-        UILanguage.LANGUAGES = [
-            { id: 'ar', name: 'العربية (Arabic)', rtl: true },
-            { id: 'de', name: 'Deutsche (German)' },
-            { id: 'el', name: 'ελληνικά (Greek)' },
-            { id: 'en', name: 'English' },
-            { id: 'es', name: 'Español (Spanish)' },
-            { id: 'fr', name: 'Français (French)' },
-            { id: 'hi', name: 'हिंदी (Hindi)' },
-            { id: 'id', name: 'Bahasa (Indonesia)' },
-            { id: 'it', name: 'Italiano (Italian)' },
-            { id: 'ja', name: '日本 (Japanese)' },
-            { id: 'ko', name: '한국어 (Korean)' },
-            { id: 'ms', name: 'Malay (Malaysian)' },
-            { id: 'nl', name: 'Nederlands (Dutch)' },
-            { id: 'pt', name: 'Português (Portuguese)' },
-            { id: 'pt-br', name: 'Português (Brasil)' },
-            { id: 'ru', name: 'Русский (Russian)' },
-            { id: 'th', name: 'ภาษาไทย (Thai)' },
-            { id: 'tl', name: 'Tagalog (Philipines)' },
-            { id: 'tw', name: '繁體中文 (Traditional Chinese)' },
-            { id: 'vi', name: 'Tiếng Việt (Vietnamese)' },
-            { id: 'zh', name: '简体中文 (Simplified Chinese)' }
-        ];
+        UILanguage.LANGUAGES = ui_application_1.UIApplication.defaults.Languages;
         __decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay }), 
             __metadata('design:type', String)
@@ -109,7 +87,7 @@ define(["require", "exports", "aurelia-framework", "./ui-input-group", "../utils
         UILanguage = __decorate([
             aurelia_framework_1.autoinject,
             aurelia_framework_1.customElement('ui-language'), 
-            __metadata('design:paramtypes', [Element])
+            __metadata('design:paramtypes', [Element, ui_application_1.UIApplication])
         ], UILanguage);
         return UILanguage;
     }(ui_input_group_1.UIInputGroup));

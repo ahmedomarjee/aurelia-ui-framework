@@ -13,7 +13,7 @@ define(["require", "exports", "../../framework/index"], function (require, expor
             this.pieData2 = [];
             this.pieData3 = [];
             this.currentPeriod1 = 'Last 30 Days';
-            this.__chart = index_1.UIChart;
+            this.__chart = index_1.UIChartStatic;
             this.profitsOptions = {
                 chartTitle: 'Profits',
                 valueAxisUnit: '$',
@@ -41,14 +41,14 @@ define(["require", "exports", "../../framework/index"], function (require, expor
                         clustered: false,
                         columnWidth: .85,
                         unitPrefix: '$',
-                        fillColors: index_1.UIChart.CHART_BLUE[5],
+                        fillColors: index_1.UIChartStatic.CHART_BLUE[5],
                         valueField: 'amountTarget'
                     }, {
                         title: 'Profit',
                         clustered: false,
                         columnWidth: .5,
                         unitPrefix: '$',
-                        fillColors: index_1.UIChart.CHART_BLUE[1],
+                        fillColors: index_1.UIChartStatic.CHART_BLUE[1],
                         valueField: 'amountActual'
                     }]
             };
@@ -84,7 +84,7 @@ define(["require", "exports", "../../framework/index"], function (require, expor
                 data.push({
                     region: c,
                     amount: ((Math.random() * 5) * 1000) + 2000,
-                    color: index_1.UIChart.CHART_VIOLET[i]
+                    color: index_1.UIChartStatic.CHART_VIOLET[i]
                 });
             });
             this.barData2 = data;
@@ -95,7 +95,7 @@ define(["require", "exports", "../../framework/index"], function (require, expor
                 data.push({
                     region: c,
                     amount: ((Math.random() * 5) * 100) + 100,
-                    color: index_1.UIChart.CHART_SPECTRUM[i]
+                    color: index_1.UIChartStatic.CHART_SPECTRUM[i]
                 });
             });
             this.barData3 = data;
@@ -126,7 +126,7 @@ define(["require", "exports", "../../framework/index"], function (require, expor
                 data.push({
                     region: c,
                     amount: ((Math.random() * 5) * 100) + 100,
-                    color: index_1.UIChart.CHART_PINK[i]
+                    color: index_1.UIChartStatic.CHART_PINK[i]
                 });
             });
             this.pieData3 = data;

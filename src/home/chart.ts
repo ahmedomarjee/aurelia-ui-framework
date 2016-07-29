@@ -1,4 +1,4 @@
-import {_, moment, UIChart} from "../../framework/index";
+import {_, moment, UIChartStatic} from "../../framework/index";
 export class ChartExample {
 
 	countries = ['Middle East', 'Australia/Asia', 'North America', 'Latin America', 'Africa', 'Europe']
@@ -17,7 +17,7 @@ export class ChartExample {
 
 	currentPeriod1 = 'Last 30 Days';
 
-	__chart = UIChart;
+	__chart = UIChartStatic;
 
 	profitsOptions: UIBarOptions = {
 		chartTitle: 'Profits',
@@ -47,14 +47,14 @@ export class ChartExample {
 			clustered: false,
 			columnWidth: .85,
 			unitPrefix: '$',
-			fillColors: UIChart.CHART_BLUE[5],
+			fillColors: UIChartStatic.CHART_BLUE[5],
 			valueField: 'amountTarget'
 		}, {
 				title: 'Profit',
 				clustered: false,
 				columnWidth: .5,
 				unitPrefix: '$',
-				fillColors: UIChart.CHART_BLUE[1],
+				fillColors: UIChartStatic.CHART_BLUE[1],
 				valueField: 'amountActual'
 			}]
 	}
@@ -93,7 +93,7 @@ export class ChartExample {
 			data.push({
 				region: c,
 				amount: ((Math.random() * 5) * 1000) + 2000,
-				color: UIChart.CHART_VIOLET[i]
+				color: UIChartStatic.CHART_VIOLET[i]
 			});
 		});
 		this.barData2 = data;
@@ -105,7 +105,7 @@ export class ChartExample {
 			data.push({
 				region: c,
 				amount: ((Math.random() * 5) * 100) + 100,
-				color: UIChart.CHART_SPECTRUM[i]
+				color: UIChartStatic.CHART_SPECTRUM[i]
 			});
 		});
 		this.barData3 = data;
@@ -138,7 +138,7 @@ export class ChartExample {
 			data.push({
 				region: c,
 				amount: ((Math.random() * 5) * 100) + 100,
-				color: UIChart.CHART_PINK[i]
+				color: UIChartStatic.CHART_PINK[i]
 			});
 		});
 		this.pieData3 = data;

@@ -17,9 +17,9 @@ define(["require", "exports", "fetch", "fabric"], function (require, exports) {
             config.Http.AuthorizationHeader = true;
             config.UseCharts = true;
         });
-        aurelia.start()
+        return aurelia.start()
             .then(function (a) {
-            return a.setRoot('./src/app.js');
+            return a.setRoot();
         })
             .then(function () {
             var splash = window.document.querySelector('.ui-splash');
