@@ -4,8 +4,9 @@
     "aurelia-binding": "github:aurelia/binding/dist/aurelia-binding.d.ts#76c497d34ee96af2a8ad19478aa31d473102eef8",
     "aurelia-dependency-injection": "github:aurelia/dependency-injection/dist/aurelia-dependency-injection.d.ts#890723dee1c08ca1764649e34efd14373e5af497",
     "aurelia-framework": "github:aurelia/framework/dist/aurelia-framework.d.ts#c92263b82366e0c578e284923b60fe079bb96766",
+    "aurelia-validatejs": "github:aurelia/validatejs/dist/aurelia-validatejs.d.ts#56ade2c59420cf521006f239d0b18892fe8db6d1",
     "aurelia-validation": "github:aurelia/validation/dist/aurelia-validation.d.ts#3fe0528e79cc1000ff02f777b69a941d0bb98b1f",
-    "aurelia-validatejs": "github:aurelia/validatejs/dist/aurelia-validatejs.d.ts#56ade2c59420cf521006f239d0b18892fe8db6d1"
+    "requirejs": "registry:npm/requirejs#2.2.0+20160319062357"
   },
   "globalDependencies": {
     "aurelia-bootstrapper": "github:aurelia/bootstrapper/dist/aurelia-bootstrapper.d.ts#111ee4eb1e5df7af39305d190d635df7d93cb7e5",
@@ -27,6 +28,7 @@
     "aurelia-templating": "github:aurelia/templating/dist/aurelia-templating.d.ts#aad25d550f316ac2d7cac29c330059897c7d15bd",
     "aurelia-templating-binding": "github:aurelia/templating-binding/dist/aurelia-templating-binding.d.ts#f90d1082b0aa3be71c23e26c1e152b22593a15b5",
     "aurelia-templating-resources": "github:aurelia/templating-resources/dist/aurelia-templating-resources.d.ts#98f81efd2d7270742bfaa1f3c37d8a71a3936172",
-    "aurelia-templating-router": "github:aurelia/templating-router/dist/aurelia-templating-router.d.ts#68460e0398f896c5883be81588bdd5f3855f05c3"
+    "aurelia-templating-router": "github:aurelia/templating-router/dist/aurelia-templating-router.d.ts#68460e0398f896c5883be81588bdd5f3855f05c3",
+    "core-js": "registry:dt/core-js#0.0.0+20160602141332"
   }
 }

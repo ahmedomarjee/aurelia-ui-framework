@@ -20,6 +20,7 @@ call jspm install aurelia-router
 call jspm install aurelia-logging
 call jspm install aurelia-event-aggregator
 call jspm install aurelia-templating-resources
+call jspm install amcharts=github:amcharts/amcharts3
 
 
 call typings install

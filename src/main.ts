@@ -1,4 +1,8 @@
 import {Aurelia} from "aurelia-framework";
+//Remove this line if using aurelia-cli
+import "fetch";
+// Remove this line if using aureli-cli
+import "fabric";
 
 export function configure(aurelia: Aurelia) {
 	aurelia.use

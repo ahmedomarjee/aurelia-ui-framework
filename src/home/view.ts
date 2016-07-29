@@ -232,7 +232,7 @@ export class Home {
 
 	canActivate(model) {
 		return this.httpClient
-			.text('./src/home/example.md')
+			.text('./markdown/example.md')
 			.then(resp => this.md = resp);
 	}
 
